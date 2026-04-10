@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+// Apply saved theme immediately before page renders to prevent flash
+(function(){var t=localStorage.getItem('suro-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rohit & Susmita | Ring Ceremony — v2</title>
+<title>Rohit & Susmita | Ring Ceremony — v3</title>
 <meta property="og:title" content="Su♡Ro | Ring Ceremony">
 <meta property="og:description" content="She pinged. He replied. The rest is #SuRo. You're invited to celebrate our engagement!">
 <meta property="og:image" content="https://rohitmukh97.github.io/Invitation/thumbnail.png">
@@ -45,6 +49,160 @@
   --text-l:#554a44;
   --text-ll:#7a6e66;
 }
+/* ===== DARK THEME ===== */
+[data-theme="dark"]{
+  --bg:#1a1714;
+  --bg-blush:#1e1816;
+  --bg-sage:#181a16;
+  --bg-lav:#1a181e;
+  --bg-sky:#16181a;
+  --rose:#c8967e;
+  --rose-l:#8a6a5e;
+  --rose-ll:#2e2420;
+  --rose-d:#d4a88c;
+  --sage:#7a9a72;
+  --sage-l:#5a7a52;
+  --sage-ll:#222a20;
+  --sage-d:#8aaa82;
+  --lav:#9a88aa;
+  --lav-l:#6a5a7a;
+  --lav-ll:#24202a;
+  --gold:#c8a860;
+  --gold-l:#a8884a;
+  --gold-ll:#2a2418;
+  --gold-d:#d4b870;
+  --mauve:#aa8a9a;
+  --peach:#8a6a52;
+  --sky:#5a6a7a;
+  --text:#e8e0d4;
+  --text-l:#c8b8a8;
+  --text-ll:#8a7e72;
+}
+[data-theme="dark"] body{
+  background:var(--bg);
+  color:var(--text);
+}
+[data-theme="dark"] #hero{
+  background:linear-gradient(170deg,var(--bg-blush) 0%,var(--bg) 35%,var(--bg-lav) 65%,var(--bg-sage) 100%);
+}
+[data-theme="dark"] #families{
+  background:linear-gradient(170deg,var(--bg-sage) 0%,var(--bg) 50%,var(--bg-blush) 100%);
+}
+[data-theme="dark"] #details{
+  background:linear-gradient(170deg,var(--bg-lav) 0%,var(--bg) 40%,var(--bg-sage) 100%);
+}
+[data-theme="dark"] #venue{
+  background:linear-gradient(170deg,var(--bg-blush) 0%,var(--bg) 50%,var(--bg-lav) 100%);
+}
+[data-theme="dark"] #ceremony{
+  background:linear-gradient(170deg,var(--bg-sage) 0%,var(--bg) 50%,var(--bg-sky) 100%);
+}
+[data-theme="dark"] #closing{
+  background:linear-gradient(170deg,var(--bg-lav) 0%,var(--bg-blush) 50%,var(--bg) 100%);
+}
+[data-theme="dark"] .envelope{
+  background:linear-gradient(135deg,#1e1816,#1a181e,#16181a);
+}
+[data-theme="dark"] .name span{
+  background:linear-gradient(135deg,var(--gold-d) 0%,var(--gold) 25%,var(--gold-l) 50%,var(--gold) 75%,var(--gold-d) 100%);
+  background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+[data-theme="dark"] .event-title{
+  background:linear-gradient(135deg,var(--gold-d) 0%,var(--gold) 30%,var(--gold-l) 60%,var(--gold-d) 100%);
+  background-size:200% 200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+[data-theme="dark"] .section-title{color:var(--gold)}
+[data-theme="dark"] .amp{color:var(--gold);text-shadow:0 0 40px rgba(200,168,96,0.2)}
+[data-theme="dark"] .closing-names{color:var(--gold);text-shadow:0 0 30px rgba(200,168,96,0.15)}
+[data-theme="dark"] .family-desc{color:var(--gold)}
+[data-theme="dark"] .date-big{
+  background:linear-gradient(180deg,var(--gold) 0%,var(--gold-l) 50%,var(--gold-d) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+[data-theme="dark"] .date-frame{
+  border-color:var(--rose-ll);
+  background:linear-gradient(135deg,rgba(200,168,96,0.03),transparent,rgba(122,98,48,0.03));
+}
+[data-theme="dark"] .date-frame::before{border-color:var(--gold-l)}
+[data-theme="dark"] .date-frame::after{border-color:var(--gold-l)}
+[data-theme="dark"] .date-frame .df-tr{border-color:var(--gold-l)}
+[data-theme="dark"] .date-frame .df-bl{border-color:var(--gold-l)}
+[data-theme="dark"] .hr-line{background:linear-gradient(90deg,transparent,var(--gold-l),transparent)}
+[data-theme="dark"] .hr-diamond{border-color:var(--gold-l)}
+[data-theme="dark"] .venue-name{text-shadow:0 0 30px rgba(200,168,96,0.08)}
+[data-theme="dark"] .scan-label{
+  background:linear-gradient(90deg,var(--text-ll) 0%,var(--gold) 25%,var(--gold-d) 50%,var(--gold) 75%,var(--text-ll) 100%);
+  background-size:400% 100%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+[data-theme="dark"] .env-progress-fill{
+  background:linear-gradient(90deg,var(--gold-l),var(--gold),var(--gold-d));
+}
+[data-theme="dark"] .env-progress-bar{background:var(--rose-ll)}
+[data-theme="dark"] .env-quote{color:var(--gold)}
+[data-theme="dark"] .env-monogram{color:var(--gold-d)}
+[data-theme="dark"] .env-monogram .env-heart{color:var(--gold)}
+[data-theme="dark"] .ganesh{color:var(--gold);text-shadow:0 0 30px rgba(200,168,96,0.2)}
+[data-theme="dark"] .blessing{color:var(--text-l)}
+[data-theme="dark"] .family-title{color:var(--gold)}
+[data-theme="dark"] .ceremony-name{color:var(--gold-d)}
+[data-theme="dark"] .closing-hashtag{color:var(--gold)}
+[data-theme="dark"] .date-month{color:var(--gold)}
+[data-theme="dark"] .time{color:var(--gold)}
+[data-theme="dark"] .sketch-bg-fixed{filter:grayscale(50%) brightness(0.7)}
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle{
+  position:fixed;
+  top:18px;right:18px;
+  z-index:10000;
+  width:44px;height:44px;
+  border:none;border-radius:50%;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(253,249,243,0.85);
+  backdrop-filter:blur(8px);
+  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+  transition:all 0.5s ease;
+}
+.theme-toggle:hover{
+  transform:scale(1.1);
+  box-shadow:0 4px 20px rgba(0,0,0,0.12);
+}
+.theme-toggle svg{
+  transition:transform 1.2s cubic-bezier(0.4,0,0.2,1), opacity 1s ease;
+}
+.theme-toggle .sun{opacity:1;position:absolute}
+.theme-toggle .moon{opacity:0;position:absolute;transform:rotate(-90deg)}
+[data-theme="dark"] .theme-toggle{
+  background:rgba(26,23,20,0.85);
+  box-shadow:0 2px 12px rgba(200,168,96,0.15);
+}
+[data-theme="dark"] .theme-toggle .sun{opacity:0;transform:rotate(90deg)}
+[data-theme="dark"] .theme-toggle .moon{opacity:1;transform:rotate(0deg)}
+
+/* Smooth theme transition overlay */
+.theme-overlay{
+  position:fixed;inset:0;z-index:9997;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.5s ease;
+}
+.theme-overlay.to-dark{
+  background:radial-gradient(ellipse at center,#1a1714,#1e1816);
+}
+.theme-overlay.to-light{
+  background:radial-gradient(ellipse at center,#fdf9f3,#fef5f0);
+}
+.theme-overlay.fade-in{opacity:1}
+.theme-overlay.fade-out{opacity:0}
+
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{
   margin:0;
@@ -898,6 +1056,23 @@ section{
 </style>
 </head>
 <body>
+
+<!-- THEME OVERLAY -->
+<div class="theme-overlay" id="themeOverlay"></div>
+
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+  <svg class="sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a860" stroke-width="1.5">
+    <circle cx="12" cy="12" r="5"/>
+    <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+    <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+  <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a860" stroke-width="1.5">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+</button>
 
 <!-- FIXED SKETCH BACKGROUNDS -->
 <img class="sketch-bg-fixed sketch-bg-fixed-tr" src="Pic back 2.jpeg" alt="">
@@ -1885,6 +2060,45 @@ window.addEventListener('scroll',()=>{
     b.style.transform=`translateY(${s*rate}px) ${b.style.transform?.includes('translateX')?'translateX(-50%)':''}`;
   });
 },{passive:true});
+// Theme toggle with slow overlay fade
+(function(){
+  const btn=document.getElementById('themeToggle');
+  const overlay=document.getElementById('themeOverlay');
+  let switching=false;
+  btn.addEventListener('click',function(){
+    if(switching)return;
+    switching=true;
+    const html=document.documentElement;
+    const goingDark=html.getAttribute('data-theme')!=='dark';
+    // Step 1: Show overlay (fade to black or white)
+    overlay.className='theme-overlay '+(goingDark?'to-dark':'to-light');
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        overlay.classList.add('fade-in');
+      });
+    });
+    // Step 2: At peak opacity, swap the theme and save
+    setTimeout(()=>{
+      if(goingDark){
+        html.setAttribute('data-theme','dark');
+        localStorage.setItem('suro-theme','dark');
+      }else{
+        html.removeAttribute('data-theme');
+        localStorage.setItem('suro-theme','light');
+      }
+    },1500);
+    // Step 3: Fade overlay out to reveal new theme
+    setTimeout(()=>{
+      overlay.classList.remove('fade-in');
+      overlay.classList.add('fade-out');
+    },1800);
+    // Step 4: Cleanup
+    setTimeout(()=>{
+      overlay.className='theme-overlay';
+      switching=false;
+    },3500);
+  });
+})();
 </script>
 
 </body>
