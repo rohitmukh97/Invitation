@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rohit & Susmita | Ring Ceremony — v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Montserrat:wght@200;300;400;500;600&family=Pinyon+Script&family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@400;700;900&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fdf9f3;
+  --bg-blush:#fef5f0;
+  --bg-sage:#f4f7f2;
+  --bg-lav:#f6f2f8;
+  --bg-sky:#f0f4f8;
+  --rose:#a8706a;
+  --rose-l:#d4a49c;
+  --rose-ll:#f5ddd8;
+  --rose-d:#7a4a42;
+  --sage:#6e8a68;
+  --sage-l:#a8c0a2;
+  --sage-ll:#dce8d8;
+  --sage-d:#4a6648;
+  --lav:#8a78a0;
+  --lav-l:#bab0c8;
+  --lav-ll:#e8e0f0;
+  --gold:#a8884a;
+  --gold-l:#c8aa72;
+  --gold-ll:#f0e4c8;
+  --gold-d:#7a6230;
+  --mauve:#96728a;
+  --peach:#e8c4a8;
+  --sky:#a8bcd0;
+  --text:#2e2622;
+  --text-l:#554a44;
+  --text-ll:#7a6e66;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Cormorant Garamond',Georgia,serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ===== SUBTLE SKETCH BACKGROUNDS (FIXED) ===== */
+.sketch-bg-fixed{
+  position:fixed;
+  pointer-events:none;
+  z-index:1;
+  filter:grayscale(15%);
+  top:50%;
+  transform:translateY(-50%);
+  width:300px;
+  height:auto;
+  opacity:0.12;
+}
+.sketch-bg-fixed-left{
+  left:0;
+  transform:translateY(-50%) rotate(-3deg);
+}
+.sketch-bg-fixed-right{
+  right:0;
+  transform:translateY(-50%) rotate(3deg);
+}
+@media(max-width:900px){
+  .sketch-bg-fixed{width:180px;opacity:0.08}
+}
+@media(max-width:740px){
+  .sketch-bg-fixed{width:130px;opacity:0.07}
+}
+
+/* ===== PRELOADER / ENVELOPE ===== */
+.envelope{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  background:linear-gradient(135deg,#fef5f0,#f6f2f8,#f0f4f8);
+  transition:opacity 1.2s ease 0.3s,visibility 0s 1.5s;
+}
+.envelope.open{opacity:0;visibility:hidden;pointer-events:none}
+.env-seal{
+  width:100px;height:100px;margin-bottom:20px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.env-ring{
+  position:absolute;border-radius:50%;border:1px solid;
+  animation:envRing 3s ease-in-out infinite;
+}
+.env-ring-1{width:100px;height:100px;border-color:var(--rose-l);animation-delay:0s}
+.env-ring-2{width:85px;height:85px;border-color:var(--sage-l);animation-delay:0.5s}
+.env-ring-3{width:70px;height:70px;border-color:var(--lav-l);animation-delay:1s}
+@keyframes envRing{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.08);opacity:1}}
+.env-monogram{
+  font-family:'Pinyon Script',cursive;font-size:28px;
+  color:var(--rose-d);z-index:2;
+}
+.env-label{
+  font-family:'Montserrat',sans-serif;font-size:9px;font-weight:400;
+  letter-spacing:0.5em;text-transform:uppercase;color:var(--text-ll);
+  margin-top:16px;
+}
+.env-dots{display:flex;gap:6px;margin-top:12px}
+.env-dot{
+  width:5px;height:5px;border-radius:50%;
+  animation:envDot 1.5s ease-in-out infinite;
+}
+.env-dot:nth-child(1){background:var(--rose-l);animation-delay:0s}
+.env-dot:nth-child(2){background:var(--sage-l);animation-delay:0.3s}
+.env-dot:nth-child(3){background:var(--lav-l);animation-delay:0.6s}
+@keyframes envDot{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
+
+/* ===== GLOBAL PARTICLES ===== */
+.particles-global{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.pg{position:absolute;border-radius:50%;opacity:0;animation:pgFloat linear infinite}
+.pg.pg-rose{background:radial-gradient(circle,var(--rose-ll),var(--rose-l))}
+.pg.pg-sage{background:radial-gradient(circle,var(--sage-ll),var(--sage-l))}
+.pg.pg-lav{background:radial-gradient(circle,var(--lav-ll),var(--lav-l))}
+.pg.pg-gold{background:radial-gradient(circle,var(--gold-ll),var(--gold-l))}
+@keyframes pgFloat{
+  0%{opacity:0;transform:translateY(110vh) scale(0.3)}
+  15%{opacity:0.5}85%{opacity:0.2}
+  100%{opacity:0;transform:translateY(-10vh) scale(1)}
+}
+
+/* ===== PETAL / LEAF FALL ANIMATION ===== */
+.petals{position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden}
+.petal{
+  position:absolute;top:-30px;
+  opacity:0;
+  animation:petalFall linear infinite;
+}
+/* Shapes: star, leaf, heart only */
+.petal-star{clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.petal-star2{clip-path:polygon(50% 0%,58% 38%,95% 28%,65% 55%,85% 90%,50% 65%,15% 90%,35% 55%,5% 28%,42% 38%)}
+.petal-leaf{clip-path:ellipse(30% 50% at 50% 50%);border-radius:0 50% 0 50%}
+.petal-leaf2{border-radius:50% 0 50% 0}
+.petal-leaf3{clip-path:polygon(50% 0%,75% 25%,80% 60%,50% 100%,20% 60%,25% 25%)}
+.petal-heart{clip-path:polygon(50% 100%,0% 35%,15% 0%,50% 20%,85% 0%,100% 35%)}
+.petal-heart2{clip-path:polygon(50% 100%,5% 40%,10% 10%,30% 0%,50% 15%,70% 0%,90% 10%,95% 40%)}
+
+@keyframes petalFall{
+  0%{opacity:0;transform:translateY(-30px) rotate(0deg) translateX(0) scale(0.6)}
+  8%{opacity:0.45}
+  25%{transform:translateY(25vh) rotate(90deg) translateX(50px) scale(0.9)}
+  50%{transform:translateY(50vh) rotate(200deg) translateX(-30px) scale(1)}
+  75%{transform:translateY(75vh) rotate(300deg) translateX(40px) scale(0.85);opacity:0.25}
+  100%{opacity:0;transform:translateY(108vh) rotate(400deg) translateX(-15px) scale(0.7)}
+}
+@keyframes petalFall2{
+  0%{opacity:0;transform:translateY(-20px) rotate(0deg) translateX(0) scale(0.5)}
+  10%{opacity:0.4}
+  30%{transform:translateY(30vh) rotate(-80deg) translateX(-45px) scale(0.95)}
+  60%{transform:translateY(60vh) rotate(-190deg) translateX(35px) scale(1)}
+  85%{opacity:0.2}
+  100%{opacity:0;transform:translateY(106vh) rotate(-360deg) translateX(-25px) scale(0.6)}
+}
+@keyframes petalFall3{
+  0%{opacity:0;transform:translateY(-25px) rotate(30deg) translateX(10px) scale(0.7)}
+  12%{opacity:0.5}
+  35%{transform:translateY(35vh) rotate(150deg) translateX(-60px) scale(1)}
+  65%{transform:translateY(65vh) rotate(260deg) translateX(50px) scale(0.9);opacity:0.3}
+  100%{opacity:0;transform:translateY(110vh) rotate(420deg) translateX(-10px) scale(0.5)}
+}
+@keyframes petalFall4{
+  0%{opacity:0;transform:translateY(-20px) rotate(-20deg) translateX(-10px) scale(0.5)}
+  8%{opacity:0.5}
+  20%{transform:translateY(18vh) rotate(40deg) translateX(70px) scale(0.9)}
+  40%{transform:translateY(38vh) rotate(120deg) translateX(-20px) scale(1)}
+  60%{transform:translateY(58vh) rotate(220deg) translateX(55px) scale(0.95);opacity:0.35}
+  80%{transform:translateY(80vh) rotate(310deg) translateX(-40px) scale(0.8);opacity:0.15}
+  100%{opacity:0;transform:translateY(108vh) rotate(400deg) translateX(20px) scale(0.5)}
+}
+@keyframes petalFall5{
+  0%{opacity:0;transform:translateY(-30px) rotate(45deg) translateX(20px) scale(0.4)}
+  6%{opacity:0.45}
+  15%{transform:translateY(12vh) rotate(80deg) translateX(-50px) scale(0.85)}
+  35%{transform:translateY(32vh) rotate(160deg) translateX(65px) scale(1)}
+  55%{transform:translateY(55vh) rotate(250deg) translateX(-45px) scale(0.9);opacity:0.3}
+  75%{transform:translateY(76vh) rotate(340deg) translateX(30px) scale(0.75);opacity:0.18}
+  100%{opacity:0;transform:translateY(112vh) rotate(450deg) translateX(-35px) scale(0.4)}
+}
+@keyframes petalFall6{
+  0%{opacity:0;transform:translateY(-15px) rotate(-40deg) translateX(5px) scale(0.6)}
+  10%{opacity:0.4}
+  25%{transform:translateY(22vh) rotate(50deg) translateX(-80px) scale(1)}
+  50%{transform:translateY(48vh) rotate(180deg) translateX(60px) scale(0.95);opacity:0.35}
+  70%{transform:translateY(70vh) rotate(280deg) translateX(-50px) scale(0.85);opacity:0.2}
+  100%{opacity:0;transform:translateY(105vh) rotate(380deg) translateX(25px) scale(0.45)}
+}
+
+/* ===== FLOATING HEARTS ===== */
+.hearts{position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden}
+.floating-heart{
+  position:absolute;bottom:-20px;opacity:0;
+  animation:heartFloat ease-in-out infinite;
+}
+@keyframes heartFloat{
+  0%{opacity:0;transform:translateY(0) scale(0.3) rotate(0deg)}
+  15%{opacity:0.3}
+  50%{transform:translateY(-50vh) scale(0.8) rotate(15deg);opacity:0.25}
+  100%{opacity:0;transform:translateY(-105vh) scale(0.5) rotate(-10deg)}
+}
+
+/* ===== TWINKLING STARS ===== */
+.twinkle-layer{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.twinkle{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:var(--gold-l);
+  animation:twinkleAnim ease-in-out infinite;
+}
+@keyframes twinkleAnim{
+  0%,100%{opacity:0;transform:scale(0.3)}
+  50%{opacity:0.6;transform:scale(1)}
+}
+
+/* ===== GENTLE SWAY FOR SECTIONS ===== */
+@keyframes gentleSway{
+  0%,100%{transform:translateX(0) rotate(0deg)}
+  25%{transform:translateX(3px) rotate(0.3deg)}
+  75%{transform:translateX(-3px) rotate(-0.3deg)}
+}
+
+/* ===== BREATHING GLOW ===== */
+@keyframes breathGlow{
+  0%,100%{box-shadow:0 0 30px rgba(201,145,138,0.05)}
+  50%{box-shadow:0 0 60px rgba(201,145,138,0.12)}
+}
+
+/* ===== SIDE VINE DECORATIONS ===== */
+.side-vines{
+  position:fixed;top:0;bottom:0;width:100%;pointer-events:none;z-index:4;
+  overflow:hidden;
+}
+.vine-left,.vine-right{
+  position:absolute;top:0;bottom:0;width:80px;
+}
+.vine-left{left:0}
+.vine-right{right:0}
+
+.vine-left svg,.vine-right svg{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+}
+
+/* Vine bloom animations */
+@keyframes bloomPulse{
+  0%,100%{transform:scale(1);opacity:0.5}
+  50%{transform:scale(1.25);opacity:0.8}
+}
+@keyframes bloomPulse2{
+  0%,100%{transform:scale(1);opacity:0.4}
+  50%{transform:scale(1.15);opacity:0.7}
+}
+@keyframes vineGrow{
+  0%{stroke-dashoffset:2000}
+  100%{stroke-dashoffset:0}
+}
+@keyframes leafSway{
+  0%,100%{transform:rotate(0deg)}
+  25%{transform:rotate(4deg)}
+  75%{transform:rotate(-4deg)}
+}
+@keyframes butterflyFloat{
+  0%,100%{transform:translateY(0) rotate(0deg);opacity:0.4}
+  25%{transform:translateY(-8px) rotate(5deg);opacity:0.6}
+  50%{transform:translateY(-3px) rotate(-3deg);opacity:0.5}
+  75%{transform:translateY(-10px) rotate(4deg);opacity:0.55}
+}
+
+/* Side scroll indicator dots */
+.side-dots{
+  position:fixed;z-index:5;pointer-events:none;
+  display:flex;flex-direction:column;gap:24px;
+  top:50%;transform:translateY(-50%);
+}
+.side-dots-left{left:34px}
+.side-dots-right{right:34px}
+.side-dot{
+  width:5px;height:5px;border-radius:50%;
+  border:1px solid var(--rose-l);
+  animation:dotPulse 3s ease-in-out infinite;
+}
+.side-dot:nth-child(2){animation-delay:0.5s;border-color:var(--sage-l)}
+.side-dot:nth-child(3){animation-delay:1s;border-color:var(--lav-l)}
+.side-dot:nth-child(4){animation-delay:1.5s;border-color:var(--gold-l)}
+.side-dot:nth-child(5){animation-delay:2s;border-color:var(--rose-l)}
+@keyframes dotPulse{
+  0%,100%{transform:scale(1);opacity:0.3;background:transparent}
+  50%{transform:scale(1.4);opacity:0.7;background:currentColor}
+}
+
+/* Hide side decorations on small screens */
+@media(max-width:900px){
+  .side-vines,.side-dots{display:none}
+}
+
+/* ===== SECTIONS ===== */
+section{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+
+/* ===== REVEAL ===== */
+.reveal{
+  opacity:0;transform:translateY(35px);
+  transition:opacity 1.4s cubic-bezier(0.25,0.46,0.45,0.94),
+             transform 1.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.stagger>.reveal:nth-child(1){transition-delay:0.1s}
+.stagger>.reveal:nth-child(2){transition-delay:0.25s}
+.stagger>.reveal:nth-child(3){transition-delay:0.4s}
+.stagger>.reveal:nth-child(4){transition-delay:0.55s}
+.stagger>.reveal:nth-child(5){transition-delay:0.7s}
+.stagger>.reveal:nth-child(6){transition-delay:0.85s}
+.stagger>.reveal:nth-child(7){transition-delay:1.0s}
+.stagger>.reveal:nth-child(8){transition-delay:1.15s}
+.stagger>.reveal:nth-child(9){transition-delay:1.3s}
+.stagger>.reveal:nth-child(10){transition-delay:1.45s}
+.stagger>.reveal:nth-child(11){transition-delay:1.6s}
+.stagger>.reveal:nth-child(12){transition-delay:1.75s}
+.stagger>.reveal:nth-child(13){transition-delay:1.9s}
+.stagger>.reveal:nth-child(14){transition-delay:2.05s}
+.stagger>.reveal:nth-child(15){transition-delay:2.2s}
+.stagger>.reveal:nth-child(16){transition-delay:2.35s}
+.stagger>.reveal:nth-child(17){transition-delay:2.5s}
+.stagger>.reveal:nth-child(18){transition-delay:2.65s}
+.stagger>.reveal:nth-child(19){transition-delay:2.8s}
+
+/* ===== SPARKLES ===== */
+.sparkle{position:fixed;pointer-events:none;z-index:3}
+.sparkle svg{animation:sparkAnim 4s ease-in-out infinite}
+@keyframes sparkAnim{0%,100%{opacity:0;transform:scale(0.3) rotate(0deg)}50%{opacity:0.6;transform:scale(1) rotate(180deg)}}
+
+/* ===== WATERCOLOR BLOBS ===== */
+.wc-blob{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:0}
+
+/* ===== DIVIDERS ===== */
+.hr{display:flex;align-items:center;gap:10px;width:70%;margin:0 auto}
+.hr-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--rose-l),transparent)}
+.hr-line-sage{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--sage-l),transparent)}
+.hr-line-lav{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--lav-l),transparent)}
+.hr-diamond{width:8px;height:8px;border:1px solid var(--rose);transform:rotate(45deg);opacity:0.5}
+.hr-diamond-sage{width:8px;height:8px;border:1px solid var(--sage);transform:rotate(45deg);opacity:0.5}
+.hr-diamond-filled{width:5px;height:5px;background:var(--rose-l);transform:rotate(45deg);opacity:0.6}
+.hr-dot{width:3px;height:3px;border-radius:50%;opacity:0.5}
+.hr-dot-rose{background:var(--rose-l)}
+.hr-dot-sage{background:var(--sage-l)}
+.hr-dot-lav{background:var(--lav-l)}
+.hr-circle{width:8px;height:8px;border-radius:50%;border:1px solid var(--rose-l);opacity:0.4}
+
+/* ===== LABELS ===== */
+.label-xs{
+  font-family:'Montserrat',sans-serif;font-size:9px;font-weight:500;
+  letter-spacing:0.35em;text-transform:uppercase;color:var(--text-l);
+}
+.label-sm{
+  font-family:'Montserrat',sans-serif;font-size:10px;font-weight:400;
+  letter-spacing:0.5em;text-transform:uppercase;color:var(--text-l);
+}
+.label-accent{
+  font-family:'Montserrat',sans-serif;font-size:10px;font-weight:500;
+  letter-spacing:0.5em;text-transform:uppercase;color:var(--rose-d);
+}
+
+/* ============================================ */
+/* SECTION 1: HERO                              */
+/* ============================================ */
+#hero{
+  background:linear-gradient(170deg,var(--bg-blush) 0%,var(--bg) 35%,var(--bg-lav) 65%,var(--bg-sage) 100%);
+  min-height:110vh;
+}
+
+.hero-wrap{
+  position:relative;z-index:3;text-align:center;
+  padding:80px 50px 70px;max-width:780px;width:100%;
+}
+
+/* Self-drawing pastel border */
+.hero-border{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-border rect{
+  stroke:var(--rose-l);stroke-width:1;fill:none;
+  stroke-dasharray:3200;stroke-dashoffset:3200;
+  animation:drawBorder 3.5s ease-out 2.8s forwards;
+}
+@keyframes drawBorder{to{stroke-dashoffset:0}}
+.hero-border-2{position:absolute;inset:8px;pointer-events:none;z-index:0}
+.hero-border-2 rect{
+  stroke:var(--sage-l);stroke-width:0.5;fill:none;
+  stroke-dasharray:3100;stroke-dashoffset:3100;
+  animation:drawBorder 3.5s ease-out 3.3s forwards;
+}
+.hero-border-3{position:absolute;inset:16px;pointer-events:none;z-index:0}
+.hero-border-3 rect{
+  stroke:var(--lav-l);stroke-width:0.5;fill:none;opacity:0.6;
+  stroke-dasharray:3000;stroke-dashoffset:3000;
+  animation:drawBorder 3.5s ease-out 3.8s forwards;
+}
+
+/* Mandala */
+.hero-mandala{
+  position:absolute;top:-80px;left:50%;transform:translateX(-50%);
+  width:600px;height:300px;overflow:hidden;opacity:0.06;z-index:0;pointer-events:none;
+}
+.hero-mandala svg{animation:mandSpin 200s linear infinite}
+@keyframes mandSpin{to{transform:rotate(360deg)}}
+
+/* Bottom mandala */
+.hero-mandala-bot{
+  position:absolute;bottom:-80px;left:50%;transform:translateX(-50%) rotate(180deg);
+  width:600px;height:300px;overflow:hidden;opacity:0.04;z-index:0;pointer-events:none;
+}
+.hero-mandala-bot svg{animation:mandSpin 200s linear infinite reverse}
+
+/* Corner ornaments */
+.corner-orn{position:absolute;z-index:2;pointer-events:none;opacity:0.5}
+.corner-orn.tl{top:4px;left:4px}
+.corner-orn.tr{top:4px;right:4px;transform:scaleX(-1)}
+.corner-orn.bl{bottom:4px;left:4px;transform:scaleY(-1)}
+.corner-orn.br{bottom:4px;right:4px;transform:scale(-1)}
+
+/* Floral side decorations */
+.floral-side{position:absolute;z-index:1;pointer-events:none;opacity:0.08}
+.floral-left{left:20px;top:50%;transform:translateY(-50%)}
+.floral-right{right:20px;top:50%;transform:translateY(-50%) scaleX(-1)}
+
+/* Ganesh */
+.ganesh{
+  font-size:40px;color:var(--rose);
+  text-shadow:0 0 30px rgba(201,145,138,0.2);
+  margin-bottom:6px;
+}
+
+/* Blessing text */
+.blessing{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:16px;font-weight:400;color:var(--text-l);
+  letter-spacing:0.08em;line-height:1.8;
+}
+
+/* Invite line */
+.invite-line{
+  font-family:'Montserrat',sans-serif;font-size:10px;font-weight:400;
+  letter-spacing:0.6em;text-transform:uppercase;color:var(--text-l);
+  margin-top:30px;
+}
+
+/* Event title */
+.event-title{
+  font-family:'Pinyon Script',cursive;font-size:82px;line-height:1.1;
+  background:linear-gradient(135deg,var(--rose-d) 0%,var(--rose) 30%,var(--mauve) 60%,var(--rose-d) 100%);
+  background-size:200% 200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:titleFlow 6s ease-in-out infinite;
+  filter:drop-shadow(0 2px 20px rgba(201,145,138,0.15));
+  margin:2px 0;
+}
+@keyframes titleFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+.event-sub{
+  font-family:'Cinzel',serif;font-size:12px;font-weight:600;
+  letter-spacing:0.7em;text-transform:uppercase;
+  color:var(--sage-d);opacity:0.6;
+}
+
+/* Rings */
+.rings-wrap{margin:28px 0 14px;position:relative}
+.rings-glow{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:140px;height:140px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,145,138,0.08),transparent 70%);
+}
+
+/* Names */
+.name{
+  font-family:'Cinzel Decorative',serif;font-size:62px;font-weight:400;
+  line-height:1.15;letter-spacing:0.06em;position:relative;display:inline-block;
+}
+.name span{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--rose-d) 0%,var(--rose) 25%,var(--mauve) 50%,var(--rose) 75%,var(--rose-d) 100%);
+  background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:nameShimmer 7s ease-in-out infinite;
+  filter:drop-shadow(0 0 15px rgba(201,145,138,0.1));
+}
+@keyframes nameShimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.name span:nth-child(1){animation-delay:0s}
+.name span:nth-child(2){animation-delay:0.12s}
+.name span:nth-child(3){animation-delay:0.24s}
+.name span:nth-child(4){animation-delay:0.36s}
+.name span:nth-child(5){animation-delay:0.48s}
+.name span:nth-child(6){animation-delay:0.6s}
+.name span:nth-child(7){animation-delay:0.72s}
+
+.name-full{
+  font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;
+  letter-spacing:0.15em;color:var(--text);margin-top:2px;
+}
+
+.name-label{
+  font-family:'Montserrat',sans-serif;font-size:8px;font-weight:500;
+  letter-spacing:0.45em;text-transform:uppercase;color:var(--text-l);
+  margin-bottom:6px;
+}
+
+/* Ampersand */
+.amp-wrap{position:relative;display:inline-block;margin:10px 0 16px}
+.amp{
+  font-family:'Pinyon Script',cursive;font-size:76px;
+  color:var(--rose);line-height:1;position:relative;z-index:2;
+  text-shadow:0 0 40px rgba(201,145,138,0.2);
+}
+.amp-ring{position:absolute;top:50%;left:50%;border-radius:50%}
+.amp-ring-1{width:100px;height:100px;transform:translate(-50%,-50%);border:1px solid var(--rose-ll);animation:ampPulse 5s ease-in-out infinite}
+.amp-ring-2{width:80px;height:80px;transform:translate(-50%,-50%);border:1px solid var(--sage-ll);animation:ampPulse 5s ease-in-out infinite 1.2s}
+.amp-ring-3{width:120px;height:120px;transform:translate(-50%,-50%);border:1px solid var(--lav-ll);animation:ampPulse 5s ease-in-out infinite 2.4s}
+@keyframes ampPulse{0%,100%{opacity:0.2;transform:translate(-50%,-50%) scale(1)}50%{opacity:0.5;transform:translate(-50%,-50%) scale(1.06)}}
+
+/* Scroll hint */
+.scroll-hint{
+  position:absolute;bottom:35px;left:50%;transform:translateX(-50%);z-index:5;text-align:center;
+  animation:scrollBounce 2.5s ease-in-out infinite;
+}
+@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
+.scroll-arrow{stroke:var(--rose-l);opacity:0.5}
+
+/* ============================================ */
+/* SECTION 2: FAMILIES                          */
+/* ============================================ */
+#families{
+  background:linear-gradient(170deg,var(--bg-sage) 0%,var(--bg) 50%,var(--bg-blush) 100%);
+  min-height:100vh;
+}
+.families-wrap{
+  position:relative;z-index:3;text-align:center;
+  padding:80px 50px;max-width:720px;width:100%;
+}
+.family-block{margin:20px 0}
+.family-title{
+  font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--sage-d);
+  margin-bottom:8px;
+}
+.family-parents{
+  font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;
+  color:var(--text);letter-spacing:0.05em;line-height:1.5;
+}
+.family-desc{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;
+  font-weight:500;color:var(--rose-d);letter-spacing:0.05em;margin-top:2px;
+}
+.together-text{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:18px;font-weight:400;color:var(--text);
+  letter-spacing:0.1em;line-height:1.8;margin:12px 0;
+}
+.section-title{
+  font-family:'Pinyon Script',cursive;font-size:44px;
+  color:var(--rose);margin:8px 0 6px;
+  text-shadow:0 0 20px rgba(201,145,138,0.1);
+}
+
+/* ============================================ */
+/* SECTION 3: DATE & TIME                       */
+/* ============================================ */
+#details{
+  background:linear-gradient(170deg,var(--bg-lav) 0%,var(--bg) 40%,var(--bg-sage) 100%);
+  min-height:110vh;
+}
+.details-wrap{
+  position:relative;z-index:3;text-align:center;
+  padding:80px 50px;max-width:720px;width:100%;
+}
+
+/* Toran */
+.toran{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  z-index:4;pointer-events:none;width:100%;max-width:800px;opacity:0.1;
+  animation:gentleSway 8s ease-in-out infinite;
+}
+
+/* Date frame */
+.date-frame{
+  position:relative;
+  border:1px solid var(--rose-ll);
+  padding:40px 60px;margin:24px 0;
+  background:linear-gradient(135deg,rgba(201,145,138,0.02),transparent,rgba(143,168,138,0.02));
+  animation:breathGlow 5s ease-in-out infinite;
+}
+.date-frame::before,.date-frame::after,.date-frame .df-tr,.date-frame .df-bl{
+  content:'';position:absolute;width:28px;height:28px;
+}
+.date-frame::before{top:-1px;left:-1px;border-top:2px solid var(--rose-l);border-left:2px solid var(--rose-l);opacity:0.6}
+.date-frame::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--sage-l);border-right:2px solid var(--sage-l);opacity:0.6}
+.date-frame .df-tr{top:-1px;right:-1px;border-top:2px solid var(--lav-l);border-right:2px solid var(--lav-l);opacity:0.5;position:absolute}
+.date-frame .df-bl{bottom:-1px;left:-1px;border-bottom:2px solid var(--gold-l);border-left:2px solid var(--gold-l);opacity:0.4;position:absolute}
+
+.day-name{
+  font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;
+  letter-spacing:0.5em;text-transform:uppercase;color:var(--text-l);
+}
+.date-row{display:flex;align-items:center;justify-content:center;gap:32px;margin:14px 0 8px}
+.date-month{
+  font-family:'Cinzel',serif;font-size:26px;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--rose);
+}
+.date-sep{width:1px;height:80px;background:linear-gradient(180deg,transparent,var(--rose-l),transparent)}
+.date-big{
+  font-family:'Cinzel Decorative',serif;font-size:108px;font-weight:900;line-height:0.85;
+  background:linear-gradient(180deg,var(--rose) 0%,var(--mauve) 50%,var(--lav) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:drop-shadow(0 4px 20px rgba(201,145,138,0.1));
+}
+.date-year{
+  font-family:'Montserrat',sans-serif;font-size:14px;font-weight:400;
+  letter-spacing:0.7em;color:var(--text-l);margin-top:4px;
+}
+.save-label{
+  font-family:'Montserrat',sans-serif;font-size:9px;font-weight:500;
+  letter-spacing:0.6em;text-transform:uppercase;color:var(--sage-d);margin-bottom:16px;
+}
+.time{
+  font-family:'Cinzel',serif;font-size:16px;font-weight:600;
+  letter-spacing:0.35em;color:var(--rose-d);opacity:0.85;margin-top:18px;
+}
+.time-note{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:15px;font-weight:400;color:var(--text-l);
+  letter-spacing:0.08em;margin-top:6px;
+}
+
+/* ============================================ */
+/* SECTION 4: VENUE                             */
+/* ============================================ */
+#venue{
+  background:linear-gradient(170deg,var(--bg-blush) 0%,var(--bg) 50%,var(--bg-lav) 100%);
+  min-height:100vh;
+}
+.venue-wrap{
+  position:relative;z-index:3;text-align:center;
+  padding:80px 50px;max-width:680px;width:100%;
+}
+.venue-name{
+  font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;
+  color:var(--text);letter-spacing:0.04em;
+  text-shadow:0 0 30px rgba(201,145,138,0.08);
+  margin:14px 0 8px;line-height:1.3;
+}
+.venue-addr{
+  font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;
+  letter-spacing:0.12em;color:var(--text);
+}
+.venue-note{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:15px;font-weight:400;color:var(--text-l);
+  letter-spacing:0.06em;margin-top:6px;line-height:1.7;
+}
+
+/* Paisley watermark */
+.venue-paisley{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:500px;height:500px;opacity:0.03;pointer-events:none;z-index:0;
+}
+
+/* ============================================ */
+/* SECTION 5: CEREMONY DETAILS                  */
+/* ============================================ */
+#ceremony{
+  background:linear-gradient(170deg,var(--bg-sage) 0%,var(--bg) 50%,var(--bg-sky) 100%);
+  min-height:90vh;
+}
+.ceremony-wrap{
+  position:relative;z-index:3;text-align:center;
+  padding:80px 50px;max-width:680px;width:100%;
+}
+.ceremony-item{
+  margin:18px 0;
+}
+.ceremony-icon{
+  width:40px;height:40px;margin:0 auto 8px;
+  display:flex;align-items:center;justify-content:center;
+}
+.ceremony-name{
+  font-family:'Cinzel',serif;font-size:14px;font-weight:600;
+  letter-spacing:0.3em;text-transform:uppercase;color:var(--text);
+}
+.ceremony-time{
+  font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;
+  color:var(--text-l);letter-spacing:0.1em;margin-top:2px;
+}
+.ceremony-desc{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:14px;font-weight:400;color:var(--text-l);
+  letter-spacing:0.05em;margin-top:2px;opacity:0.85;
+}
+
+/* ============================================ */
+/* SECTION 6: CLOSING                           */
+/* ============================================ */
+#closing{
+  background:linear-gradient(170deg,var(--bg-lav) 0%,var(--bg-blush) 50%,var(--bg) 100%);
+  min-height:80vh;
+}
+.closing-wrap{
+  position:relative;z-index:3;text-align:center;
+  padding:80px 50px;max-width:600px;width:100%;
+}
+.closing-msg{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:22px;font-weight:400;line-height:2;
+  color:var(--text);letter-spacing:0.04em;
+}
+.closing-names{
+  font-family:'Pinyon Script',cursive;font-size:42px;
+  color:var(--rose);margin-top:24px;
+  text-shadow:0 0 30px rgba(201,145,138,0.15);
+}
+.closing-hashtag{
+  font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;
+  letter-spacing:0.3em;color:var(--mauve);margin-top:16px;
+}
+.closing-footer{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:15px;font-weight:400;color:var(--text-l);
+  margin-top:28px;letter-spacing:0.06em;line-height:1.8;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:740px){
+  .name{font-size:42px;letter-spacing:0.03em}
+  .event-title{font-size:56px}
+  .date-big{font-size:76px}
+  .hero-wrap,.details-wrap,.venue-wrap,.families-wrap,.ceremony-wrap,.closing-wrap{padding:55px 24px}
+  .date-frame{padding:28px 24px}
+  .date-row{gap:18px}
+  .venue-name{font-size:28px}
+  .hr{width:88%}
+  .family-parents{font-size:19px}
+  .closing-msg{font-size:19px}
+  .section-title{font-size:36px}
+}
+@media print{
+  section{min-height:auto;page-break-inside:avoid}
+  .particles-global,.petals,.sparkle,.scroll-hint,.envelope{display:none!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
+  .reveal{opacity:1;transform:none}.envelope{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- FIXED SKETCH BACKGROUNDS -->
+<img class="sketch-bg-fixed sketch-bg-fixed-left" src="Pic back.jpeg" alt="">
+<img class="sketch-bg-fixed sketch-bg-fixed-right" src="Pic back 2.jpeg" alt="">
+
+<!-- ENVELOPE -->
+<div class="envelope" id="envelope">
+  <div style="text-align:center">
+    <div class="env-seal">
+      <div class="env-ring env-ring-1"></div>
+      <div class="env-ring env-ring-2"></div>
+      <div class="env-ring env-ring-3"></div>
+      <span class="env-monogram">R & S</span>
+    </div>
+    <div class="env-label">Opening your invitation</div>
+    <div class="env-dots"><div class="env-dot"></div><div class="env-dot"></div><div class="env-dot"></div></div>
+  </div>
+</div>
+
+<!-- GLOBAL PARTICLES -->
+<div class="particles-global" id="particles"></div>
+
+<!-- TWINKLING STARS -->
+<div class="twinkle-layer" id="twinkles"></div>
+
+<!-- FALLING PETALS & LEAVES -->
+<div class="petals" id="petals"></div>
+
+<!-- FLOATING HEARTS -->
+<div class="hearts" id="hearts"></div>
+
+<!-- SPARKLES -->
+<div class="sparkle" style="top:10%;left:6%"><svg width="14" height="14" viewBox="0 0 14 14" style="animation-delay:0s"><path d="M7 0L8.2 5.8L14 7L8.2 8.2L7 14L5.8 8.2L0 7L5.8 5.8Z" fill="#e8bfb8" opacity="0.5"/></svg></div>
+<div class="sparkle" style="top:6%;right:8%"><svg width="10" height="10" viewBox="0 0 14 14" style="animation-delay:1.5s"><path d="M7 0L8.2 5.8L14 7L8.2 8.2L7 14L5.8 8.2L0 7L5.8 5.8Z" fill="#b8ccb4" opacity="0.4"/></svg></div>
+<div class="sparkle" style="top:30%;left:4%"><svg width="8" height="8" viewBox="0 0 14 14" style="animation-delay:2.8s"><path d="M7 0L8.2 5.8L14 7L8.2 8.2L7 14L5.8 8.2L0 7L5.8 5.8Z" fill="#d0c4dc" opacity="0.35"/></svg></div>
+<div class="sparkle" style="top:50%;right:5%"><svg width="12" height="12" viewBox="0 0 14 14" style="animation-delay:0.8s"><path d="M7 0L8.2 5.8L14 7L8.2 8.2L7 14L5.8 8.2L0 7L5.8 5.8Z" fill="#e8bfb8" opacity="0.4"/></svg></div>
+<div class="sparkle" style="top:70%;left:5%"><svg width="9" height="9" viewBox="0 0 14 14" style="animation-delay:3.5s"><path d="M7 0L8.2 5.8L14 7L8.2 8.2L7 14L5.8 8.2L0 7L5.8 5.8Z" fill="#b8ccb4" opacity="0.3"/></svg></div>
+<div class="sparkle" style="top:88%;right:7%"><svg width="11" height="11" viewBox="0 0 14 14" style="animation-delay:2s"><path d="M7 0L8.2 5.8L14 7L8.2 8.2L7 14L5.8 8.2L0 7L5.8 5.8Z" fill="#d0c4dc" opacity="0.35"/></svg></div>
+<div class="sparkle" style="top:42%;left:92%"><svg width="7" height="7" viewBox="0 0 14 14" style="animation-delay:4.2s"><path d="M7 0L8.2 5.8L14 7L8.2 8.2L7 14L5.8 8.2L0 7L5.8 5.8Z" fill="#ddc498" opacity="0.3"/></svg></div>
+<div class="sparkle" style="top:18%;left:50%"><svg width="8" height="8" viewBox="0 0 14 14" style="animation-delay:1s"><path d="M7 0L8.2 5.8L14 7L8.2 8.2L7 14L5.8 8.2L0 7L5.8 5.8Z" fill="#e8bfb8" opacity="0.3"/></svg></div>
+
+<!-- ===== SIDE VINE DECORATIONS ===== -->
+<div class="side-vines">
+
+  <!-- LEFT VINE -->
+  <div class="vine-left">
+    <svg viewBox="0 0 80 1200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <!-- Main vine stem -->
+      <path d="M40 0 Q35 60 42 120 Q48 180 38 240 Q30 300 44 360 Q52 420 36 480 Q28 540 45 600 Q54 660 37 720 Q28 780 43 840 Q50 900 35 960 Q26 1020 42 1080 Q50 1140 38 1200"
+        stroke="#a8c0a2" stroke-width="1.2" fill="none" opacity="0.25"
+        stroke-dasharray="2000" style="animation:vineGrow 4s ease-out 3s forwards;stroke-dashoffset:2000"/>
+      <!-- Secondary thin stem -->
+      <path d="M40 0 Q32 80 44 160 Q52 240 34 320 Q26 400 46 480 Q56 560 33 640 Q24 720 45 800 Q54 880 34 960 Q26 1040 44 1120 Q52 1200 38 1200"
+        stroke="#d4a49c" stroke-width="0.5" fill="none" opacity="0.12"
+        stroke-dasharray="2000" style="animation:vineGrow 5s ease-out 4s forwards;stroke-dashoffset:2000"/>
+
+      <!-- Leaves along the vine -->
+      <g style="animation:leafSway 6s ease-in-out infinite">
+        <ellipse cx="28" cy="80" rx="10" ry="5" transform="rotate(-30 28 80)" fill="#a8c0a2" opacity="0.15"/>
+      </g>
+      <g style="animation:leafSway 7s ease-in-out infinite 0.5s">
+        <ellipse cx="52" cy="150" rx="12" ry="5" transform="rotate(25 52 150)" fill="#b8d0b2" opacity="0.12"/>
+      </g>
+      <g style="animation:leafSway 5.5s ease-in-out infinite 1s">
+        <ellipse cx="24" cy="230" rx="9" ry="4" transform="rotate(-35 24 230)" fill="#c8dcc2" opacity="0.15"/>
+      </g>
+      <g style="animation:leafSway 6.5s ease-in-out infinite 1.5s">
+        <ellipse cx="55" cy="320" rx="11" ry="5" transform="rotate(20 55 320)" fill="#a8c0a2" opacity="0.12"/>
+      </g>
+      <g style="animation:leafSway 7.5s ease-in-out infinite 0.8s">
+        <ellipse cx="22" cy="410" rx="10" ry="4" transform="rotate(-25 22 410)" fill="#90b088" opacity="0.14"/>
+      </g>
+      <g style="animation:leafSway 6s ease-in-out infinite 2s">
+        <ellipse cx="50" cy="500" rx="12" ry="5" transform="rotate(30 50 500)" fill="#b8d0b2" opacity="0.13"/>
+      </g>
+      <g style="animation:leafSway 5s ease-in-out infinite 1.2s">
+        <ellipse cx="26" cy="590" rx="9" ry="4" transform="rotate(-20 26 590)" fill="#c8dcc2" opacity="0.15"/>
+      </g>
+      <g style="animation:leafSway 7s ease-in-out infinite 0.3s">
+        <ellipse cx="54" cy="680" rx="11" ry="5" transform="rotate(28 54 680)" fill="#a8c0a2" opacity="0.12"/>
+      </g>
+      <g style="animation:leafSway 6.5s ease-in-out infinite 1.8s">
+        <ellipse cx="20" cy="770" rx="10" ry="4" transform="rotate(-32 20 770)" fill="#b8d0b2" opacity="0.14"/>
+      </g>
+      <g style="animation:leafSway 5.5s ease-in-out infinite 0.6s">
+        <ellipse cx="52" cy="860" rx="12" ry="5" transform="rotate(22 52 860)" fill="#90b088" opacity="0.12"/>
+      </g>
+      <g style="animation:leafSway 7s ease-in-out infinite 1.4s">
+        <ellipse cx="25" cy="950" rx="9" ry="4" transform="rotate(-28 25 950)" fill="#c8dcc2" opacity="0.15"/>
+      </g>
+      <g style="animation:leafSway 6s ease-in-out infinite 2.2s">
+        <ellipse cx="53" cy="1040" rx="11" ry="5" transform="rotate(25 53 1040)" fill="#a8c0a2" opacity="0.12"/>
+      </g>
+      <g style="animation:leafSway 5.5s ease-in-out infinite 0.9s">
+        <ellipse cx="22" cy="1130" rx="10" ry="4" transform="rotate(-30 22 1130)" fill="#b8d0b2" opacity="0.14"/>
+      </g>
+
+      <!-- Blooming flowers along vine -->
+      <g style="animation:bloomPulse 4s ease-in-out infinite">
+        <circle cx="34" cy="120" r="5" fill="none" stroke="#d4a49c" stroke-width="0.6" opacity="0.3"/>
+        <circle cx="34" cy="120" r="2" fill="#d4a49c" opacity="0.2"/>
+      </g>
+      <g style="animation:bloomPulse 5s ease-in-out infinite 1s">
+        <circle cx="44" cy="290" r="6" fill="none" stroke="#bab0c8" stroke-width="0.6" opacity="0.25"/>
+        <circle cx="44" cy="290" r="2.5" fill="#bab0c8" opacity="0.18"/>
+      </g>
+      <g style="animation:bloomPulse2 4.5s ease-in-out infinite 0.5s">
+        <circle cx="30" cy="460" r="5" fill="none" stroke="#d4a49c" stroke-width="0.6" opacity="0.3"/>
+        <circle cx="30" cy="460" r="2" fill="#d4a49c" opacity="0.2"/>
+      </g>
+      <g style="animation:bloomPulse 5.5s ease-in-out infinite 2s">
+        <circle cx="48" cy="640" r="6" fill="none" stroke="#c8aa72" stroke-width="0.6" opacity="0.22"/>
+        <circle cx="48" cy="640" r="2.5" fill="#c8aa72" opacity="0.16"/>
+      </g>
+      <g style="animation:bloomPulse2 4s ease-in-out infinite 1.5s">
+        <circle cx="32" cy="810" r="5" fill="none" stroke="#d4a49c" stroke-width="0.6" opacity="0.28"/>
+        <circle cx="32" cy="810" r="2" fill="#d4a49c" opacity="0.2"/>
+      </g>
+      <g style="animation:bloomPulse 5s ease-in-out infinite 0.8s">
+        <circle cx="46" cy="980" r="6" fill="none" stroke="#bab0c8" stroke-width="0.6" opacity="0.25"/>
+        <circle cx="46" cy="980" r="2.5" fill="#bab0c8" opacity="0.18"/>
+      </g>
+      <g style="animation:bloomPulse2 4.5s ease-in-out infinite 2.5s">
+        <circle cx="30" cy="1140" r="5" fill="none" stroke="#d4a49c" stroke-width="0.6" opacity="0.3"/>
+        <circle cx="30" cy="1140" r="2" fill="#d4a49c" opacity="0.2"/>
+      </g>
+
+      <!-- Small hearts on the vine -->
+      <path d="M18 180 Q18 175 22 175 Q26 175 26 180 Q26 184 22 188 Q18 184 18 180Z" fill="#d4a49c" opacity="0.15" style="animation:bloomPulse 6s ease-in-out infinite 0.3s"/>
+      <path d="M14 540 Q14 535 18 535 Q22 535 22 540 Q22 544 18 548 Q14 544 14 540Z" fill="#bab0c8" opacity="0.12" style="animation:bloomPulse2 5s ease-in-out infinite 1.8s"/>
+      <path d="M16 900 Q16 895 20 895 Q24 895 24 900 Q24 904 20 908 Q16 904 16 900Z" fill="#c8aa72" opacity="0.13" style="animation:bloomPulse 5.5s ease-in-out infinite 2.8s"/>
+
+      <!-- Tiny stars -->
+      <path d="M12 360L13.5 356L17 356L14 354L15.5 350L12 352L8.5 350L10 354L7 356L10.5 356Z" fill="#c8aa72" opacity="0.15" style="animation:sparkAnim 4s ease-in-out infinite 0.5s"/>
+      <path d="M10 720L11.5 716L15 716L12 714L13.5 710L10 712L6.5 710L8 714L5 716L8.5 716Z" fill="#d4a49c" opacity="0.12" style="animation:sparkAnim 5s ease-in-out infinite 2s"/>
+      <path d="M14 1060L15.5 1056L19 1056L16 1054L17.5 1050L14 1052L10.5 1050L12 1054L9 1056L12.5 1056Z" fill="#bab0c8" opacity="0.14" style="animation:sparkAnim 4.5s ease-in-out infinite 3.5s"/>
+
+      <!-- Butterfly -->
+      <g style="animation:butterflyFloat 8s ease-in-out infinite 2s" opacity="0.2">
+        <path d="M18 420 Q10 414 14 408 Q18 414 18 420Z" fill="#d4a49c"/>
+        <path d="M18 420 Q26 414 22 408 Q18 414 18 420Z" fill="#bab0c8"/>
+      </g>
+      <g style="animation:butterflyFloat 9s ease-in-out infinite 5s" opacity="0.15">
+        <path d="M15 840 Q7 834 11 828 Q15 834 15 840Z" fill="#a8c0a2"/>
+        <path d="M15 840 Q23 834 19 828 Q15 834 15 840Z" fill="#c8aa72"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- RIGHT VINE (mirrored, different timing) -->
+  <div class="vine-right">
+    <svg viewBox="0 0 80 1200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="transform:scaleX(-1)">
+      <!-- Main vine stem -->
+      <path d="M40 0 Q45 70 36 140 Q28 210 44 280 Q52 350 35 420 Q26 490 46 560 Q55 630 34 700 Q25 770 44 840 Q52 910 36 980 Q28 1050 45 1120 Q52 1200 40 1200"
+        stroke="#bab0c8" stroke-width="1.2" fill="none" opacity="0.22"
+        stroke-dasharray="2000" style="animation:vineGrow 4.5s ease-out 3.5s forwards;stroke-dashoffset:2000"/>
+      <path d="M40 0 Q48 90 32 180 Q24 270 48 360 Q56 450 30 540 Q22 630 48 720 Q56 810 32 900 Q24 990 46 1080 Q52 1200 40 1200"
+        stroke="#a8c0a2" stroke-width="0.5" fill="none" opacity="0.1"
+        stroke-dasharray="2000" style="animation:vineGrow 5.5s ease-out 4.5s forwards;stroke-dashoffset:2000"/>
+
+      <!-- Leaves -->
+      <g style="animation:leafSway 6.5s ease-in-out infinite 0.3s">
+        <ellipse cx="52" cy="100" rx="11" ry="5" transform="rotate(28 52 100)" fill="#bab0c8" opacity="0.13"/>
+      </g>
+      <g style="animation:leafSway 5.5s ease-in-out infinite 1.2s">
+        <ellipse cx="26" cy="190" rx="10" ry="4" transform="rotate(-22 26 190)" fill="#d4a49c" opacity="0.14"/>
+      </g>
+      <g style="animation:leafSway 7s ease-in-out infinite 0.7s">
+        <ellipse cx="55" cy="280" rx="12" ry="5" transform="rotate(32 55 280)" fill="#a8c0a2" opacity="0.12"/>
+      </g>
+      <g style="animation:leafSway 6s ease-in-out infinite 1.8s">
+        <ellipse cx="22" cy="370" rx="9" ry="4" transform="rotate(-28 22 370)" fill="#bab0c8" opacity="0.15"/>
+      </g>
+      <g style="animation:leafSway 5s ease-in-out infinite 0.4s">
+        <ellipse cx="54" cy="460" rx="11" ry="5" transform="rotate(20 54 460)" fill="#c8aa72" opacity="0.12"/>
+      </g>
+      <g style="animation:leafSway 7.5s ease-in-out infinite 1.5s">
+        <ellipse cx="24" cy="550" rx="10" ry="4" transform="rotate(-35 24 550)" fill="#a8c0a2" opacity="0.14"/>
+      </g>
+      <g style="animation:leafSway 6s ease-in-out infinite 2.2s">
+        <ellipse cx="52" cy="640" rx="12" ry="5" transform="rotate(25 52 640)" fill="#d4a49c" opacity="0.13"/>
+      </g>
+      <g style="animation:leafSway 5.5s ease-in-out infinite 0.9s">
+        <ellipse cx="20" cy="730" rx="9" ry="4" transform="rotate(-30 20 730)" fill="#bab0c8" opacity="0.15"/>
+      </g>
+      <g style="animation:leafSway 7s ease-in-out infinite 1.6s">
+        <ellipse cx="53" cy="820" rx="11" ry="5" transform="rotate(22 53 820)" fill="#a8c0a2" opacity="0.12"/>
+      </g>
+      <g style="animation:leafSway 6.5s ease-in-out infinite 2s">
+        <ellipse cx="25" cy="910" rx="10" ry="4" transform="rotate(-25 25 910)" fill="#c8aa72" opacity="0.14"/>
+      </g>
+      <g style="animation:leafSway 5.5s ease-in-out infinite 0.6s">
+        <ellipse cx="52" cy="1000" rx="12" ry="5" transform="rotate(30 52 1000)" fill="#d4a49c" opacity="0.12"/>
+      </g>
+      <g style="animation:leafSway 6s ease-in-out infinite 1.3s">
+        <ellipse cx="24" cy="1100" rx="9" ry="4" transform="rotate(-28 24 1100)" fill="#bab0c8" opacity="0.15"/>
+      </g>
+
+      <!-- Blooming flowers -->
+      <g style="animation:bloomPulse2 4.5s ease-in-out infinite 0.8s">
+        <circle cx="42" cy="160" r="5" fill="none" stroke="#bab0c8" stroke-width="0.6" opacity="0.28"/>
+        <circle cx="42" cy="160" r="2" fill="#bab0c8" opacity="0.2"/>
+      </g>
+      <g style="animation:bloomPulse 5s ease-in-out infinite 2s">
+        <circle cx="36" cy="340" r="6" fill="none" stroke="#d4a49c" stroke-width="0.6" opacity="0.25"/>
+        <circle cx="36" cy="340" r="2.5" fill="#d4a49c" opacity="0.18"/>
+      </g>
+      <g style="animation:bloomPulse2 5.5s ease-in-out infinite 1.2s">
+        <circle cx="44" cy="520" r="5" fill="none" stroke="#c8aa72" stroke-width="0.6" opacity="0.25"/>
+        <circle cx="44" cy="520" r="2" fill="#c8aa72" opacity="0.18"/>
+      </g>
+      <g style="animation:bloomPulse 4s ease-in-out infinite 3s">
+        <circle cx="32" cy="700" r="6" fill="none" stroke="#d4a49c" stroke-width="0.6" opacity="0.28"/>
+        <circle cx="32" cy="700" r="2.5" fill="#d4a49c" opacity="0.2"/>
+      </g>
+      <g style="animation:bloomPulse2 5s ease-in-out infinite 0.5s">
+        <circle cx="46" cy="880" r="5" fill="none" stroke="#bab0c8" stroke-width="0.6" opacity="0.25"/>
+        <circle cx="46" cy="880" r="2" fill="#bab0c8" opacity="0.18"/>
+      </g>
+      <g style="animation:bloomPulse 4.5s ease-in-out infinite 2.5s">
+        <circle cx="34" cy="1060" r="6" fill="none" stroke="#a8c0a2" stroke-width="0.6" opacity="0.25"/>
+        <circle cx="34" cy="1060" r="2.5" fill="#a8c0a2" opacity="0.18"/>
+      </g>
+
+      <!-- Hearts -->
+      <path d="M58 220 Q58 215 62 215 Q66 215 66 220 Q66 224 62 228 Q58 224 58 220Z" fill="#bab0c8" opacity="0.14" style="animation:bloomPulse 5.5s ease-in-out infinite 1s"/>
+      <path d="M56 580 Q56 575 60 575 Q64 575 64 580 Q64 584 60 588 Q56 584 56 580Z" fill="#d4a49c" opacity="0.12" style="animation:bloomPulse2 6s ease-in-out infinite 3s"/>
+      <path d="M58 940 Q58 935 62 935 Q66 935 66 940 Q66 944 62 948 Q58 944 58 940Z" fill="#c8aa72" opacity="0.13" style="animation:bloomPulse 5s ease-in-out infinite 0.8s"/>
+
+      <!-- Stars -->
+      <path d="M62 400L63.5 396L67 396L64 394L65.5 390L62 392L58.5 390L60 394L57 396L60.5 396Z" fill="#d4a49c" opacity="0.14" style="animation:sparkAnim 5s ease-in-out infinite 1.5s"/>
+      <path d="M60 760L61.5 756L65 756L62 754L63.5 750L60 752L56.5 750L58 754L55 756L58.5 756Z" fill="#c8aa72" opacity="0.12" style="animation:sparkAnim 4.5s ease-in-out infinite 3s"/>
+      <path d="M64 1100L65.5 1096L69 1096L66 1094L67.5 1090L64 1092L60.5 1090L62 1094L59 1096L62.5 1096Z" fill="#bab0c8" opacity="0.13" style="animation:sparkAnim 5.5s ease-in-out infinite 0.5s"/>
+
+      <!-- Butterfly -->
+      <g style="animation:butterflyFloat 9s ease-in-out infinite 4s" opacity="0.18">
+        <path d="M60 480 Q52 474 56 468 Q60 474 60 480Z" fill="#bab0c8"/>
+        <path d="M60 480 Q68 474 64 468 Q60 474 60 480Z" fill="#d4a49c"/>
+      </g>
+      <g style="animation:butterflyFloat 7.5s ease-in-out infinite 1s" opacity="0.15">
+        <path d="M58 900 Q50 894 54 888 Q58 894 58 900Z" fill="#c8aa72"/>
+        <path d="M58 900 Q66 894 62 888 Q58 894 58 900Z" fill="#a8c0a2"/>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<!-- Side dots -->
+<div class="side-dots side-dots-left">
+  <div class="side-dot"></div><div class="side-dot"></div><div class="side-dot"></div><div class="side-dot"></div><div class="side-dot"></div>
+</div>
+<div class="side-dots side-dots-right">
+  <div class="side-dot"></div><div class="side-dot"></div><div class="side-dot"></div><div class="side-dot"></div><div class="side-dot"></div>
+</div>
+
+
+<!-- ================================================ -->
+<!-- SECTION 1: HERO                                  -->
+<!-- ================================================ -->
+<section id="hero">
+  <!-- Subtle sketch backgrounds -->
+  <!-- Watercolor blobs -->
+  <div class="wc-blob" style="width:400px;height:400px;top:-100px;left:-100px;background:var(--rose-ll);opacity:0.25"></div>
+  <div class="wc-blob" style="width:350px;height:350px;top:-50px;right:-80px;background:var(--lav-ll);opacity:0.2"></div>
+  <div class="wc-blob" style="width:300px;height:300px;bottom:-60px;left:50%;background:var(--sage-ll);opacity:0.15"></div>
+  <div class="wc-blob" style="width:250px;height:250px;bottom:10%;right:10%;background:var(--gold-ll);opacity:0.1"></div>
+
+  <!-- Mandala top -->
+  <div class="hero-mandala">
+    <svg viewBox="0 0 500 500" fill="none" stroke="var(--rose-l)" stroke-width="0.5">
+      <g transform="translate(250,250)">
+        <circle r="30"/><circle r="50"/><circle r="72"/><circle r="98"/><circle r="125"/><circle r="155"/><circle r="185"/><circle r="215"/><circle r="245"/>
+        <g id="p1"><ellipse cx="0" cy="-40" rx="8" ry="22"/></g>
+        <use href="#p1" transform="rotate(30)"/><use href="#p1" transform="rotate(60)"/><use href="#p1" transform="rotate(90)"/>
+        <use href="#p1" transform="rotate(120)"/><use href="#p1" transform="rotate(150)"/><use href="#p1" transform="rotate(180)"/>
+        <use href="#p1" transform="rotate(210)"/><use href="#p1" transform="rotate(240)"/><use href="#p1" transform="rotate(270)"/>
+        <use href="#p1" transform="rotate(300)"/><use href="#p1" transform="rotate(330)"/>
+        <g id="p2"><ellipse cx="0" cy="-85" rx="12" ry="32"/></g>
+        <use href="#p2" transform="rotate(15)"/><use href="#p2" transform="rotate(45)"/><use href="#p2" transform="rotate(75)"/>
+        <use href="#p2" transform="rotate(105)"/><use href="#p2" transform="rotate(135)"/><use href="#p2" transform="rotate(165)"/>
+        <use href="#p2" transform="rotate(195)"/><use href="#p2" transform="rotate(225)"/><use href="#p2" transform="rotate(255)"/>
+        <use href="#p2" transform="rotate(285)"/><use href="#p2" transform="rotate(315)"/><use href="#p2" transform="rotate(345)"/>
+        <g id="p3"><ellipse cx="0" cy="-145" rx="14" ry="38"/></g>
+        <use href="#p3" transform="rotate(0)"/><use href="#p3" transform="rotate(30)"/><use href="#p3" transform="rotate(60)"/>
+        <use href="#p3" transform="rotate(90)"/><use href="#p3" transform="rotate(120)"/><use href="#p3" transform="rotate(150)"/>
+        <use href="#p3" transform="rotate(180)"/><use href="#p3" transform="rotate(210)"/><use href="#p3" transform="rotate(240)"/>
+        <use href="#p3" transform="rotate(270)"/><use href="#p3" transform="rotate(300)"/><use href="#p3" transform="rotate(330)"/>
+        <g id="p4"><path d="M0,-195L7,-218L0,-248L-7,-218Z"/></g>
+        <use href="#p4" transform="rotate(0)"/><use href="#p4" transform="rotate(15)"/><use href="#p4" transform="rotate(30)"/>
+        <use href="#p4" transform="rotate(45)"/><use href="#p4" transform="rotate(60)"/><use href="#p4" transform="rotate(75)"/>
+        <use href="#p4" transform="rotate(90)"/><use href="#p4" transform="rotate(105)"/><use href="#p4" transform="rotate(120)"/>
+        <use href="#p4" transform="rotate(135)"/><use href="#p4" transform="rotate(150)"/><use href="#p4" transform="rotate(165)"/>
+        <use href="#p4" transform="rotate(180)"/><use href="#p4" transform="rotate(195)"/><use href="#p4" transform="rotate(210)"/>
+        <use href="#p4" transform="rotate(225)"/><use href="#p4" transform="rotate(240)"/><use href="#p4" transform="rotate(255)"/>
+        <use href="#p4" transform="rotate(270)"/><use href="#p4" transform="rotate(285)"/><use href="#p4" transform="rotate(300)"/>
+        <use href="#p4" transform="rotate(315)"/><use href="#p4" transform="rotate(330)"/><use href="#p4" transform="rotate(345)"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-mandala-bot">
+    <svg viewBox="0 0 500 500" fill="none" stroke="var(--sage-l)" stroke-width="0.4">
+      <g transform="translate(250,250)">
+        <circle r="35"/><circle r="55"/><circle r="80"/><circle r="108"/><circle r="140"/><circle r="175"/><circle r="210"/><circle r="245"/>
+        <g id="q1"><path d="M0,-42Q12,-62 0,-82Q-12,-62 0,-42Z"/></g>
+        <use href="#q1" transform="rotate(0)"/><use href="#q1" transform="rotate(20)"/><use href="#q1" transform="rotate(40)"/>
+        <use href="#q1" transform="rotate(60)"/><use href="#q1" transform="rotate(80)"/><use href="#q1" transform="rotate(100)"/>
+        <use href="#q1" transform="rotate(120)"/><use href="#q1" transform="rotate(140)"/><use href="#q1" transform="rotate(160)"/>
+        <use href="#q1" transform="rotate(180)"/><use href="#q1" transform="rotate(200)"/><use href="#q1" transform="rotate(220)"/>
+        <use href="#q1" transform="rotate(240)"/><use href="#q1" transform="rotate(260)"/><use href="#q1" transform="rotate(280)"/>
+        <use href="#q1" transform="rotate(300)"/><use href="#q1" transform="rotate(320)"/><use href="#q1" transform="rotate(340)"/>
+        <g id="q2"><ellipse cx="0" cy="-120" rx="12" ry="30"/></g>
+        <use href="#q2" transform="rotate(0)"/><use href="#q2" transform="rotate(30)"/><use href="#q2" transform="rotate(60)"/>
+        <use href="#q2" transform="rotate(90)"/><use href="#q2" transform="rotate(120)"/><use href="#q2" transform="rotate(150)"/>
+        <use href="#q2" transform="rotate(180)"/><use href="#q2" transform="rotate(210)"/><use href="#q2" transform="rotate(240)"/>
+        <use href="#q2" transform="rotate(270)"/><use href="#q2" transform="rotate(300)"/><use href="#q2" transform="rotate(330)"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Floral side decorations -->
+  <div class="floral-side floral-left">
+    <svg width="60" height="400" viewBox="0 0 60 400" fill="none">
+      <path d="M30 0L30 400" stroke="var(--rose-l)" stroke-width="0.3" opacity="0.4"/>
+      <circle cx="30" cy="60" r="8" stroke="var(--rose-l)" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <circle cx="30" cy="60" r="3" fill="var(--rose-ll)" opacity="0.3"/>
+      <ellipse cx="18" cy="100" rx="8" ry="16" transform="rotate(-20 18 100)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.3"/>
+      <ellipse cx="42" cy="130" rx="8" ry="16" transform="rotate(20 42 130)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.3"/>
+      <circle cx="30" cy="170" r="5" stroke="var(--lav-l)" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <circle cx="30" cy="170" r="2" fill="var(--lav-ll)" opacity="0.3"/>
+      <rect x="26" y="196" width="8" height="8" transform="rotate(45 30 200)" stroke="var(--rose-l)" stroke-width="0.4" fill="none" opacity="0.3"/>
+      <ellipse cx="20" cy="240" rx="7" ry="14" transform="rotate(-15 20 240)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.25"/>
+      <ellipse cx="40" cy="270" rx="7" ry="14" transform="rotate(15 40 270)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.25"/>
+      <circle cx="30" cy="310" r="6" stroke="var(--rose-l)" stroke-width="0.5" fill="none" opacity="0.35"/>
+      <circle cx="30" cy="310" r="2.5" fill="var(--rose-ll)" opacity="0.25"/>
+      <circle cx="30" cy="350" r="4" stroke="var(--lav-l)" stroke-width="0.4" fill="none" opacity="0.3"/>
+    </svg>
+  </div>
+  <div class="floral-side floral-right">
+    <svg width="60" height="400" viewBox="0 0 60 400" fill="none">
+      <path d="M30 0L30 400" stroke="var(--rose-l)" stroke-width="0.3" opacity="0.4"/>
+      <circle cx="30" cy="60" r="8" stroke="var(--rose-l)" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <circle cx="30" cy="60" r="3" fill="var(--rose-ll)" opacity="0.3"/>
+      <ellipse cx="18" cy="100" rx="8" ry="16" transform="rotate(-20 18 100)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.3"/>
+      <ellipse cx="42" cy="130" rx="8" ry="16" transform="rotate(20 42 130)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.3"/>
+      <circle cx="30" cy="170" r="5" stroke="var(--lav-l)" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <circle cx="30" cy="170" r="2" fill="var(--lav-ll)" opacity="0.3"/>
+      <rect x="26" y="196" width="8" height="8" transform="rotate(45 30 200)" stroke="var(--rose-l)" stroke-width="0.4" fill="none" opacity="0.3"/>
+      <ellipse cx="20" cy="240" rx="7" ry="14" transform="rotate(-15 20 240)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.25"/>
+      <circle cx="30" cy="310" r="6" stroke="var(--rose-l)" stroke-width="0.5" fill="none" opacity="0.35"/>
+    </svg>
+  </div>
+
+  <div class="hero-wrap stagger">
+    <!-- Self-drawing triple border -->
+    <svg class="hero-border" viewBox="0 0 780 1000" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0">
+      <rect x="16" y="16" width="748" height="968" rx="0"/>
+    </svg>
+    <div class="hero-border-2" style="position:absolute;inset:8px;pointer-events:none">
+      <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 764 984" preserveAspectRatio="none">
+        <rect x="0" y="0" width="764" height="984" stroke="var(--sage-l)" stroke-width="0.5" fill="none" stroke-dasharray="3100" stroke-dashoffset="3100" style="animation:drawBorder 3.5s ease-out 3.3s forwards"/>
+      </svg>
+    </div>
+    <div class="hero-border-3" style="position:absolute;inset:16px;pointer-events:none">
+      <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 748 968" preserveAspectRatio="none">
+        <rect x="0" y="0" width="748" height="968" stroke="var(--lav-l)" stroke-width="0.5" fill="none" opacity="0.5" stroke-dasharray="3000" stroke-dashoffset="3000" style="animation:drawBorder 3.5s ease-out 3.8s forwards"/>
+      </svg>
+    </div>
+
+    <!-- Corner ornaments -->
+    <svg class="corner-orn tl" width="80" height="80" viewBox="0 0 80 80" fill="none">
+      <path d="M2 2Q2 45 45 45" stroke="var(--rose-l)" stroke-width="0.8"/>
+      <path d="M2 2Q2 55 55 55" stroke="var(--sage-l)" stroke-width="0.5" opacity="0.5"/>
+      <path d="M2 2Q2 65 65 65" stroke="var(--lav-l)" stroke-width="0.3" opacity="0.3"/>
+      <circle cx="6" cy="6" r="2.5" fill="var(--rose-l)" opacity="0.5"/>
+      <circle cx="6" cy="6" r="6" stroke="var(--rose-l)" stroke-width="0.3" fill="none" opacity="0.3"/>
+      <path d="M2 15Q10 15 15 10Q15 20 24 20" stroke="var(--rose-l)" stroke-width="0.4" opacity="0.35"/>
+      <ellipse cx="22" cy="32" rx="5" ry="12" transform="rotate(-45 22 32)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.25"/>
+      <ellipse cx="32" cy="22" rx="5" ry="12" transform="rotate(45 32 22)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.25"/>
+      <circle cx="18" cy="18" r="1.5" fill="var(--lav-l)" opacity="0.3"/>
+    </svg>
+    <svg class="corner-orn tr" width="80" height="80" viewBox="0 0 80 80" fill="none">
+      <path d="M2 2Q2 45 45 45" stroke="var(--rose-l)" stroke-width="0.8"/>
+      <path d="M2 2Q2 55 55 55" stroke="var(--sage-l)" stroke-width="0.5" opacity="0.5"/>
+      <path d="M2 2Q2 65 65 65" stroke="var(--lav-l)" stroke-width="0.3" opacity="0.3"/>
+      <circle cx="6" cy="6" r="2.5" fill="var(--rose-l)" opacity="0.5"/>
+      <ellipse cx="22" cy="32" rx="5" ry="12" transform="rotate(-45 22 32)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.25"/>
+      <ellipse cx="32" cy="22" rx="5" ry="12" transform="rotate(45 32 22)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.25"/>
+    </svg>
+    <svg class="corner-orn bl" width="80" height="80" viewBox="0 0 80 80" fill="none">
+      <path d="M2 2Q2 45 45 45" stroke="var(--rose-l)" stroke-width="0.8"/>
+      <path d="M2 2Q2 55 55 55" stroke="var(--sage-l)" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="6" cy="6" r="2.5" fill="var(--rose-l)" opacity="0.5"/>
+      <ellipse cx="22" cy="32" rx="5" ry="12" transform="rotate(-45 22 32)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.25"/>
+    </svg>
+    <svg class="corner-orn br" width="80" height="80" viewBox="0 0 80 80" fill="none">
+      <path d="M2 2Q2 45 45 45" stroke="var(--rose-l)" stroke-width="0.8"/>
+      <path d="M2 2Q2 55 55 55" stroke="var(--sage-l)" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="6" cy="6" r="2.5" fill="var(--rose-l)" opacity="0.5"/>
+      <ellipse cx="22" cy="32" rx="5" ry="12" transform="rotate(-45 22 32)" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.25"/>
+    </svg>
+
+    <!-- Flourish -->
+    <svg class="reveal" width="200" height="25" viewBox="0 0 200 25" fill="none" style="margin-bottom:8px;opacity:0.4">
+      <path d="M100 22Q72 22 55 14Q38 5 10 8" stroke="var(--rose-l)" stroke-width="0.8"/>
+      <path d="M100 22Q128 22 145 14Q162 5 190 8" stroke="var(--rose-l)" stroke-width="0.8"/>
+      <path d="M100 18Q78 18 65 12Q52 5 32 7" stroke="var(--sage-l)" stroke-width="0.4" opacity="0.5"/>
+      <path d="M100 18Q122 18 135 12Q148 5 168 7" stroke="var(--sage-l)" stroke-width="0.4" opacity="0.5"/>
+      <circle cx="100" cy="22" r="2" fill="var(--rose-l)"/>
+      <circle cx="10" cy="8" r="1" fill="var(--rose-l)" opacity="0.3"/>
+      <circle cx="190" cy="8" r="1" fill="var(--rose-l)" opacity="0.3"/>
+    </svg>
+
+    <div class="reveal ganesh">&#x0950;</div>
+    <div class="reveal label-xs" style="margin-bottom:4px">Shri Ganeshaya Namaha</div>
+    <div class="reveal blessing">
+      With the divine blessings of the Almighty<br>
+      & the joyous consent of both families
+    </div>
+
+    <div class="reveal hr">
+      <div class="hr-line"></div>
+      <div class="hr-dot hr-dot-rose"></div>
+      <div class="hr-circle"></div>
+      <div class="hr-dot hr-dot-sage"></div>
+      <div class="hr-diamond"></div>
+      <div class="hr-dot hr-dot-lav"></div>
+      <div class="hr-circle"></div>
+      <div class="hr-dot hr-dot-rose"></div>
+      <div class="hr-line"></div>
+    </div>
+
+    <div class="reveal invite-line">We joyfully invite you to celebrate the</div>
+    <div class="reveal event-title">Ring Ceremony</div>
+    <div class="reveal event-sub">Engagement Celebration</div>
+
+    <div class="reveal" style="margin:30px 0 16px">
+      <div class="rings-wrap">
+        <div class="rings-glow"></div>
+        <svg width="110" height="65" viewBox="0 0 110 65" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="rg1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--rose-ll)"/><stop offset="50%" stop-color="var(--rose)"/><stop offset="100%" stop-color="var(--rose-d)"/>
+            </linearGradient>
+            <linearGradient id="rg2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="var(--rose-ll)"/><stop offset="50%" stop-color="var(--rose)"/><stop offset="100%" stop-color="var(--rose-d)"/>
+            </linearGradient>
+            <filter id="rglow"><feGaussianBlur stdDeviation="2.5"/></filter>
+          </defs>
+          <ellipse cx="42" cy="36" rx="24" ry="24" stroke="var(--rose-l)" stroke-width="3" fill="none" filter="url(#rglow)" opacity="0.25"/>
+          <ellipse cx="68" cy="36" rx="24" ry="24" stroke="var(--rose-l)" stroke-width="3" fill="none" filter="url(#rglow)" opacity="0.25"/>
+          <ellipse cx="42" cy="36" rx="24" ry="24" stroke="url(#rg1)" stroke-width="2" fill="none"/>
+          <ellipse cx="42" cy="36" rx="21" ry="21" stroke="var(--rose-ll)" stroke-width="0.4" fill="none" opacity="0.4"/>
+          <ellipse cx="68" cy="36" rx="24" ry="24" stroke="url(#rg2)" stroke-width="2" fill="none"/>
+          <ellipse cx="68" cy="36" rx="21" ry="21" stroke="var(--rose-ll)" stroke-width="0.4" fill="none" opacity="0.4"/>
+          <polygon points="42,8 46,16 42,14 38,16" fill="var(--rose-l)"/>
+          <circle cx="22" cy="15" r="1.3" fill="var(--rose-l)" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="3s" repeatCount="indefinite"/></circle>
+          <circle cx="88" cy="15" r="1" fill="var(--rose-l)" opacity="0.4"><animate attributeName="opacity" values="0.4;0.1;0.4" dur="3.5s" repeatCount="indefinite"/></circle>
+          <circle cx="14" cy="42" r="0.8" fill="var(--lav-l)" opacity="0.3"><animate attributeName="opacity" values="0.3;0.05;0.3" dur="4s" repeatCount="indefinite"/></circle>
+          <circle cx="96" cy="42" r="0.8" fill="var(--sage-l)" opacity="0.3"><animate attributeName="opacity" values="0.3;0.05;0.3" dur="3.2s" repeatCount="indefinite"/></circle>
+        </svg>
+      </div>
+    </div>
+
+    <div class="reveal label-xs" style="color:var(--sage)">Of</div>
+
+    <div class="reveal name-label">The Groom</div>
+    <div class="reveal name">
+      <span>R</span><span>o</span><span>h</span><span>i</span><span>t</span>
+    </div>
+    <div class="reveal name-full">Rohit Mukherjee</div>
+
+    <div class="reveal amp-wrap">
+      <div class="amp-ring amp-ring-1"></div>
+      <div class="amp-ring amp-ring-2"></div>
+      <div class="amp-ring amp-ring-3"></div>
+      <div class="amp">&</div>
+    </div>
+
+    <div class="reveal name-label">The Bride</div>
+    <div class="reveal name">
+      <span>S</span><span>u</span><span>s</span><span>m</span><span>i</span><span>t</span><span>a</span>
+    </div>
+    <div class="reveal name-full">Susmita Basak</div>
+
+  </div>
+
+  <div class="scroll-hint">
+    <span class="label-xs" style="font-size:7px;letter-spacing:0.4em;display:block;margin-bottom:6px;color:var(--rose-l)">Scroll down</span>
+    <svg width="18" height="22" viewBox="0 0 18 22" class="scroll-arrow">
+      <path d="M9 2L9 18M4 14L9 19L14 14" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ================================================ -->
+<!-- SECTION 2: FAMILIES                              -->
+<!-- ================================================ -->
+<section id="families">
+  <div class="wc-blob" style="width:350px;height:350px;top:10%;left:-80px;background:var(--sage-ll);opacity:0.2"></div>
+  <div class="wc-blob" style="width:300px;height:300px;bottom:10%;right:-60px;background:var(--rose-ll);opacity:0.15"></div>
+
+  <div class="families-wrap stagger">
+
+    <svg class="reveal" width="160" height="20" viewBox="0 0 160 20" fill="none" style="margin-bottom:8px;opacity:0.35">
+      <path d="M80 18Q55 18 42 10Q28 2 5 5" stroke="var(--sage-l)" stroke-width="0.7"/>
+      <path d="M80 18Q105 18 118 10Q132 2 155 5" stroke="var(--sage-l)" stroke-width="0.7"/>
+      <circle cx="80" cy="18" r="1.5" fill="var(--sage-l)"/>
+    </svg>
+
+    <div class="reveal section-title">With Love & Blessings</div>
+
+    <div class="reveal together-text">
+      We are overjoyed to announce the engagement of our beloved children.<br>
+      With hearts full of gratitude, we invite you to share in this beautiful moment<br>
+      as two souls begin their journey together.
+    </div>
+
+    <div class="reveal hr">
+      <div class="hr-line-sage"></div>
+      <div class="hr-dot hr-dot-sage"></div>
+      <div class="hr-diamond-sage"></div>
+      <div class="hr-dot hr-dot-sage"></div>
+      <div class="hr-line-sage"></div>
+    </div>
+
+    <div class="reveal family-block">
+      <div class="family-title">The Mukherjee Family</div>
+      <div class="family-parents">Cordially invites you on the occasion of<br>the engagement of their beloved son</div>
+      <div class="family-desc">Rohit Mukherjee</div>
+    </div>
+
+    <div class="reveal" style="font-family:'Pinyon Script',cursive;font-size:32px;color:var(--mauve);margin:8px 0">with</div>
+
+    <div class="reveal family-block">
+      <div class="family-title">The Basak Family</div>
+      <div class="family-parents">Joyfully celebrates the engagement<br>of their cherished daughter</div>
+      <div class="family-desc">Susmita Basak</div>
+    </div>
+
+    <div class="reveal hr" style="margin-top:28px">
+      <div class="hr-line-sage"></div>
+      <div class="hr-dot hr-dot-lav"></div>
+      <div class="hr-line-sage"></div>
+    </div>
+
+    <div class="reveal together-text" style="font-size:15px;margin-top:20px">
+      "Two hearts, one love, one beautiful beginning"
+    </div>
+
+    <svg class="reveal" width="120" height="18" viewBox="0 0 120 18" fill="none" style="opacity:0.3;margin-top:8px">
+      <path d="M60 4Q42 4 32 9Q22 14 8 12" stroke="var(--sage-l)" stroke-width="0.5"/>
+      <path d="M60 4Q78 4 88 9Q98 14 112 12" stroke="var(--sage-l)" stroke-width="0.5"/>
+      <circle cx="60" cy="4" r="1.2" fill="var(--sage-l)"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ================================================ -->
+<!-- SECTION 3: DATE & TIME                           -->
+<!-- ================================================ -->
+<section id="details">
+  <div class="wc-blob" style="width:400px;height:400px;top:-80px;right:-100px;background:var(--lav-ll);opacity:0.2"></div>
+  <div class="wc-blob" style="width:300px;height:300px;bottom:-40px;left:-60px;background:var(--gold-ll);opacity:0.12"></div>
+
+  <!-- Toran -->
+  <div class="toran">
+    <svg viewBox="0 0 800 65" fill="none">
+      <path d="M0 8Q100 58 200 35Q300 12 400 48Q500 12 600 35Q700 58 800 8" stroke="var(--rose-l)" stroke-width="1.2" fill="none"/>
+      <path d="M0 5Q100 52 200 32Q300 10 400 44Q500 10 600 32Q700 52 800 5" stroke="var(--sage-l)" stroke-width="0.4" fill="none" opacity="0.5"/>
+      <circle cx="100" cy="40" r="5" stroke="var(--rose-l)" stroke-width="0.5" fill="rgba(201,145,138,0.05)"/>
+      <circle cx="100" cy="40" r="2" fill="var(--rose-ll)" opacity="0.3"/>
+      <circle cx="200" cy="35" r="6" stroke="var(--sage-l)" stroke-width="0.5" fill="rgba(143,168,138,0.05)"/>
+      <circle cx="200" cy="35" r="2.5" fill="var(--sage-ll)" opacity="0.3"/>
+      <circle cx="300" cy="20" r="5" stroke="var(--lav-l)" stroke-width="0.5" fill="rgba(176,160,192,0.05)"/>
+      <circle cx="300" cy="20" r="2" fill="var(--lav-ll)" opacity="0.3"/>
+      <circle cx="400" cy="48" r="7" stroke="var(--rose-l)" stroke-width="0.6" fill="rgba(201,145,138,0.05)"/>
+      <circle cx="400" cy="48" r="3" fill="var(--rose-ll)" opacity="0.3"/>
+      <circle cx="500" cy="20" r="5" stroke="var(--lav-l)" stroke-width="0.5" fill="rgba(176,160,192,0.05)"/>
+      <circle cx="500" cy="20" r="2" fill="var(--lav-ll)" opacity="0.3"/>
+      <circle cx="600" cy="35" r="6" stroke="var(--sage-l)" stroke-width="0.5" fill="rgba(143,168,138,0.05)"/>
+      <circle cx="600" cy="35" r="2.5" fill="var(--sage-ll)" opacity="0.3"/>
+      <circle cx="700" cy="40" r="5" stroke="var(--rose-l)" stroke-width="0.5" fill="rgba(201,145,138,0.05)"/>
+      <circle cx="700" cy="40" r="2" fill="var(--rose-ll)" opacity="0.3"/>
+      <!-- Hanging elements -->
+      <line x1="200" y1="41" x2="200" y2="54" stroke="var(--rose-l)" stroke-width="0.4" opacity="0.3"/>
+      <circle cx="200" cy="56" r="2" stroke="var(--rose-l)" stroke-width="0.3" fill="none" opacity="0.3"/>
+      <line x1="400" y1="55" x2="400" y2="62" stroke="var(--rose-l)" stroke-width="0.4" opacity="0.3"/>
+      <path d="M396 62L400 68L404 62" stroke="var(--rose-l)" stroke-width="0.3" fill="none" opacity="0.3"/>
+      <line x1="600" y1="41" x2="600" y2="54" stroke="var(--rose-l)" stroke-width="0.4" opacity="0.3"/>
+      <circle cx="600" cy="56" r="2" stroke="var(--rose-l)" stroke-width="0.3" fill="none" opacity="0.3"/>
+    </svg>
+  </div>
+
+  <div class="details-wrap stagger">
+    <svg class="reveal" width="180" height="20" viewBox="0 0 180 20" fill="none" style="margin-bottom:12px;opacity:0.35">
+      <path d="M90 18Q62 18 48 10Q34 2 8 5" stroke="var(--lav-l)" stroke-width="0.7"/>
+      <path d="M90 18Q118 18 132 10Q146 2 172 5" stroke="var(--lav-l)" stroke-width="0.7"/>
+      <circle cx="90" cy="18" r="1.5" fill="var(--lav-l)"/>
+    </svg>
+
+    <div class="reveal section-title">Save the Date</div>
+    <div class="reveal label-sm" style="margin-bottom:6px">Mark your calendars for this special day</div>
+
+    <div class="reveal date-frame">
+      <div class="df-tr"></div>
+      <div class="df-bl"></div>
+      <div class="day-name">Saturday</div>
+      <div class="date-row">
+        <div>
+          <div class="date-month">June</div>
+          <div class="date-year">2 0 2 6</div>
+        </div>
+        <div class="date-sep"></div>
+        <div class="date-big">27</div>
+      </div>
+    </div>
+
+    <div class="reveal time">1 1 : 0 0 &ensp; A M &ensp; O N W A R D S</div>
+    <div class="reveal time-note">
+      Please grace us with your presence as we exchange rings<br>
+      and celebrate this joyous union
+    </div>
+
+    <div class="reveal hr" style="margin-top:28px">
+      <div class="hr-line-lav"></div>
+      <div class="hr-dot hr-dot-lav"></div>
+      <div class="hr-line-lav"></div>
+    </div>
+
+    <svg class="reveal" width="120" height="18" viewBox="0 0 120 18" fill="none" style="margin-top:12px;opacity:0.3">
+      <path d="M60 4Q42 4 32 9Q22 14 8 12" stroke="var(--lav-l)" stroke-width="0.5"/>
+      <path d="M60 4Q78 4 88 9Q98 14 112 12" stroke="var(--lav-l)" stroke-width="0.5"/>
+      <circle cx="60" cy="4" r="1.2" fill="var(--lav-l)"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ================================================ -->
+<!-- SECTION 4: VENUE                                 -->
+<!-- ================================================ -->
+<section id="venue">
+  <div class="wc-blob" style="width:350px;height:350px;top:-60px;left:-80px;background:var(--rose-ll);opacity:0.18"></div>
+  <div class="wc-blob" style="width:280px;height:280px;bottom:5%;right:-60px;background:var(--lav-ll);opacity:0.15"></div>
+
+  <div class="venue-paisley">
+    <svg viewBox="0 0 400 400" fill="none">
+      <path d="M200 380Q140 340 120 260Q100 180 140 120Q180 60 240 50Q300 40 340 90Q370 130 340 180Q310 230 260 220Q210 210 220 160Q228 120 260 115Q290 110 300 140Q308 165 288 178" stroke="var(--rose-l)" stroke-width="1" fill="none"/>
+      <path d="M200 360Q150 325 132 255Q115 185 150 130Q185 75 235 65" stroke="var(--sage-l)" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <ellipse cx="180" cy="280" rx="15" ry="35" transform="rotate(-15 180 280)" stroke="var(--lav-l)" stroke-width="0.4" fill="none" opacity="0.3"/>
+      <ellipse cx="155" cy="220" rx="12" ry="28" transform="rotate(-25 155 220)" stroke="var(--rose-l)" stroke-width="0.4" fill="none" opacity="0.25"/>
+    </svg>
+  </div>
+
+  <div class="venue-wrap stagger">
+    <svg class="reveal" width="160" height="20" viewBox="0 0 160 20" fill="none" style="margin-bottom:8px;opacity:0.35">
+      <path d="M80 18Q55 18 42 10Q28 2 5 5" stroke="var(--rose-l)" stroke-width="0.7"/>
+      <path d="M80 18Q105 18 118 10Q132 2 155 5" stroke="var(--rose-l)" stroke-width="0.7"/>
+      <circle cx="80" cy="18" r="1.5" fill="var(--rose-l)"/>
+    </svg>
+
+    <div class="reveal label-accent">You are cordially invited to</div>
+    <div class="reveal section-title">The Venue</div>
+
+    <div class="reveal hr" style="margin:12px auto 20px">
+      <div class="hr-line"></div><div class="hr-dot hr-dot-rose"></div><div class="hr-diamond"></div><div class="hr-dot hr-dot-rose"></div><div class="hr-line"></div>
+    </div>
+
+    <div class="reveal venue-name">Janapriya Sai Darshan</div>
+    <div class="reveal venue-addr">Whitefield, Bangalore</div>
+    <div class="reveal venue-note">
+      We look forward to welcoming you at this beautiful venue,<br>
+      where love, laughter, and cherished memories await.
+    </div>
+
+    <div class="reveal hr" style="margin:28px auto">
+      <div class="hr-line"></div><div class="hr-dot hr-dot-sage"></div><div class="hr-line"></div>
+    </div>
+
+    <svg class="reveal" width="120" height="18" viewBox="0 0 120 18" fill="none" style="opacity:0.3">
+      <path d="M60 4Q42 4 32 9Q22 14 8 12" stroke="var(--rose-l)" stroke-width="0.5"/>
+      <path d="M60 4Q78 4 88 9Q98 14 112 12" stroke="var(--rose-l)" stroke-width="0.5"/>
+      <circle cx="60" cy="4" r="1.2" fill="var(--rose-l)"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ================================================ -->
+<!-- SECTION 5: CEREMONY PROGRAM                      -->
+<!-- ================================================ -->
+<section id="ceremony">
+  <div class="wc-blob" style="width:300px;height:300px;top:5%;right:-70px;background:var(--sage-ll);opacity:0.18"></div>
+  <div class="wc-blob" style="width:250px;height:250px;bottom:10%;left:-50px;background:var(--lav-ll);opacity:0.12"></div>
+
+  <div class="ceremony-wrap stagger">
+    <svg class="reveal" width="160" height="20" viewBox="0 0 160 20" fill="none" style="margin-bottom:8px;opacity:0.35">
+      <path d="M80 18Q55 18 42 10Q28 2 5 5" stroke="var(--sage-l)" stroke-width="0.7"/>
+      <path d="M80 18Q105 18 118 10Q132 2 155 5" stroke="var(--sage-l)" stroke-width="0.7"/>
+      <circle cx="80" cy="18" r="1.5" fill="var(--sage-l)"/>
+    </svg>
+
+    <div class="reveal section-title">Celebrations</div>
+    <div class="reveal label-sm" style="margin-bottom:24px">An evening of love, joy & togetherness</div>
+
+    <div class="reveal ceremony-item">
+      <div class="ceremony-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="var(--rose-l)" stroke-width="0.8"/><path d="M14 8L14 14L18 16" stroke="var(--rose)" stroke-width="0.8" fill="none"/></svg>
+      </div>
+      <div class="ceremony-name">Welcome & Aarti</div>
+      <div class="ceremony-time">11:00 AM</div>
+      <div class="ceremony-desc">Traditional welcome of guests with aarti and tilak</div>
+    </div>
+
+    <div class="reveal" style="margin:12px 0">
+      <svg width="1" height="30" viewBox="0 0 1 30"><line x1="0.5" y1="0" x2="0.5" y2="30" stroke="var(--sage-l)" stroke-width="0.5" stroke-dasharray="3 3"/></svg>
+    </div>
+
+    <div class="reveal ceremony-item">
+      <div class="ceremony-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="15" r="7" stroke="var(--sage-l)" stroke-width="0.8"/><circle cx="18" cy="15" r="7" stroke="var(--sage-l)" stroke-width="0.8"/><polygon points="10,6 12,10 10,9 8,10" fill="var(--sage-l)"/></svg>
+      </div>
+      <div class="ceremony-name">Ring Exchange</div>
+      <div class="ceremony-time">12:00 PM</div>
+      <div class="ceremony-desc">The sacred exchange of rings, sealing the promise of togetherness</div>
+    </div>
+
+    <div class="reveal" style="margin:12px 0">
+      <svg width="1" height="30" viewBox="0 0 1 30"><line x1="0.5" y1="0" x2="0.5" y2="30" stroke="var(--sage-l)" stroke-width="0.5" stroke-dasharray="3 3"/></svg>
+    </div>
+
+    <div class="reveal ceremony-item">
+      <div class="ceremony-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 6Q8 14 14 22Q20 14 14 6Z" stroke="var(--lav-l)" stroke-width="0.8" fill="none"/><circle cx="14" cy="14" r="3" stroke="var(--lav)" stroke-width="0.6" fill="none"/></svg>
+      </div>
+      <div class="ceremony-name">Blessings & Ashirwad</div>
+      <div class="ceremony-time">1:00 PM</div>
+      <div class="ceremony-desc">Seek blessings from elders and loved ones</div>
+    </div>
+
+    <div class="reveal" style="margin:12px 0">
+      <svg width="1" height="30" viewBox="0 0 1 30"><line x1="0.5" y1="0" x2="0.5" y2="30" stroke="var(--sage-l)" stroke-width="0.5" stroke-dasharray="3 3"/></svg>
+    </div>
+
+    <div class="reveal ceremony-item">
+      <div class="ceremony-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="6" y="10" width="16" height="12" rx="2" stroke="var(--gold-l)" stroke-width="0.8" fill="none"/><path d="M6 14L14 10L22 14" stroke="var(--gold-l)" stroke-width="0.8" fill="none"/><circle cx="14" cy="17" r="2" fill="var(--gold-ll)"/></svg>
+      </div>
+      <div class="ceremony-name">Grand Feast & Celebration</div>
+      <div class="ceremony-time">2:00 PM onwards</div>
+      <div class="ceremony-desc">Lavish lunch, music, dance & merriment for all</div>
+    </div>
+
+    <div class="reveal hr" style="margin-top:28px">
+      <div class="hr-line-sage"></div><div class="hr-dot hr-dot-sage"></div><div class="hr-line-sage"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================ -->
+<!-- SECTION 6: CLOSING                               -->
+<!-- ================================================ -->
+<section id="closing">
+  <div class="wc-blob" style="width:350px;height:350px;top:-60px;left:50%;transform:translateX(-50%);background:var(--rose-ll);opacity:0.12"></div>
+
+  <div class="closing-wrap stagger">
+    <svg class="reveal" width="180" height="22" viewBox="0 0 180 22" fill="none" style="margin-bottom:12px;opacity:0.35">
+      <path d="M90 20Q62 20 48 12Q34 4 8 7" stroke="var(--rose-l)" stroke-width="0.7"/>
+      <path d="M90 20Q118 20 132 12Q146 4 172 7" stroke="var(--rose-l)" stroke-width="0.7"/>
+      <circle cx="90" cy="20" r="1.5" fill="var(--rose-l)"/>
+    </svg>
+
+    <div class="reveal closing-msg">
+      Your gracious presence and heartfelt blessings<br>
+      would add immeasurable joy to our celebration.<br>
+      We eagerly await the pleasure of your company<br>
+      as we embark on this beautiful new chapter.
+    </div>
+
+    <div class="reveal hr" style="margin:28px auto;width:40%">
+      <div class="hr-line"></div><div class="hr-diamond-filled"></div><div class="hr-line"></div>
+    </div>
+
+    <div class="reveal closing-names">Rohit & Susmita</div>
+    <div class="reveal closing-hashtag">#RohitWedsSusmita</div>
+
+    <div class="reveal closing-footer">
+      With love and warm regards,<br>
+      The Mukherjee & Basak Families
+    </div>
+
+    <!-- Final flourish -->
+    <svg class="reveal" width="220" height="35" viewBox="0 0 220 35" fill="none" style="margin-top:28px;opacity:0.35">
+      <path d="M110 30Q78 30 60 20Q42 10 12 14" stroke="var(--rose-l)" stroke-width="0.8"/>
+      <path d="M110 30Q142 30 160 20Q178 10 208 14" stroke="var(--rose-l)" stroke-width="0.8"/>
+      <path d="M110 25Q84 25 70 18Q56 10 34 13" stroke="var(--sage-l)" stroke-width="0.4" opacity="0.5"/>
+      <path d="M110 25Q136 25 150 18Q164 10 186 13" stroke="var(--sage-l)" stroke-width="0.4" opacity="0.5"/>
+      <circle cx="110" cy="30" r="2" fill="var(--rose-l)"/>
+      <circle cx="12" cy="14" r="1" fill="var(--rose-l)" opacity="0.3"/>
+      <circle cx="208" cy="14" r="1" fill="var(--rose-l)" opacity="0.3"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// Envelope open
+setTimeout(()=>{document.getElementById('envelope').classList.add('open')},2800);
+
+// Particles (40 total)
+(function(){
+  const c=document.getElementById('particles');
+  const types=['pg-rose','pg-sage','pg-lav','pg-gold'];
+  for(let i=0;i<40;i++){
+    const p=document.createElement('div');
+    p.className='pg '+types[Math.floor(Math.random()*types.length)];
+    const s=1.5+Math.random()*3.5;
+    p.style.cssText=`left:${Math.random()*100}%;width:${s}px;height:${s}px;animation-delay:${Math.random()*20}s;animation-duration:${12+Math.random()*14}s;`;
+    c.appendChild(p);
+  }
+})();
+
+// Twinkling stars (25)
+(function(){
+  const c=document.getElementById('twinkles');
+  const cols=['#d4a49c','#a8c0a2','#bab0c8','#c8aa72','#e8bfb8','#d0c4dc'];
+  for(let i=0;i<25;i++){
+    const t=document.createElement('div');
+    t.className='twinkle';
+    const s=2+Math.random()*3;
+    t.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${s}px;height:${s}px;background:${cols[Math.floor(Math.random()*cols.length)]};animation-delay:${Math.random()*6}s;animation-duration:${3+Math.random()*4}s;`;
+    c.appendChild(t);
+  }
+})();
+
+// Falling petals & leaves (80 total, many shapes & color shades)
+(function(){
+  const c=document.getElementById('petals');
+  const shapes=['petal-star','petal-star2','petal-leaf','petal-leaf2','petal-leaf3','petal-heart','petal-heart2'];
+  const colors=[
+    // Rose / pink — 12 shades light to deep
+    '#fce8e4','#f8dcd6','#f5ddd8','#f0ccc4','#ecc0b8','#e8bfb8',
+    '#e0a8a0','#d4a49c','#c89088','#bc7c74','#d09890','#e4b4ac',
+    // Blush / peach — 10 shades
+    '#fce8dc','#f8e0d4','#f4d8cc','#f0d0c0','#ecc8b4','#e8c4a8',
+    '#e0b89c','#d8ac90','#f0b8a8','#f5e0d0',
+    // Soft pink / mauve — 8 shades
+    '#f8d8e0','#f4d0d8','#f0c8d0','#ecc0c8','#e4b4c0','#dcaab8',
+    '#d4a0b0','#c890a4',
+    // Sage / green — 10 shades
+    '#e8f0e4','#dce8d8','#d4e4d0','#c8dcc2','#bcd4b8','#b0ccac',
+    '#a8c0a2','#98b496','#90b088','#84a47c',
+    // Mint — 6 shades
+    '#e0f0ec','#d0e8e0','#c0dcd4','#b0d0c8','#a0c8bc','#90bcb0',
+    // Lavender / purple — 10 shades
+    '#f0e8f4','#e8e0f0','#e0d8ec','#d8cce4','#d0c4dc','#c8bcd4',
+    '#bab0c8','#b0a4c0','#a498b8','#9c90b0',
+    // Lilac — 5 shades
+    '#ecdcf0','#e4d0e8','#dcc4e0','#d0b8d8','#c8acd0',
+    // Gold / warm — 8 shades
+    '#f8f0dc','#f5ecd0','#f0e4c8','#e8dcb8','#e4d4b0','#dcc498',
+    '#d0b880','#c8aa72',
+    // Champagne / cream — 5 shades
+    '#faf4e8','#f5eee0','#f0e8d8','#ebe0cc','#e4d8c4',
+    // Coral — 6 shades
+    '#fce0d8','#f8d4cc','#f0c4b8','#e8b8ac','#e0a89c','#d89c90',
+    // Sky / baby blue — 6 shades
+    '#e8f0f8','#dce8f4','#d0e0f0','#c4d8ec','#b8d0e4','#acc4dc',
+    // Dusty teal — 4 shades
+    '#d0e4e4','#c0d8d8','#b0cccc','#a0c0c0'
+  ];
+  const anims=['petalFall','petalFall2','petalFall3','petalFall4','petalFall5','petalFall6'];
+  for(let i=0;i<80;i++){
+    const p=document.createElement('div');
+    const shape=shapes[Math.floor(Math.random()*shapes.length)];
+    p.className='petal '+shape;
+    const s=5+Math.random()*18;
+    const col=colors[Math.floor(Math.random()*colors.length)];
+    const anim=anims[Math.floor(Math.random()*anims.length)];
+    const dur=16+Math.random()*22;
+    const delay=Math.random()*30;
+    p.style.cssText=`
+      left:${Math.random()*100}%;
+      width:${s}px;height:${s*(0.6+Math.random()*0.8)}px;
+      background:${col};
+      animation-name:${anim};
+      animation-delay:${delay}s;
+      animation-duration:${dur}s;
+      filter:blur(${Math.random()<0.25?'1px':'0px'});
+      opacity:0;
+    `;
+    c.appendChild(p);
+  }
+})();
+
+// Floating hearts (10)
+(function(){
+  const c=document.getElementById('hearts');
+  const cols=['#d4a49c','#e8bfb8','#f5ddd8','#bab0c8','#c8aa72','#e0a8a0','#f0ccc4'];
+  for(let i=0;i<10;i++){
+    const h=document.createElement('div');
+    h.className='floating-heart';
+    const s=8+Math.random()*12;
+    h.style.cssText=`
+      left:${Math.random()*100}%;
+      width:${s}px;height:${s}px;
+      animation-delay:${Math.random()*18}s;
+      animation-duration:${16+Math.random()*12}s;
+    `;
+    // SVG heart inside
+    h.innerHTML=`<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="${cols[Math.floor(Math.random()*cols.length)]}" opacity="0.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+    c.appendChild(h);
+  }
+})();
+
+// IntersectionObserver
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// Parallax mandalas + watercolor blobs
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY;
+  const m=document.querySelector('.hero-mandala');
+  const m2=document.querySelector('.hero-mandala-bot');
+  if(m)m.style.transform=`translateX(-50%) translateY(${s*0.12}px)`;
+  if(m2)m2.style.transform=`translateX(-50%) rotate(180deg) translateY(${-s*0.08}px)`;
+  // Subtle parallax on watercolor blobs
+  document.querySelectorAll('.wc-blob').forEach((b,i)=>{
+    const rate=0.03+i*0.01;
+    b.style.transform=`translateY(${s*rate}px) ${b.style.transform?.includes('translateX')?'translateX(-50%)':''}`;
+  });
+},{passive:true});
+</script>
+
+</body>
+</html>
