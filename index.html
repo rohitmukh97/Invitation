@@ -53,25 +53,29 @@ body{
   pointer-events:none;
   z-index:1;
   filter:grayscale(15%);
-  top:50%;
-  transform:translateY(-50%);
-  width:300px;
+  width:280px;
   height:auto;
-  opacity:0.12;
+  opacity:0.11;
 }
-.sketch-bg-fixed-left{
-  left:0;
-  transform:translateY(-50%) rotate(-3deg);
+.sketch-bg-fixed-tr{
+  top:-20px;
+  right:-30px;
+  transform:rotate(8deg);
 }
-.sketch-bg-fixed-right{
-  right:0;
-  transform:translateY(-50%) rotate(3deg);
+.sketch-bg-fixed-bl{
+  bottom:-20px;
+  left:-30px;
+  transform:rotate(-8deg);
 }
 @media(max-width:900px){
   .sketch-bg-fixed{width:180px;opacity:0.08}
+  .sketch-bg-fixed-tr{top:-10px;right:-20px}
+  .sketch-bg-fixed-bl{bottom:-10px;left:-20px}
 }
 @media(max-width:740px){
   .sketch-bg-fixed{width:130px;opacity:0.07}
+  .sketch-bg-fixed-tr{top:-5px;right:-10px}
+  .sketch-bg-fixed-bl{bottom:-5px;left:-10px}
 }
 
 /* ===== PRELOADER / ENVELOPE ===== */
@@ -788,8 +792,8 @@ section{
 <body>
 
 <!-- FIXED SKETCH BACKGROUNDS -->
-<img class="sketch-bg-fixed sketch-bg-fixed-left" src="Pic back.jpeg" alt="">
-<img class="sketch-bg-fixed sketch-bg-fixed-right" src="Pic back 2.jpeg" alt="">
+<img class="sketch-bg-fixed sketch-bg-fixed-tr" src="Pic back 2.jpeg" alt="">
+<img class="sketch-bg-fixed sketch-bg-fixed-bl" src="Pic back.jpeg" alt="">
 
 <!-- ENVELOPE -->
 <div class="envelope" id="envelope">
