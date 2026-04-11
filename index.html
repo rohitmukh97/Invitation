@@ -3128,44 +3128,35 @@ window.addEventListener('scroll',()=>{
     }
   });
 
-  // ===== Visibility handling =====
-  // When the tab/window is hidden (user switched apps, minimized browser,
-  // locked phone, etc), fade the music out quickly and pause. When the tab
-  // becomes visible again, fade it back in — unless the user had manually
-  // paused before leaving (in which case we respect their choice).
-  document.addEventListener('visibilitychange',function(){
-    if(document.hidden){
-      // Tab is going away
-      if(userPaused||audio.paused)return;  // already paused, nothing to do
-      hiddenPaused=true;
+  // ===== Visibility / backgrounding handling =====
+  // When the page is hidden (switched apps, minimized browser, locked phone),
+  // fade out and pause. When it comes back, fade in. Respect manual pauses.
+  //
+  // iOS Safari quirks:
+  //   - visibilitychange often DOES NOT fire when backgrounding the whole app
+  //   - window.blur/focus do not fire for app-level backgrounding
+  //   - pagehide/pageshow ARE reliable on iOS Safari for backgrounding
+  //   - We must call audio.pause() synchronously on pagehide because iOS
+  //     freezes JS execution quickly after the event — any pending fade
+  //     timer won't get a chance to complete.
+  function goBackground(fadeFirst){
+    if(userPaused||audio.paused)return;
+    hiddenPaused=true;
+    if(fadeFirst){
+      // We have time for the gentle fade (regular visibility change)
       fadeTo(0,()=>{
         if(hiddenPaused)audio.pause();
       },VIS_FADE_MS);
     }else{
-      // Tab is coming back
-      if(userPaused)return;  // user had paused manually — don't auto-resume
-      if(!hiddenPaused)return;  // we didn't pause it, so don't resume it
-      hiddenPaused=false;
-      audio.muted=false;
-      audio.volume=0;
-      const p=audio.play();
-      const onStart=()=>{fadeTo(TARGET_VOL);};
-      if(p&&p.then){p.then(onStart).catch(()=>{});}
-      else{onStart();}
+      // No time — pause immediately (iOS about to freeze JS)
+      clearFade();
+      audio.pause();
+      audio.volume=TARGET_VOL;  // reset for next fade-in
     }
-  });
-
-  // Some mobile browsers (iOS Safari especially) fire 'pagehide' / 'blur'
-  // instead of or in addition to visibilitychange. Catch those too.
-  window.addEventListener('blur',function(){
-    if(userPaused||audio.paused||document.hidden)return;
-    hiddenPaused=true;
-    fadeTo(0,()=>{
-      if(hiddenPaused)audio.pause();
-    },VIS_FADE_MS);
-  });
-  window.addEventListener('focus',function(){
-    if(userPaused||!hiddenPaused)return;
+  }
+  function goForeground(){
+    if(userPaused)return;
+    if(!hiddenPaused)return;
     hiddenPaused=false;
     audio.muted=false;
     audio.volume=0;
@@ -3173,6 +3164,40 @@ window.addEventListener('scroll',()=>{
     const onStart=()=>{fadeTo(TARGET_VOL);};
     if(p&&p.then){p.then(onStart).catch(()=>{});}
     else{onStart();}
+  }
+
+  // Desktop + Android — visibilitychange is reliable
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden)goBackground(true);
+    else goForeground();
+  });
+
+  // iOS Safari (and also a good fallback everywhere) — pagehide/pageshow are
+  // the Page Lifecycle API events that DO fire on iOS when backgrounding.
+  // Must pause synchronously (no fade) because iOS may freeze JS immediately.
+  window.addEventListener('pagehide',function(){
+    goBackground(false);  // immediate pause, no fade
+  });
+  window.addEventListener('pageshow',function(e){
+    // persisted = true when coming back from bfcache (iOS back button)
+    goForeground();
+  });
+
+  // Page Lifecycle API (Chrome, latest Safari) — freeze/resume
+  document.addEventListener('freeze',function(){
+    goBackground(false);
+  });
+  document.addEventListener('resume',function(){
+    goForeground();
+  });
+
+  // Desktop window blur/focus — covers minimizing the browser window on Mac/PC
+  window.addEventListener('blur',function(){
+    if(document.hidden)return;  // visibilitychange will handle it
+    goBackground(true);
+  });
+  window.addEventListener('focus',function(){
+    goForeground();
   });
 })();
 
