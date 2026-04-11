@@ -3,6 +3,7 @@
 <script>
 // Apply saved preferences before render to prevent flash.
 // First-time visitors (no localStorage) get: light theme, English, normal font, animations on.
+// Language is NEVER persisted — every page load starts in English.
 (function(){
   var html=document.documentElement;
   var t=localStorage.getItem('suro6-theme');
@@ -11,9 +12,8 @@
   var f=localStorage.getItem('suro6-font');
   if(f==='large'){html.classList.add('font-large');}
   // else: default normal font
-  var l=localStorage.getItem('suro6-lang');
-  if(l==='bn'){html.classList.add('lang-bn');}
-  // else: default English
+  // Language: always start in English, ignore any previously saved preference
+  localStorage.removeItem('suro6-lang');
   // Animations default: on (nothing to apply; .paused class only added on user toggle)
 })();
 </script>
@@ -544,6 +544,76 @@ html.lang-bn .scan-label{font-size:13px;text-transform:none;font-weight:500}
   html.lang-bn .together-text{font-size:16px}
   html.lang-bn .family-parents{font-size:16px}
   html.lang-bn .closing-msg{font-size:17px}
+}
+
+/* ===== BENGALI + FONT-LARGE combined mode =====
+   When both lang-bn and font-large are active, the plain lang-bn rules win
+   by source order over plain font-large rules (same specificity). These
+   two-class selectors (html.lang-bn.font-large) have higher specificity
+   so they cleanly override both, giving Bengali its own "large" sizes. */
+html.lang-bn.font-large .label-xs{font-size:16px}
+html.lang-bn.font-large .label-sm{font-size:17px}
+html.lang-bn.font-large .label-accent{font-size:17px}
+html.lang-bn.font-large .name-label{font-size:15px}
+html.lang-bn.font-large .save-label{font-size:16px}
+html.lang-bn.font-large .invite-line{font-size:17px}
+html.lang-bn.font-large .blessing{font-size:22px;line-height:1.9}
+html.lang-bn.font-large .event-sub{font-size:16px}
+html.lang-bn.font-large .event-title{font-size:72px}
+html.lang-bn.font-large .section-title{font-size:46px}
+html.lang-bn.font-large .name{font-size:54px}
+html.lang-bn.font-large .name-full{font-size:22px}
+html.lang-bn.font-large .family-title{font-size:20px}
+html.lang-bn.font-large .family-parents{font-size:24px;line-height:1.8}
+html.lang-bn.font-large .family-desc{font-size:22px}
+html.lang-bn.font-large .together-text{font-size:24px;line-height:1.9}
+html.lang-bn.font-large .day-name{font-size:23px}
+html.lang-bn.font-large .date-month{font-size:32px}
+html.lang-bn.font-large .date-year{font-size:19px}
+html.lang-bn.font-large .date-big{font-size:104px}
+html.lang-bn.font-large .time{font-size:23px}
+html.lang-bn.font-large .time-note{font-size:21px;line-height:1.8}
+html.lang-bn.font-large .venue-name{font-size:46px}
+html.lang-bn.font-large .venue-addr{font-size:24px}
+html.lang-bn.font-large .venue-note{font-size:20px;line-height:1.8}
+html.lang-bn.font-large .ceremony-name{font-size:21px}
+html.lang-bn.font-large .ceremony-time{font-size:21px}
+html.lang-bn.font-large .ceremony-desc{font-size:18px;line-height:1.7}
+html.lang-bn.font-large .closing-msg{font-size:26px;line-height:2}
+html.lang-bn.font-large .closing-footer{font-size:20px}
+html.lang-bn.font-large .closing-hashtag{font-size:15px}
+html.lang-bn.font-large .closing-names{font-size:48px}
+html.lang-bn.font-large .scan-label{font-size:16px}
+html.lang-bn.font-large .amp{font-size:74px}
+
+@media(max-width:740px){
+  html.lang-bn.font-large .label-xs{font-size:14px}
+  html.lang-bn.font-large .label-sm{font-size:15px}
+  html.lang-bn.font-large .label-accent{font-size:15px}
+  html.lang-bn.font-large .name-label{font-size:13px}
+  html.lang-bn.font-large .invite-line{font-size:14px}
+  html.lang-bn.font-large .blessing{font-size:18px}
+  html.lang-bn.font-large .event-title{font-size:54px}
+  html.lang-bn.font-large .section-title{font-size:34px}
+  html.lang-bn.font-large .name{font-size:38px}
+  html.lang-bn.font-large .name-full{font-size:19px}
+  html.lang-bn.font-large .family-title{font-size:17px}
+  html.lang-bn.font-large .family-parents{font-size:20px}
+  html.lang-bn.font-large .family-desc{font-size:19px}
+  html.lang-bn.font-large .together-text{font-size:19px}
+  html.lang-bn.font-large .date-big{font-size:72px}
+  html.lang-bn.font-large .date-month{font-size:27px}
+  html.lang-bn.font-large .day-name{font-size:19px}
+  html.lang-bn.font-large .time{font-size:18px}
+  html.lang-bn.font-large .time-note{font-size:18px}
+  html.lang-bn.font-large .venue-name{font-size:34px}
+  html.lang-bn.font-large .venue-addr{font-size:21px}
+  html.lang-bn.font-large .venue-note{font-size:17px}
+  html.lang-bn.font-large .ceremony-name{font-size:18px}
+  html.lang-bn.font-large .ceremony-desc{font-size:16px}
+  html.lang-bn.font-large .closing-msg{font-size:21px}
+  html.lang-bn.font-large .closing-footer{font-size:17px}
+  html.lang-bn.font-large .closing-names{font-size:38px}
 }
 
 /* ===== LANGUAGE TOGGLE (Book icon) — subtle & faint ===== */
@@ -3093,16 +3163,12 @@ window.addEventListener('scroll',()=>{
       },200);
     },1850);
   }
-  // On first load, if Bengali is saved, apply it without animation
-  if(localStorage.getItem('suro6-lang')==='bn'){
-    applyLang('bn',false);
-  }
+  // Language is NOT persisted — every page load starts in English
   btn.addEventListener('click',function(){
     if(switching)return;
     const html=document.documentElement;
     const isBn=html.classList.contains('lang-bn');
     const newLang=isBn?'en':'bn';
-    localStorage.setItem('suro6-lang',newLang);
     applyLang(newLang,true);
   });
 })();
