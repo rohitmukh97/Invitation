@@ -250,11 +250,14 @@
   position:relative;
   display:inline-block;
   cursor:pointer;
-  opacity:1;pointer-events:auto;
-  transition:opacity 1s ease;
+  opacity:0.6;pointer-events:auto;
+  transition:opacity 0.6s ease;
 }
-.anim-toggle.visible{opacity:1;pointer-events:auto}
+.anim-toggle:hover{opacity:0.9}
+.anim-toggle.visible{pointer-events:auto}
 .anim-toggle:hover .anim-body{transform:scale(1.15)}
+[data-theme="dark"] .anim-toggle{opacity:0.55}
+[data-theme="dark"] .anim-toggle:hover{opacity:0.85}
 .anim-body{
   position:relative;width:50px;height:50px;
   transition:transform 0.5s ease;
@@ -297,9 +300,12 @@
   display:inline-block;
   cursor:pointer;
   opacity:1;pointer-events:auto;
-  transition:opacity 1s ease;
+  transition:opacity 0.6s ease;
 }
-.font-toggle.visible{opacity:1;pointer-events:auto}
+.font-toggle:hover{opacity:1}
+.font-toggle.visible{pointer-events:auto}
+[data-theme="dark"] .font-toggle{opacity:0.95}
+[data-theme="dark"] .font-toggle:hover{opacity:1}
 .font-toggle:hover .font-body{transform:scale(1.15)}
 .font-body{
   position:relative;width:50px;height:50px;
@@ -503,18 +509,20 @@ html.lang-bn .scan-label{font-size:13px;text-transform:none;font-weight:500}
   html.lang-bn .closing-msg{font-size:17px}
 }
 
-/* ===== LANGUAGE TOGGLE (Bengali আ) — faint & subtle ===== */
+/* ===== LANGUAGE TOGGLE (Book icon) — subtle & faint ===== */
 .lang-toggle{
   position:relative;
   display:inline-block;
   cursor:pointer;
-  opacity:0.45;pointer-events:auto;
+  opacity:0.6;pointer-events:auto;
   transition:opacity 0.6s ease;
 }
-.lang-toggle:hover{opacity:0.85}
+.lang-toggle:hover{opacity:0.9}
 .lang-toggle:hover .lang-body{transform:scale(1.15)}
+[data-theme="dark"] .lang-toggle{opacity:0.55}
+[data-theme="dark"] .lang-toggle:hover{opacity:0.85}
 .lang-body{
-  position:relative;width:44px;height:44px;
+  position:relative;width:50px;height:50px;
   display:flex;align-items:center;justify-content:center;
   transition:transform 0.5s ease;
 }
@@ -524,37 +532,15 @@ html.lang-bn .scan-label{font-size:13px;text-transform:none;font-weight:500}
   transition:opacity 1.2s ease,transform 1.2s ease;
   display:flex;align-items:center;justify-content:center;
 }
-.lang-en{
-  font-family:'Cinzel Decorative',serif;
-  font-size:22px;font-weight:500;
-  color:var(--rose-d);
-  opacity:1;
-}
-.lang-bn-ch{
-  font-family:'Noto Serif Bengali',serif;
-  font-size:26px;font-weight:500;
-  color:var(--sage-d);
-  opacity:0;
-}
-/* When Bengali is active, show Bengali character */
-html.lang-bn .lang-en{opacity:0;transform:translate(-50%,-50%) scale(0.7)}
+.lang-en{opacity:1}
+.lang-bn-ch{opacity:0}
+/* When Bengali is active, show Bengali book variant */
+html.lang-bn .lang-en{opacity:0;transform:translate(-50%,-50%) scale(0.8)}
 html.lang-bn .lang-bn-ch{opacity:1;transform:translate(-50%,-50%) scale(1)}
-/* Faint outer ring */
-.lang-body::after{
-  content:'';position:absolute;inset:-4px;border-radius:50%;
-  border:1px dashed var(--rose-l);opacity:0.3;
-  pointer-events:none;
-  animation:langRingPulse 5s ease-in-out infinite;
-}
-@keyframes langRingPulse{
-  0%,100%{transform:scale(1);opacity:0.25}
-  50%{transform:scale(1.08);opacity:0.45}
-}
-html.lang-bn .lang-body::after{border-color:var(--sage-l)}
-[data-theme="dark"] .lang-toggle{opacity:0.35}
-[data-theme="dark"] .lang-toggle:hover{opacity:0.8}
-[data-theme="dark"] .lang-en{color:var(--rose-d)}
-[data-theme="dark"] .lang-bn-ch{color:var(--sage-d)}
+[data-theme="dark"] .lang-en svg path,
+[data-theme="dark"] .lang-en svg line{stroke:var(--rose-l)!important}
+[data-theme="dark"] .lang-bn-ch svg path,
+[data-theme="dark"] .lang-bn-ch svg line{stroke:var(--sage-l)!important}
 
 /* Smooth theme transition overlay */
 .theme-overlay{
@@ -1914,19 +1900,73 @@ section{
         </div>
       </div>
 
-      <!-- Language Toggle (Bengali) -->
+      <!-- Language Toggle (Book icon) -->
       <div class="lang-toggle" id="langToggle" title="Switch language / ভাষা পরিবর্তন">
         <div class="lang-body">
+          <!-- English state: open book with Latin-style horizontal page lines -->
           <div class="lang-en">
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-              <circle cx="22" cy="22" r="18" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
-              <text x="22" y="30" text-anchor="middle" font-family="Cinzel Decorative, serif" font-size="22" font-weight="700" fill="currentColor">A</text>
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <!-- Left page -->
+              <path d="M5 10 Q5 9 6 9 Q13 10 20 12 L20 32 Q13 30 6 29 Q5 29 5 28 Z"
+                stroke="var(--rose-l)" stroke-width="0.8" fill="var(--rose-ll)" opacity="0.75"/>
+              <!-- Right page -->
+              <path d="M35 10 Q35 9 34 9 Q27 10 20 12 L20 32 Q27 30 34 29 Q35 29 35 28 Z"
+                stroke="var(--rose-l)" stroke-width="0.8" fill="var(--rose-ll)" opacity="0.75"/>
+              <!-- Spine -->
+              <line x1="20" y1="12" x2="20" y2="32" stroke="var(--rose)" stroke-width="0.6" opacity="0.5"/>
+              <!-- Latin-style horizontal lines on left page -->
+              <line x1="8" y1="15" x2="17" y2="16.2" stroke="var(--rose)" stroke-width="0.5" opacity="0.55"/>
+              <line x1="8" y1="18" x2="17" y2="19.2" stroke="var(--rose)" stroke-width="0.5" opacity="0.55"/>
+              <line x1="8" y1="21" x2="17" y2="22.2" stroke="var(--rose)" stroke-width="0.5" opacity="0.55"/>
+              <line x1="8" y1="24" x2="15" y2="25.2" stroke="var(--rose)" stroke-width="0.5" opacity="0.55"/>
+              <!-- Latin-style horizontal lines on right page -->
+              <line x1="23" y1="16.2" x2="32" y2="15" stroke="var(--rose)" stroke-width="0.5" opacity="0.55"/>
+              <line x1="23" y1="19.2" x2="32" y2="18" stroke="var(--rose)" stroke-width="0.5" opacity="0.55"/>
+              <line x1="23" y1="22.2" x2="32" y2="21" stroke="var(--rose)" stroke-width="0.5" opacity="0.55"/>
+              <line x1="25" y1="25.2" x2="32" y2="24" stroke="var(--rose)" stroke-width="0.5" opacity="0.55"/>
+              <!-- Little "A" serif accent at top of spine -->
+              <circle cx="20" cy="10" r="1.2" fill="var(--rose)" opacity="0.5"/>
             </svg>
           </div>
+          <!-- Bengali state: open book with "matra" (top line) & rounded characters suggestion -->
           <div class="lang-bn-ch">
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-              <circle cx="22" cy="22" r="18" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
-              <text x="22" y="32" text-anchor="middle" font-family="Noto Serif Bengali, serif" font-size="26" font-weight="700" fill="currentColor">আ</text>
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <!-- Left page -->
+              <path d="M5 10 Q5 9 6 9 Q13 10 20 12 L20 32 Q13 30 6 29 Q5 29 5 28 Z"
+                stroke="var(--sage-l)" stroke-width="0.8" fill="var(--sage-ll)" opacity="0.75"/>
+              <!-- Right page -->
+              <path d="M35 10 Q35 9 34 9 Q27 10 20 12 L20 32 Q27 30 34 29 Q35 29 35 28 Z"
+                stroke="var(--sage-l)" stroke-width="0.8" fill="var(--sage-ll)" opacity="0.75"/>
+              <!-- Spine -->
+              <line x1="20" y1="12" x2="20" y2="32" stroke="var(--sage)" stroke-width="0.6" opacity="0.5"/>
+              <!-- Bengali-style: top "matra" bar + short descenders to suggest Bengali script -->
+              <!-- Left page matra lines -->
+              <line x1="8" y1="15.5" x2="17" y2="16.5" stroke="var(--sage)" stroke-width="0.8" opacity="0.6"/>
+              <line x1="9" y1="16.5" x2="10" y2="18" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+              <line x1="12" y1="17" x2="13" y2="18.5" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+              <line x1="15" y1="17.3" x2="16" y2="18.8" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+
+              <line x1="8" y1="20" x2="17" y2="21" stroke="var(--sage)" stroke-width="0.8" opacity="0.6"/>
+              <line x1="10" y1="21" x2="11" y2="22.5" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+              <line x1="13" y1="21.3" x2="14" y2="22.8" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+
+              <line x1="8" y1="24.5" x2="15" y2="25.5" stroke="var(--sage)" stroke-width="0.8" opacity="0.6"/>
+              <line x1="10" y1="25.5" x2="11" y2="27" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+
+              <!-- Right page matra lines -->
+              <line x1="23" y1="16.5" x2="32" y2="15.5" stroke="var(--sage)" stroke-width="0.8" opacity="0.6"/>
+              <line x1="24" y1="17.5" x2="25" y2="19" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+              <line x1="27" y1="17.2" x2="28" y2="18.7" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+              <line x1="30" y1="17" x2="31" y2="18.5" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+
+              <line x1="23" y1="21" x2="32" y2="20" stroke="var(--sage)" stroke-width="0.8" opacity="0.6"/>
+              <line x1="25" y1="22" x2="26" y2="23.5" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+              <line x1="29" y1="21.7" x2="30" y2="23.2" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+
+              <line x1="25" y1="25.5" x2="32" y2="24.5" stroke="var(--sage)" stroke-width="0.8" opacity="0.6"/>
+              <line x1="28" y1="26.5" x2="29" y2="28" stroke="var(--sage)" stroke-width="0.5" opacity="0.5"/>
+
+              <circle cx="20" cy="10" r="1.2" fill="var(--sage)" opacity="0.5"/>
             </svg>
           </div>
         </div>
