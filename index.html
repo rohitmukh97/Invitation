@@ -166,8 +166,8 @@
   display:inline-block;
   cursor:pointer;
   margin-bottom:12px;
-  opacity:0;
-  pointer-events:none;
+  opacity:1;
+  pointer-events:auto;
   transition:opacity 1s ease;
 }
 .celestial-toggle.visible{
@@ -241,6 +241,7 @@
 .toggle-row{
   display:flex;align-items:center;justify-content:center;
   gap:40px;margin-bottom:12px;
+  opacity:1;
 }
 
 /* ===== ANIMATION TOGGLE (PETAL/LEAF) ===== */
@@ -248,7 +249,7 @@
   position:relative;
   display:inline-block;
   cursor:pointer;
-  opacity:0;pointer-events:none;
+  opacity:1;pointer-events:auto;
   transition:opacity 1s ease;
 }
 .anim-toggle.visible{opacity:1;pointer-events:auto}
@@ -294,7 +295,7 @@
   position:relative;
   display:inline-block;
   cursor:pointer;
-  opacity:0;pointer-events:none;
+  opacity:1;pointer-events:auto;
   transition:opacity 1s ease;
 }
 .font-toggle.visible{opacity:1;pointer-events:auto}
@@ -1660,7 +1661,7 @@ section{
       <circle cx="190" cy="8" r="1" fill="var(--rose-l)" opacity="0.3"/>
     </svg>
 
-    <div class="reveal toggle-row">
+    <div class="toggle-row">
 
       <!-- Animation Toggle (left) -->
       <div class="anim-toggle" id="animToggle">
