@@ -3060,7 +3060,8 @@ window.addEventListener('scroll',()=>{
 
 // ===== BACKGROUND MUSIC icon — pause/resume with fade =====
 // Initial playback is started by the Tap-to-Open button (user gesture).
-// This handler only manages the icon toggle after that.
+// This handler manages the icon toggle AND auto-pauses when the tab/app
+// loses visibility (minimize, tab switch, phone lock, etc).
 (function(){
   const audio=document.getElementById('bgMusic');
   const toggle=document.getElementById('musicToggle');
@@ -3068,19 +3069,26 @@ window.addEventListener('scroll',()=>{
 
   const TARGET_VOL=0.5;
   const FADE_MS=1800;
+  const VIS_FADE_MS=800;  // faster fade when leaving tab (feels more responsive)
   const TICK=30;
   let fadeTimer=null;
+  // Tracks whether the user manually paused (true) vs visibility paused (false).
+  // Manual pauses don't auto-resume when the tab becomes visible again.
+  let userPaused=false;
+  // Tracks whether we paused because the tab went hidden
+  let hiddenPaused=false;
 
   // Icon starts showing playing state (matches default)
   toggle.classList.add('playing');
   toggle.classList.remove('paused');
 
   function clearFade(){if(fadeTimer){clearInterval(fadeTimer);fadeTimer=null;}}
-  function fadeTo(target,done){
+  function fadeTo(target,done,duration){
     clearFade();
     const start=audio.volume;
     const delta=target-start;
-    const steps=FADE_MS/TICK;
+    const ms=duration||FADE_MS;
+    const steps=ms/TICK;
     let step=0;
     fadeTimer=setInterval(()=>{
       step++;
@@ -3095,6 +3103,8 @@ window.addEventListener('scroll',()=>{
   toggle.addEventListener('click',function(e){
     if(audio.paused){
       // Resume
+      userPaused=false;
+      hiddenPaused=false;
       audio.muted=false;
       audio.volume=0;
       const p=audio.play();
@@ -3106,7 +3116,9 @@ window.addEventListener('scroll',()=>{
       if(p&&p.then){p.then(onStart).catch(()=>{});}
       else{onStart();}
     }else{
-      // Fade out then pause (position preserved)
+      // User manually paused
+      userPaused=true;
+      hiddenPaused=false;
       fadeTo(0,()=>{
         audio.pause();
         audio.volume=TARGET_VOL;
@@ -3114,6 +3126,53 @@ window.addEventListener('scroll',()=>{
         toggle.classList.add('paused');
       });
     }
+  });
+
+  // ===== Visibility handling =====
+  // When the tab/window is hidden (user switched apps, minimized browser,
+  // locked phone, etc), fade the music out quickly and pause. When the tab
+  // becomes visible again, fade it back in — unless the user had manually
+  // paused before leaving (in which case we respect their choice).
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){
+      // Tab is going away
+      if(userPaused||audio.paused)return;  // already paused, nothing to do
+      hiddenPaused=true;
+      fadeTo(0,()=>{
+        if(hiddenPaused)audio.pause();
+      },VIS_FADE_MS);
+    }else{
+      // Tab is coming back
+      if(userPaused)return;  // user had paused manually — don't auto-resume
+      if(!hiddenPaused)return;  // we didn't pause it, so don't resume it
+      hiddenPaused=false;
+      audio.muted=false;
+      audio.volume=0;
+      const p=audio.play();
+      const onStart=()=>{fadeTo(TARGET_VOL);};
+      if(p&&p.then){p.then(onStart).catch(()=>{});}
+      else{onStart();}
+    }
+  });
+
+  // Some mobile browsers (iOS Safari especially) fire 'pagehide' / 'blur'
+  // instead of or in addition to visibilitychange. Catch those too.
+  window.addEventListener('blur',function(){
+    if(userPaused||audio.paused||document.hidden)return;
+    hiddenPaused=true;
+    fadeTo(0,()=>{
+      if(hiddenPaused)audio.pause();
+    },VIS_FADE_MS);
+  });
+  window.addEventListener('focus',function(){
+    if(userPaused||!hiddenPaused)return;
+    hiddenPaused=false;
+    audio.muted=false;
+    audio.volume=0;
+    const p=audio.play();
+    const onStart=()=>{fadeTo(TARGET_VOL);};
+    if(p&&p.then){p.then(onStart).catch(()=>{});}
+    else{onStart();}
   });
 })();
 
