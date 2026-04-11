@@ -252,6 +252,34 @@
   display:flex;align-items:center;justify-content:center;
   gap:40px;margin-bottom:12px;
   opacity:1;
+  max-width:100%;
+  flex-wrap:nowrap;
+}
+@media(max-width:740px){
+  .toggle-row{gap:18px;padding:0 4px}
+  .toggle-row .music-body,
+  .toggle-row .anim-body,
+  .toggle-row .font-body,
+  .toggle-row .lang-body,
+  .toggle-row .celestial-body{width:42px;height:42px}
+  .toggle-row .music-body svg,
+  .toggle-row .anim-body svg,
+  .toggle-row .font-body svg,
+  .toggle-row .lang-body svg,
+  .toggle-row .celestial-body svg{width:38px;height:38px}
+}
+@media(max-width:400px){
+  .toggle-row{gap:12px}
+  .toggle-row .music-body,
+  .toggle-row .anim-body,
+  .toggle-row .font-body,
+  .toggle-row .lang-body,
+  .toggle-row .celestial-body{width:38px;height:38px}
+  .toggle-row .music-body svg,
+  .toggle-row .anim-body svg,
+  .toggle-row .font-body svg,
+  .toggle-row .lang-body svg,
+  .toggle-row .celestial-body svg{width:34px;height:34px}
 }
 
 /* ===== ANIMATION TOGGLE (PETAL/LEAF) ===== */
