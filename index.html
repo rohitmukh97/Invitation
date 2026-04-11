@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-// Apply saved theme, font size, and language immediately before page renders to prevent flash
+// Apply saved preferences before render to prevent flash.
+// First-time visitors (no localStorage) get: light theme, English, normal font, animations on.
 (function(){
-  var t=localStorage.getItem('suro-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');
-  var f=localStorage.getItem('suro-font');if(f==='large')document.documentElement.classList.add('font-large');
-  var l=localStorage.getItem('suro-lang');if(l==='bn')document.documentElement.classList.add('lang-bn');
+  var html=document.documentElement;
+  var t=localStorage.getItem('suro6-theme');
+  if(t==='dark'){html.setAttribute('data-theme','dark');}
+  // else: default light theme (no attribute)
+  var f=localStorage.getItem('suro6-font');
+  if(f==='large'){html.classList.add('font-large');}
+  // else: default normal font
+  var l=localStorage.getItem('suro6-lang');
+  if(l==='bn'){html.classList.add('lang-bn');}
+  // else: default English
+  // Animations default: on (nothing to apply; .paused class only added on user toggle)
 })();
 </script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rohit & Susmita | Ring Ceremony — v5</title>
+<title>Rohit & Susmita | Ring Ceremony — v6</title>
 <meta property="og:title" content="Su♡Ro | Ring Ceremony">
 <meta property="og:description" content="She pinged. He replied. The rest is #SuRo. You're invited to celebrate our engagement!">
 <meta property="og:image" content="https://rohitmukh97.github.io/Invitation/thumbnail.png">
@@ -542,6 +551,65 @@ html.lang-bn .lang-bn-ch{opacity:1;transform:translate(-50%,-50%) scale(1)}
 [data-theme="dark"] .lang-bn-ch svg path,
 [data-theme="dark"] .lang-bn-ch svg line{stroke:var(--sage-l)!important}
 
+/* ===== MUSIC TOGGLE (speaker with animated waves) ===== */
+.music-toggle{
+  position:relative;
+  display:inline-block;
+  cursor:pointer;
+  opacity:0.6;pointer-events:auto;
+  transition:opacity 0.6s ease;
+}
+.music-toggle:hover{opacity:0.9}
+.music-toggle:hover .music-body{transform:scale(1.15)}
+[data-theme="dark"] .music-toggle{opacity:0.55}
+[data-theme="dark"] .music-toggle:hover{opacity:0.85}
+.music-body{
+  position:relative;width:50px;height:50px;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.5s ease;
+}
+.music-body svg{overflow:visible}
+/* Broadcast wave animation — gentle staggered pulse */
+.music-toggle.playing .wave{
+  animation:wavePulse 2.2s ease-in-out infinite;
+  transform-origin:23px 9px;
+}
+.music-toggle.playing .wave-1{animation-delay:0s}
+.music-toggle.playing .wave-2{animation-delay:0.35s}
+.music-toggle.playing .wave-3{animation-delay:0.7s}
+@keyframes wavePulse{
+  0%,100%{opacity:0.2;transform:scale(0.88) translateY(2px)}
+  50%{opacity:0.85;transform:scale(1.08) translateY(-2px)}
+}
+/* Tuning needle subtly wiggles when playing, like a radio picking up signal */
+.music-toggle.playing .tuning-needle{
+  animation:tuningWiggle 3.5s ease-in-out infinite;
+  transform-origin:28.5px 20.5px;
+}
+@keyframes tuningWiggle{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(1.5px)}
+  40%{transform:translateX(-1px)}
+  60%{transform:translateX(2px)}
+  80%{transform:translateX(-0.5px)}
+}
+/* Paused state: waves fade out, needle stops, mute slash appears */
+.music-toggle.paused .wave{opacity:0.12;animation:none}
+.music-toggle.paused .tuning-needle{animation:none;opacity:0.4}
+.music-toggle.paused .mute-slash{opacity:0.7}
+.music-toggle .mute-slash{transition:opacity 0.6s ease}
+.music-toggle .wave{transition:opacity 0.6s ease}
+.music-toggle .tuning-needle{transition:opacity 0.6s ease}
+/* Dark mode — use gold tones for the whole radio */
+[data-theme="dark"] .music-toggle .speaker-body{stroke:var(--gold-l);fill:var(--gold-ll)}
+[data-theme="dark"] .music-toggle .wave{stroke:var(--gold)}
+[data-theme="dark"] .music-toggle .tuning-needle{stroke:var(--gold-d)}
+[data-theme="dark"] .music-toggle .mute-slash{stroke:var(--gold-d)}
+[data-theme="dark"] .music-toggle svg circle{stroke:var(--gold)}
+[data-theme="dark"] .music-toggle svg circle[fill]{fill:var(--gold)}
+[data-theme="dark"] .music-toggle svg rect:not(.speaker-body){stroke:var(--gold)}
+[data-theme="dark"] .music-toggle svg line{stroke:var(--gold)}
+
 /* Smooth theme transition overlay */
 .theme-overlay{
   position:fixed;inset:0;z-index:9997;
@@ -640,6 +708,118 @@ body{
   color:var(--text-ll);
 }
 
+/* ===== TAP TO OPEN (first screen, unlocks audio) ===== */
+.tap-to-open{
+  position:fixed;inset:0;z-index:10000;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#fef5f0,#f6f2f8,#f0f4f8);
+  transition:opacity 1.2s ease,visibility 0s 1.3s;
+}
+.tap-to-open.dismissed{
+  opacity:0;visibility:hidden;pointer-events:none;
+}
+.tap-content{
+  text-align:center;display:flex;flex-direction:column;align-items:center;
+  padding:40px 30px;max-width:420px;
+  animation:tapContentFade 1.2s ease-out;
+}
+@keyframes tapContentFade{
+  0%{opacity:0;transform:translateY(20px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+.tap-rings{
+  position:relative;width:180px;height:180px;margin-bottom:32px;
+  display:flex;align-items:center;justify-content:center;
+}
+.tap-ring{
+  position:absolute;border-radius:50%;border:1.5px solid;
+  animation:envRing 3s ease-in-out infinite;
+}
+.tap-ring-1{width:180px;height:180px;border-color:var(--rose-l);animation-delay:0s}
+.tap-ring-2{width:148px;height:148px;border-color:var(--sage-l);animation-delay:0.5s}
+.tap-ring-3{width:116px;height:116px;border-color:var(--lav-l);animation-delay:1s}
+.tap-monogram{
+  font-family:'Pinyon Script',cursive;font-size:58px;
+  color:var(--rose-d);z-index:2;
+  display:flex;align-items:center;justify-content:center;gap:4px;
+}
+.tap-monogram .tap-heart{
+  font-size:28px;color:var(--rose);
+  animation:heartBeat 2s ease-in-out infinite;
+}
+.tap-label{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:22px;font-weight:400;color:var(--text-l);
+  letter-spacing:0.05em;margin-bottom:28px;
+}
+.tap-button{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--rose-d);
+  background:transparent;
+  border:1.5px solid var(--rose);
+  padding:16px 32px;
+  border-radius:40px;
+  cursor:pointer;
+  position:relative;
+  transition:all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  animation:tapBtnPulse 2.8s ease-in-out infinite;
+}
+@keyframes tapBtnPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(168,112,106,0.35),0 4px 20px rgba(168,112,106,0.1)}
+  50%{box-shadow:0 0 0 14px rgba(168,112,106,0),0 4px 30px rgba(168,112,106,0.2)}
+}
+.tap-button:hover{
+  background:var(--rose-d);
+  color:var(--bg);
+  transform:translateY(-2px);
+  border-color:var(--rose-d);
+}
+.tap-button:active{transform:translateY(0)}
+.tap-btn-text{display:inline-block}
+.tap-btn-icon{
+  transition:transform 0.5s ease;
+}
+.tap-button:hover .tap-btn-icon{transform:translateX(4px)}
+.tap-hint{
+  margin-top:22px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:13px;color:var(--text-ll);
+  letter-spacing:0.06em;
+  display:flex;align-items:center;justify-content:center;
+}
+@media(max-width:740px){
+  .tap-rings{width:160px;height:160px;margin-bottom:26px}
+  .tap-ring-1{width:160px;height:160px}
+  .tap-ring-2{width:132px;height:132px}
+  .tap-ring-3{width:104px;height:104px}
+  .tap-monogram{font-size:48px}
+  .tap-monogram .tap-heart{font-size:24px}
+  .tap-label{font-size:18px;margin-bottom:22px}
+  .tap-button{font-size:11px;padding:14px 26px;letter-spacing:0.25em}
+  .tap-hint{font-size:12px;margin-top:18px}
+}
+/* Dark theme */
+[data-theme="dark"] .tap-to-open{background:linear-gradient(135deg,#1a1714,#181a16,#16181a)}
+[data-theme="dark"] .tap-monogram{color:var(--gold-d)}
+[data-theme="dark"] .tap-monogram .tap-heart{color:var(--gold)}
+[data-theme="dark"] .tap-label{color:var(--text)}
+[data-theme="dark"] .tap-button{color:var(--gold-d);border-color:var(--gold)}
+[data-theme="dark"] .tap-button:hover{background:var(--gold);color:var(--bg)}
+[data-theme="dark"] .tap-hint{color:var(--text-ll)}
+[data-theme="dark"] .tap-ring-1{border-color:var(--gold-l)}
+[data-theme="dark"] .tap-ring-2{border-color:var(--rose-l)}
+[data-theme="dark"] .tap-ring-3{border-color:var(--sage-l)}
+
+/* Bengali font for tap screen when lang-bn active */
+html.lang-bn .tap-label,
+html.lang-bn .tap-button,
+html.lang-bn .tap-hint{font-family:'Noto Serif Bengali','Hind Siliguri',serif}
+html.lang-bn .tap-button{letter-spacing:0.1em;text-transform:none;font-size:15px}
+html.lang-bn .tap-label{font-style:normal;font-size:20px}
+html.lang-bn .tap-hint{font-style:normal}
+
 /* ===== PRELOADER / ENVELOPE ===== */
 .envelope{
   position:fixed;inset:0;z-index:9999;
@@ -665,8 +845,21 @@ body{
 .env-monogram{
   font-family:'Pinyon Script',cursive;font-size:30px;
   color:var(--rose-d);z-index:2;
-  display:flex;align-items:center;justify-content:center;gap:4px;
+  display:flex;align-items:center;justify-content:center;
 }
+.env-mono-en,.env-mono-bn{
+  display:flex;align-items:center;justify-content:center;gap:4px;
+  transition:opacity 0.6s ease;
+}
+.env-mono-bn{
+  position:absolute;
+  font-family:'Noto Serif Bengali',serif;
+  font-size:0.85em;
+  opacity:0;
+}
+html.lang-bn .env-mono-en{opacity:0}
+html.lang-bn .env-mono-bn{opacity:1;position:static}
+html.lang-bn .env-monogram .env-mono-en{position:absolute}
 .env-monogram .env-heart{
   font-size:16px;
   color:var(--rose);
@@ -1428,6 +1621,37 @@ section{
 <img class="sketch-bg-fixed sketch-bg-fixed-tr" src="Pic back 2.jpeg" alt="">
 <img class="sketch-bg-fixed sketch-bg-fixed-bl" src="Pic back.jpeg" alt="">
 
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop preload="auto" playsinline>
+  <source src="1000%20years.mp3" type="audio/mpeg">
+</audio>
+
+<!-- TAP TO OPEN — the first thing the user sees -->
+<div class="tap-to-open" id="tapToOpen">
+  <div class="tap-content">
+    <div class="tap-rings">
+      <div class="tap-ring tap-ring-1"></div>
+      <div class="tap-ring tap-ring-2"></div>
+      <div class="tap-ring tap-ring-3"></div>
+      <div class="tap-monogram"><span>Su</span><span class="tap-heart">&#9829;</span><span>Ro</span></div>
+    </div>
+    <div class="tap-label i18n" data-bn="আপনাকে সাদরে আমন্ত্রণ জানানো হচ্ছে">You&rsquo;re cordially invited</div>
+    <button class="tap-button" id="tapButton" type="button">
+      <span class="tap-btn-text i18n" data-bn="আমন্ত্রণপত্র খুলুন">Open Invitation</span>
+      <svg class="tap-btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M4 10 L16 10 M10 4 L16 10 L10 16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="tap-hint">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="vertical-align:middle;margin-right:4px">
+        <path d="M4 6 L6 6 L6 3 L9 6 L9 11 L6 11 L6 8 L4 8 Z" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linejoin="round"/>
+        <path d="M11 4 Q13 7 11 10" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="i18n" data-bn="শব্দ চালু করে দেখাই সবচেয়ে ভালো">Best viewed with sound on</span>
+    </div>
+  </div>
+</div>
+
 <!-- ENVELOPE -->
 <div class="envelope" id="envelope">
   <div style="text-align:center;display:flex;flex-direction:column;align-items:center;width:100%">
@@ -1435,7 +1659,7 @@ section{
       <div class="env-ring env-ring-1"></div>
       <div class="env-ring env-ring-2"></div>
       <div class="env-ring env-ring-3"></div>
-      <span class="env-monogram"><span>Su</span><span class="env-heart">&#9829;</span><span>Ro</span></span>
+      <span class="env-monogram"><span class="env-mono-en"><span>Su</span><span class="env-heart">&#9829;</span><span>Ro</span></span><span class="env-mono-bn"><span>সু</span><span class="env-heart">&#9829;</span><span>রো</span></span></span>
     </div>
     <div class="env-quotes" id="envQuotes"></div>
     <div class="env-progress-wrap">
@@ -1972,6 +2196,47 @@ section{
         </div>
       </div>
 
+      <!-- Music Toggle (vintage radio with broadcast waves) -->
+      <div class="music-toggle playing" id="musicToggle" title="Music on/off">
+        <div class="music-body">
+          <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+            <!-- Broadcast waves above antenna (animated when playing) -->
+            <path class="wave wave-1" d="M15 9 Q23 3 31 9" stroke="var(--rose)" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <path class="wave wave-2" d="M12 12 Q23 0 34 12" stroke="var(--rose)" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.5"/>
+            <path class="wave wave-3" d="M9 15 Q23 -3 37 15" stroke="var(--rose)" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.35"/>
+            <!-- Antenna -->
+            <line x1="23" y1="6" x2="23" y2="14" stroke="var(--rose-l)" stroke-width="0.9" stroke-linecap="round"/>
+            <circle cx="23" cy="5" r="1.3" fill="var(--rose)" opacity="0.8"/>
+            <!-- Radio body -->
+            <rect class="speaker-body" x="7" y="14" width="32" height="26" rx="3" ry="3"
+              stroke="var(--rose-l)" stroke-width="0.9" fill="var(--rose-ll)" opacity="0.75"/>
+            <!-- Speaker grille (left circle) -->
+            <circle cx="15" cy="27" r="5.5" stroke="var(--rose)" stroke-width="0.7" fill="none" opacity="0.7"/>
+            <circle cx="15" cy="27" r="3.5" stroke="var(--rose)" stroke-width="0.5" fill="none" opacity="0.55"/>
+            <circle cx="15" cy="27" r="1.3" fill="var(--rose)" opacity="0.6"/>
+            <!-- Display/tuning dial (top right) -->
+            <rect x="22" y="18" width="13" height="5" rx="0.8" ry="0.8"
+              stroke="var(--rose)" stroke-width="0.6" fill="none" opacity="0.55"/>
+            <line x1="24" y1="20.5" x2="25.6" y2="20.5" stroke="var(--rose)" stroke-width="0.5" opacity="0.6"/>
+            <line x1="27" y1="20.5" x2="28.6" y2="20.5" stroke="var(--rose)" stroke-width="0.5" opacity="0.6"/>
+            <line x1="30" y1="20.5" x2="31.6" y2="20.5" stroke="var(--rose)" stroke-width="0.5" opacity="0.6"/>
+            <line x1="33" y1="20.5" x2="33.6" y2="20.5" stroke="var(--rose)" stroke-width="0.5" opacity="0.6"/>
+            <!-- Tuning indicator needle (animated slight wiggle) -->
+            <line class="tuning-needle" x1="28.5" y1="18.8" x2="28.5" y2="22.2"
+              stroke="var(--rose-d)" stroke-width="0.6" stroke-linecap="round" opacity="0.75"/>
+            <!-- Control knobs (bottom right) -->
+            <circle cx="25" cy="32" r="1.8" stroke="var(--rose)" stroke-width="0.6" fill="none" opacity="0.65"/>
+            <circle cx="25" cy="32" r="0.5" fill="var(--rose)" opacity="0.7"/>
+            <circle cx="31" cy="32" r="1.8" stroke="var(--rose)" stroke-width="0.6" fill="none" opacity="0.65"/>
+            <circle cx="31" cy="32" r="0.5" fill="var(--rose)" opacity="0.7"/>
+            <rect x="34.5" y="31" width="2.5" height="2" rx="0.3" ry="0.3" fill="var(--rose)" opacity="0.45"/>
+            <!-- Mute slash (visible when paused) -->
+            <line class="mute-slash" x1="6" y1="10" x2="40" y2="42"
+              stroke="var(--rose-d)" stroke-width="1.3" stroke-linecap="round" opacity="0"/>
+          </svg>
+        </div>
+      </div>
+
       <!-- Theme Toggle (right) -->
       <div class="celestial-toggle" id="themeToggle">
         <div class="celestial-body">
@@ -2414,13 +2679,16 @@ section{
 
 <!-- ===== JAVASCRIPT ===== -->
 <script>
-// Envelope open
-// Envelope quote rotation + progress bar
-(function(){
-  const totalTime=7500;
+// Envelope open — wrapped in a function so it only runs AFTER the user taps
+// the "Open Invitation" button (which provides the user gesture that unlocks
+// audio playback with sound).
+function startEnvelopeAndLoading(){
+  const isBn=document.documentElement.classList.contains('lang-bn');
+  const totalTime=6600;
   const quoteTime=2300;
-  const fixed="She pinged. He replied. The rest is #SuRo.";
-  const pool=[
+  // English quotes
+  const fixedEn="She pinged. He replied. The rest is #SuRo.";
+  const poolEn=[
     "Started as colleagues. Promoted to soulmates.",
     "From Teams notifications to wedding invitations.",
     "Best thing that ever came out of a Teams chat.",
@@ -2435,6 +2703,26 @@ section{
     "One conversation changed two lives forever.",
     "They didn\u2019t find love. Love found them."
   ];
+  // Bengali quotes (parallel to English — same index = same meaning)
+  const fixedBn="সে বার্তা পাঠাল। সে উত্তর দিল। বাকিটা #SuRo।";
+  const poolBn=[
+    "সহকর্মী হিসেবে শুরু। আত্মার সঙ্গী হিসেবে পরিণতি।",
+    "টিমস নোটিফিকেশন থেকে বিবাহের আমন্ত্রণে।",
+    "টিমস চ্যাট থেকে আসা সেরা প্রাপ্তি।",
+    "প্রথম বার্তা: \u2018হাই ব্রো\u2019। মোড় ঘুরল: সে শুধুই ব্রো ছিল না।",
+    "\u2018হাই ব্রো\u2019 \u2192 সেরা বন্ধু \u2192 আত্মার সঙ্গী \u2192 #SuRo",
+    "আলোচ্যসূচি: ১টি। সময়কাল: আজীবন। বিষয়: আমরা।",
+    "দুটি হৃদয়। একটি গল্প। অসংখ্য অধ্যায়।",
+    "এমন মোড় কেউ আশা করেনি। এখনও পর্যন্ত সেরা।",
+    "প্রতিটি সাক্ষাৎ কাকতালীয় নয়। কিছু কিছু ভাগ্য লিখিত।",
+    "অপরিচিত \u2192 বন্ধু \u2192 সেরা বন্ধু \u2192 চিরকাল।",
+    "সেরা সিদ্ধান্তগুলো সেই যেগুলো হৃদয় আগে নেয়।",
+    "একটি কথোপকথন দুটি জীবন চিরতরে বদলে দিল।",
+    "তারা ভালোবাসা খুঁজে পায়নি। ভালোবাসা তাদের খুঁজে পেয়েছে।"
+  ];
+  const fixed=isBn?fixedBn:fixedEn;
+  const pool=isBn?poolBn.slice():poolEn.slice();
+  // Shuffle pool
   for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
   const quotes=[pool[0],fixed,pool[1]];
   const container=document.getElementById('envQuotes');
@@ -2445,7 +2733,7 @@ section{
     if(idx<els.length){els[idx].classList.add('active');idx++;setTimeout(showNext,quoteTime);}
   }
   showNext();
-  // Progress bar
+  // Progress bar — always English numerals regardless of language
   const fill=document.getElementById('envProgressFill');
   const pct=document.getElementById('envProgressPct');
   const start=Date.now();
@@ -2477,6 +2765,50 @@ section{
       env.style.opacity=String(next);
     },16);
   },totalTime+500);
+}
+// Tap to Open handler — the one user gesture that unlocks audio with sound.
+(function(){
+  const tapScreen=document.getElementById('tapToOpen');
+  const tapBtn=document.getElementById('tapButton');
+  if(!tapScreen||!tapBtn)return;
+  let launched=false;
+  function launch(e){
+    if(launched)return;
+    launched=true;
+    if(e){e.preventDefault?.();}
+    // Start music RIGHT NOW — inside this click handler so the browser
+    // treats it as user-initiated and allows sound.
+    const audio=document.getElementById('bgMusic');
+    if(audio){
+      audio.muted=false;
+      audio.volume=0;
+      const p=audio.play();
+      if(p&&p.then){
+        p.then(()=>{
+          // Fade volume up to target over ~2s for gentle entry
+          const TARGET=0.5;
+          const steps=60;
+          let s=0;
+          const timer=setInterval(()=>{
+            s++;
+            const r=s/steps;
+            audio.volume=Math.min(TARGET,TARGET*r);
+            if(s>=steps)clearInterval(timer);
+          },33);
+        }).catch(()=>{});
+      }
+    }
+    // Fade out the tap screen
+    tapScreen.classList.add('dismissed');
+    // Kick off envelope loading screen (quotes, progress bar, fade-out)
+    startEnvelopeAndLoading();
+  }
+  tapBtn.addEventListener('click',launch);
+  tapBtn.addEventListener('touchend',launch);
+  // Allow keyboard activation (space/enter)
+  tapBtn.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' '){launch(e);}
+  });
 })();
 
 // Particles (40 total)
@@ -2611,20 +2943,79 @@ window.addEventListener('scroll',()=>{
 (function(){
   const toggle=document.getElementById('fontToggle');
   // Restore button state if font was saved as large
-  if(localStorage.getItem('suro-font')==='large') toggle.classList.add('enlarged');
+  if(localStorage.getItem('suro6-font')==='large') toggle.classList.add('enlarged');
   toggle.addEventListener('click',function(){
     const html=document.documentElement;
     html.classList.add('font-transitioning');
     if(this.classList.contains('enlarged')){
       this.classList.remove('enlarged');
       html.classList.remove('font-large');
-      localStorage.setItem('suro-font','normal');
+      localStorage.setItem('suro6-font','normal');
     }else{
       this.classList.add('enlarged');
       html.classList.add('font-large');
-      localStorage.setItem('suro-font','large');
+      localStorage.setItem('suro6-font','large');
     }
     setTimeout(()=>html.classList.remove('font-transitioning'),900);
+  });
+})();
+
+// ===== BACKGROUND MUSIC icon — pause/resume with fade =====
+// Initial playback is started by the Tap-to-Open button (user gesture).
+// This handler only manages the icon toggle after that.
+(function(){
+  const audio=document.getElementById('bgMusic');
+  const toggle=document.getElementById('musicToggle');
+  if(!audio||!toggle)return;
+
+  const TARGET_VOL=0.5;
+  const FADE_MS=1800;
+  const TICK=30;
+  let fadeTimer=null;
+
+  // Icon starts showing playing state (matches default)
+  toggle.classList.add('playing');
+  toggle.classList.remove('paused');
+
+  function clearFade(){if(fadeTimer){clearInterval(fadeTimer);fadeTimer=null;}}
+  function fadeTo(target,done){
+    clearFade();
+    const start=audio.volume;
+    const delta=target-start;
+    const steps=FADE_MS/TICK;
+    let step=0;
+    fadeTimer=setInterval(()=>{
+      step++;
+      const r=Math.min(step/steps,1);
+      const eased=r<0.5?4*r*r*r:1-Math.pow(-2*r+2,3)/2;
+      audio.volume=Math.max(0,Math.min(1,start+delta*eased));
+      if(r>=1){clearFade();if(done)done();}
+    },TICK);
+  }
+
+  // Click handler — pause with fade-out, or resume with fade-in
+  toggle.addEventListener('click',function(e){
+    if(audio.paused){
+      // Resume
+      audio.muted=false;
+      audio.volume=0;
+      const p=audio.play();
+      const onStart=()=>{
+        toggle.classList.add('playing');
+        toggle.classList.remove('paused');
+        fadeTo(TARGET_VOL);
+      };
+      if(p&&p.then){p.then(onStart).catch(()=>{});}
+      else{onStart();}
+    }else{
+      // Fade out then pause (position preserved)
+      fadeTo(0,()=>{
+        audio.pause();
+        audio.volume=TARGET_VOL;
+        toggle.classList.remove('playing');
+        toggle.classList.add('paused');
+      });
+    }
   });
 })();
 
@@ -2675,7 +3066,7 @@ window.addEventListener('scroll',()=>{
     },1850);
   }
   // On first load, if Bengali is saved, apply it without animation
-  if(localStorage.getItem('suro-lang')==='bn'){
+  if(localStorage.getItem('suro6-lang')==='bn'){
     applyLang('bn',false);
   }
   btn.addEventListener('click',function(){
@@ -2683,7 +3074,7 @@ window.addEventListener('scroll',()=>{
     const html=document.documentElement;
     const isBn=html.classList.contains('lang-bn');
     const newLang=isBn?'en':'bn';
-    localStorage.setItem('suro-lang',newLang);
+    localStorage.setItem('suro6-lang',newLang);
     applyLang(newLang,true);
   });
 })();
@@ -2722,10 +3113,10 @@ document.getElementById('animToggle').addEventListener('click',function(){
     setTimeout(()=>{
       if(goingDark){
         html.setAttribute('data-theme','dark');
-        localStorage.setItem('suro-theme','dark');
+        localStorage.setItem('suro6-theme','dark');
       }else{
         html.removeAttribute('data-theme');
-        localStorage.setItem('suro-theme','light');
+        localStorage.setItem('suro6-theme','light');
       }
       // Step 3: Immediately start fading out
       requestAnimationFrame(()=>{
