@@ -755,8 +755,12 @@ body{
 
 /* ===== SECTIONS ===== */
 section{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
+  padding:80px 0;
+}
+@media(max-width:740px){
+  section{padding:60px 0}
 }
 
 /* ===== REVEAL ===== */
@@ -827,7 +831,8 @@ section{
 /* ============================================ */
 #hero{
   background:linear-gradient(170deg,var(--bg-blush) 0%,var(--bg) 35%,var(--bg-lav) 65%,var(--bg-sage) 100%);
-  min-height:110vh;
+  min-height:100vh;
+  padding:40px 0 80px;
 }
 
 .hero-wrap{
@@ -980,18 +985,23 @@ section{
 
 /* Scroll hint */
 .scroll-hint{
-  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);z-index:5;text-align:center;
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:5;text-align:center;
   animation:scrollBounce 2.5s ease-in-out infinite;
+  transition:opacity 0.6s ease;
+  pointer-events:none;
 }
+.scroll-hint.hidden{opacity:0}
 @keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-.scroll-arrow{stroke:var(--rose-l);opacity:0.5}
+.scroll-arrow{stroke:var(--rose);opacity:0.7}
+@media(max-width:740px){
+  .scroll-hint{bottom:14px}
+}
 
 /* ============================================ */
 /* SECTION 2: FAMILIES                          */
 /* ============================================ */
 #families{
   background:linear-gradient(170deg,var(--bg-sage) 0%,var(--bg) 50%,var(--bg-blush) 100%);
-  min-height:100vh;
 }
 .families-wrap{
   position:relative;z-index:3;text-align:center;
@@ -1027,7 +1037,6 @@ section{
 /* ============================================ */
 #details{
   background:linear-gradient(170deg,var(--bg-lav) 0%,var(--bg) 40%,var(--bg-sage) 100%);
-  min-height:110vh;
 }
 .details-wrap{
   position:relative;z-index:3;text-align:center;
@@ -1097,7 +1106,6 @@ section{
 /* ============================================ */
 #venue{
   background:linear-gradient(170deg,var(--bg-blush) 0%,var(--bg) 50%,var(--bg-lav) 100%);
-  min-height:100vh;
 }
 .venue-wrap{
   position:relative;z-index:3;text-align:center;
@@ -1130,7 +1138,6 @@ section{
 /* ============================================ */
 #ceremony{
   background:linear-gradient(170deg,var(--bg-sage) 0%,var(--bg) 50%,var(--bg-sky) 100%);
-  min-height:90vh;
 }
 .ceremony-wrap{
   position:relative;z-index:3;text-align:center;
@@ -1162,7 +1169,6 @@ section{
 /* ============================================ */
 #closing{
   background:linear-gradient(170deg,var(--bg-lav) 0%,var(--bg-blush) 50%,var(--bg) 100%);
-  min-height:80vh;
 }
 .closing-wrap{
   position:relative;z-index:3;text-align:center;
@@ -2349,6 +2355,9 @@ window.addEventListener('scroll',()=>{
   const m2=document.querySelector('.hero-mandala-bot');
   if(m)m.style.transform=`translateX(-50%) translateY(${s*0.12}px)`;
   if(m2)m2.style.transform=`translateX(-50%) rotate(180deg) translateY(${-s*0.08}px)`;
+  // Hide scroll hint once user starts scrolling
+  const hint=document.querySelector('.scroll-hint');
+  if(hint){if(s>80)hint.classList.add('hidden');else hint.classList.remove('hidden');}
   // Subtle parallax on watercolor blobs
   document.querySelectorAll('.wc-blob').forEach((b,i)=>{
     const rate=0.03+i*0.01;
