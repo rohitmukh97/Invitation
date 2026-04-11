@@ -363,8 +363,6 @@ html.font-large .save-label{font-size:12px}
 html.font-large .label-sm,.font-large .label-xs,.font-large .label-accent{font-size:12px}
 html.font-large .invite-line{font-size:13px}
 html.font-large .scan-label{font-size:10px}
-html.font-large #hero{min-height:130vh}
-html.font-large .hero-wrap{padding-bottom:120px}
 /* Tighten section & wrap padding in large-font mode so there's no empty space at top */
 html.font-large section{padding:12px 0}
 html.font-large #hero{padding:20px 0 60px}
@@ -383,10 +381,10 @@ html.font-large .closing-wrap{padding:20px 50px}
   html.font-large .closing-wrap,
   html.font-large .hero-wrap{padding:12px 20px}
 }
-/* Smooth transition */
+/* Smooth transition — animate font-size, padding, and min-height together */
 html.font-transitioning section,
 html.font-transitioning section *{
-  transition:font-size 0.8s ease !important;
+  transition:font-size 0.8s ease,padding 0.8s ease,margin 0.8s ease,min-height 0.8s ease !important;
 }
 
 /* Smooth theme transition overlay */
