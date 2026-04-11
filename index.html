@@ -757,10 +757,10 @@ body{
 section{
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
-  padding:80px 0;
+  padding:30px 0;
 }
 @media(max-width:740px){
-  section{padding:60px 0}
+  section{padding:20px 0}
 }
 
 /* ===== REVEAL ===== */
@@ -1005,7 +1005,7 @@ section{
 }
 .families-wrap{
   position:relative;z-index:3;text-align:center;
-  padding:80px 50px;max-width:720px;width:100%;
+  padding:40px 50px;max-width:720px;width:100%;
 }
 .family-block{margin:20px 0}
 .family-title{
@@ -1040,7 +1040,7 @@ section{
 }
 .details-wrap{
   position:relative;z-index:3;text-align:center;
-  padding:80px 50px;max-width:720px;width:100%;
+  padding:40px 50px;max-width:720px;width:100%;
 }
 
 /* Toran */
@@ -1109,7 +1109,7 @@ section{
 }
 .venue-wrap{
   position:relative;z-index:3;text-align:center;
-  padding:80px 50px;max-width:680px;width:100%;
+  padding:40px 50px;max-width:680px;width:100%;
 }
 .venue-name{
   font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;
@@ -1141,7 +1141,7 @@ section{
 }
 .ceremony-wrap{
   position:relative;z-index:3;text-align:center;
-  padding:80px 50px;max-width:680px;width:100%;
+  padding:40px 50px;max-width:680px;width:100%;
 }
 .ceremony-item{
   margin:18px 0;
@@ -1172,7 +1172,7 @@ section{
 }
 .closing-wrap{
   position:relative;z-index:3;text-align:center;
-  padding:80px 50px;max-width:600px;width:100%;
+  padding:40px 50px;max-width:600px;width:100%;
 }
 .closing-msg{
   font-family:'Cormorant Garamond',serif;font-style:italic;
@@ -1199,7 +1199,7 @@ section{
   .name{font-size:38px;letter-spacing:0.02em}
   .event-title{font-size:48px}
   .date-big{font-size:68px}
-  .hero-wrap,.details-wrap,.venue-wrap,.families-wrap,.ceremony-wrap,.closing-wrap{padding:45px 20px}
+  .hero-wrap,.details-wrap,.venue-wrap,.families-wrap,.ceremony-wrap,.closing-wrap{padding:28px 20px}
   .date-frame{padding:24px 18px}
   .date-row{gap:14px}
   .date-month{font-size:20px;letter-spacing:0.12em}
@@ -2342,10 +2342,10 @@ section{
   }
 })();
 
-// IntersectionObserver
+// IntersectionObserver — trigger earlier so content appears before it's fully in view
 const observer=new IntersectionObserver((entries)=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.12,rootMargin:'0px 0px -30px 0px'});
+},{threshold:0,rootMargin:'0px 0px 300px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 // Parallax mandalas + watercolor blobs
