@@ -365,6 +365,24 @@ html.font-large .invite-line{font-size:13px}
 html.font-large .scan-label{font-size:10px}
 html.font-large #hero{min-height:130vh}
 html.font-large .hero-wrap{padding-bottom:120px}
+/* Tighten section & wrap padding in large-font mode so there's no empty space at top */
+html.font-large section{padding:12px 0}
+html.font-large #hero{padding:20px 0 60px}
+html.font-large .families-wrap,
+html.font-large .details-wrap,
+html.font-large .venue-wrap,
+html.font-large .ceremony-wrap,
+html.font-large .closing-wrap{padding:20px 50px}
+@media(max-width:740px){
+  html.font-large section{padding:6px 0}
+  html.font-large #hero{padding:10px 0 40px}
+  html.font-large .families-wrap,
+  html.font-large .details-wrap,
+  html.font-large .venue-wrap,
+  html.font-large .ceremony-wrap,
+  html.font-large .closing-wrap,
+  html.font-large .hero-wrap{padding:12px 20px}
+}
 /* Smooth transition */
 html.font-transitioning section,
 html.font-transitioning section *{
