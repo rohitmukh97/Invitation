@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-// Apply saved theme and font size immediately before page renders to prevent flash
+// Apply saved theme, font size, and language immediately before page renders to prevent flash
 (function(){
   var t=localStorage.getItem('suro-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');
   var f=localStorage.getItem('suro-font');if(f==='large')document.documentElement.classList.add('font-large');
+  var l=localStorage.getItem('suro-lang');if(l==='bn')document.documentElement.classList.add('lang-bn');
 })();
 </script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rohit & Susmita | Ring Ceremony — v4</title>
+<title>Rohit & Susmita | Ring Ceremony — v5</title>
 <meta property="og:title" content="Su♡Ro | Ring Ceremony">
 <meta property="og:description" content="She pinged. He replied. The rest is #SuRo. You're invited to celebrate our engagement!">
 <meta property="og:image" content="https://rohitmukh97.github.io/Invitation/thumbnail.png">
@@ -21,7 +22,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Montserrat:wght@200;300;400;500;600&family=Pinyon+Script&family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@400;700;900&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Montserrat:wght@200;300;400;500;600&family=Pinyon+Script&family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@400;700;900&family=Tangerine:wght@400;700&family=Noto+Serif+Bengali:wght@300;400;500;600;700;800&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -386,6 +387,174 @@ html.font-transitioning section,
 html.font-transitioning section *{
   transition:font-size 0.8s ease,padding 0.8s ease,margin 0.8s ease,min-height 0.8s ease !important;
 }
+
+/* ===== BENGALI LANGUAGE MODE ===== */
+/* Apply Bengali font family to all text-bearing elements in Bengali mode */
+html.lang-bn body,
+html.lang-bn .blessing,
+html.lang-bn .invite-line,
+html.lang-bn .label-xs,
+html.lang-bn .label-sm,
+html.lang-bn .label-accent,
+html.lang-bn .name-label,
+html.lang-bn .family-title,
+html.lang-bn .family-parents,
+html.lang-bn .family-desc,
+html.lang-bn .together-text,
+html.lang-bn .section-title,
+html.lang-bn .day-name,
+html.lang-bn .date-month,
+html.lang-bn .date-year,
+html.lang-bn .save-label,
+html.lang-bn .time,
+html.lang-bn .time-note,
+html.lang-bn .venue-name,
+html.lang-bn .venue-addr,
+html.lang-bn .venue-note,
+html.lang-bn .ceremony-name,
+html.lang-bn .ceremony-time,
+html.lang-bn .ceremony-desc,
+html.lang-bn .closing-msg,
+html.lang-bn .closing-footer,
+html.lang-bn .name-full,
+html.lang-bn .env-label,
+html.lang-bn .env-quote{
+  font-family:'Noto Serif Bengali','Hind Siliguri',serif!important;
+}
+/* Keep ornamental script fonts for event title, ampersand, and couple names */
+html.lang-bn .event-title,
+html.lang-bn .amp,
+html.lang-bn .closing-names,
+html.lang-bn .env-monogram,
+html.lang-bn .name{
+  font-family:'Noto Serif Bengali','Hind Siliguri',serif!important;
+  font-weight:600;
+}
+/* Slow, gradual fade during language swap — 1.8s each direction */
+.i18n{
+  transition:opacity 1.8s cubic-bezier(0.4,0,0.2,1)!important;
+}
+html.lang-transitioning .i18n{
+  opacity:0!important;
+}
+/* Also fade decorative elements (rings, dividers, flourishes, ornaments) so they
+   don't visually jump when content reflows after the text swap. Exclude the
+   toggle-row and scroll-hint so the language button stays visible. */
+html.lang-transitioning .hero-wrap .reveal,
+html.lang-transitioning .families-wrap .reveal,
+html.lang-transitioning .details-wrap .reveal,
+html.lang-transitioning .venue-wrap .reveal,
+html.lang-transitioning .ceremony-wrap .reveal,
+html.lang-transitioning .closing-wrap .reveal{
+  opacity:0!important;
+  transition:opacity 1.8s cubic-bezier(0.4,0,0.2,1)!important;
+}
+/* Adjust sizes for Bengali — letters render shorter and denser, so boost small labels */
+html.lang-bn .name{font-size:44px;letter-spacing:0.02em}
+html.lang-bn .event-title{font-size:60px}
+html.lang-bn .date-big{font-family:'Noto Serif Bengali',serif!important;font-size:88px}
+html.lang-bn .section-title{font-size:38px}
+/* Small labels — Bengali needs ~35-50% larger to match visual weight of English */
+html.lang-bn .label-xs{font-size:13px;text-transform:none;letter-spacing:0.08em;font-weight:500}
+html.lang-bn .label-sm{font-size:14px;text-transform:none;letter-spacing:0.08em;font-weight:500}
+html.lang-bn .label-accent{font-size:14px;text-transform:none;letter-spacing:0.08em;font-weight:500}
+html.lang-bn .name-label{font-size:12px;text-transform:none;letter-spacing:0.1em;font-weight:500}
+html.lang-bn .save-label{font-size:13px;text-transform:none;letter-spacing:0.1em;font-weight:500}
+html.lang-bn .invite-line{font-size:14px;text-transform:none;letter-spacing:0.08em;font-weight:500}
+html.lang-bn .blessing{font-size:17px;font-weight:500;line-height:1.9}
+html.lang-bn .event-sub{font-size:13px;text-transform:none;letter-spacing:0.15em;font-weight:500}
+html.lang-bn .family-title{font-size:17px;text-transform:none;letter-spacing:0.08em;font-weight:600}
+html.lang-bn .day-name{font-size:19px;text-transform:none;letter-spacing:0.15em;font-weight:500}
+html.lang-bn .date-month{font-size:26px;letter-spacing:0.06em}
+html.lang-bn .date-year{font-size:16px;letter-spacing:0.4em}
+html.lang-bn .time{font-size:18px;letter-spacing:0.2em;font-weight:500}
+html.lang-bn .time-note{font-size:17px;font-weight:500;line-height:1.8}
+html.lang-bn .venue-addr{font-size:19px;font-weight:500;letter-spacing:0.05em}
+html.lang-bn .venue-note{font-size:16px;font-weight:500;line-height:1.8}
+html.lang-bn .ceremony-name{font-size:17px;text-transform:none;letter-spacing:0.05em;font-weight:600}
+html.lang-bn .ceremony-time{font-size:17px;font-weight:500}
+html.lang-bn .ceremony-desc{font-size:15px;font-weight:500;line-height:1.7}
+html.lang-bn .together-text{font-size:19px;font-weight:500;line-height:1.9}
+html.lang-bn .family-parents{font-size:19px;font-weight:500;line-height:1.8}
+html.lang-bn .family-desc{font-size:18px;font-weight:600}
+html.lang-bn .closing-msg{font-size:21px;font-weight:500;line-height:2}
+html.lang-bn .closing-footer{font-size:16px;font-weight:500}
+html.lang-bn .scan-label{font-size:13px;text-transform:none;font-weight:500}
+
+@media(max-width:740px){
+  html.lang-bn .name{font-size:32px}
+  html.lang-bn .event-title{font-size:44px}
+  html.lang-bn .date-big{font-size:60px}
+  html.lang-bn .section-title{font-size:28px}
+  html.lang-bn .label-xs{font-size:12px}
+  html.lang-bn .label-sm{font-size:13px}
+  html.lang-bn .label-accent{font-size:13px}
+  html.lang-bn .name-label{font-size:11px}
+  html.lang-bn .invite-line{font-size:12px}
+  html.lang-bn .blessing{font-size:15px}
+  html.lang-bn .time{font-size:15px}
+  html.lang-bn .time-note{font-size:15px}
+  html.lang-bn .venue-addr{font-size:17px}
+  html.lang-bn .venue-note{font-size:14px}
+  html.lang-bn .ceremony-name{font-size:15px}
+  html.lang-bn .ceremony-desc{font-size:13px}
+  html.lang-bn .together-text{font-size:16px}
+  html.lang-bn .family-parents{font-size:16px}
+  html.lang-bn .closing-msg{font-size:17px}
+}
+
+/* ===== LANGUAGE TOGGLE (Bengali আ) — faint & subtle ===== */
+.lang-toggle{
+  position:relative;
+  display:inline-block;
+  cursor:pointer;
+  opacity:0.45;pointer-events:auto;
+  transition:opacity 0.6s ease;
+}
+.lang-toggle:hover{opacity:0.85}
+.lang-toggle:hover .lang-body{transform:scale(1.15)}
+.lang-body{
+  position:relative;width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.5s ease;
+}
+.lang-en,.lang-bn-ch{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  transition:opacity 1.2s ease,transform 1.2s ease;
+  display:flex;align-items:center;justify-content:center;
+}
+.lang-en{
+  font-family:'Cinzel Decorative',serif;
+  font-size:22px;font-weight:500;
+  color:var(--rose-d);
+  opacity:1;
+}
+.lang-bn-ch{
+  font-family:'Noto Serif Bengali',serif;
+  font-size:26px;font-weight:500;
+  color:var(--sage-d);
+  opacity:0;
+}
+/* When Bengali is active, show Bengali character */
+html.lang-bn .lang-en{opacity:0;transform:translate(-50%,-50%) scale(0.7)}
+html.lang-bn .lang-bn-ch{opacity:1;transform:translate(-50%,-50%) scale(1)}
+/* Faint outer ring */
+.lang-body::after{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  border:1px dashed var(--rose-l);opacity:0.3;
+  pointer-events:none;
+  animation:langRingPulse 5s ease-in-out infinite;
+}
+@keyframes langRingPulse{
+  0%,100%{transform:scale(1);opacity:0.25}
+  50%{transform:scale(1.08);opacity:0.45}
+}
+html.lang-bn .lang-body::after{border-color:var(--sage-l)}
+[data-theme="dark"] .lang-toggle{opacity:0.35}
+[data-theme="dark"] .lang-toggle:hover{opacity:0.8}
+[data-theme="dark"] .lang-en{color:var(--rose-d)}
+[data-theme="dark"] .lang-bn-ch{color:var(--sage-d)}
 
 /* Smooth theme transition overlay */
 .theme-overlay{
@@ -1745,6 +1914,24 @@ section{
         </div>
       </div>
 
+      <!-- Language Toggle (Bengali) -->
+      <div class="lang-toggle" id="langToggle" title="Switch language / ভাষা পরিবর্তন">
+        <div class="lang-body">
+          <div class="lang-en">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="18" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+              <text x="22" y="30" text-anchor="middle" font-family="Cinzel Decorative, serif" font-size="22" font-weight="700" fill="currentColor">A</text>
+            </svg>
+          </div>
+          <div class="lang-bn-ch">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="18" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+              <text x="22" y="32" text-anchor="middle" font-family="Noto Serif Bengali, serif" font-size="26" font-weight="700" fill="currentColor">আ</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
       <!-- Theme Toggle (right) -->
       <div class="celestial-toggle" id="themeToggle">
         <div class="celestial-body">
@@ -1780,8 +1967,8 @@ section{
     </div>
 
     <div class="reveal ganesh">&#x0950;</div>
-    <div class="reveal label-xs" style="margin-bottom:4px">Shri Ganeshaya Namaha</div>
-    <div class="reveal blessing">
+    <div class="reveal label-xs i18n" data-bn="শ্রী গণেশায় নমঃ" style="margin-bottom:4px">Shri Ganeshaya Namaha</div>
+    <div class="reveal blessing i18n" data-bn="সর্বশক্তিমানের দিব্য আশীর্বাদে<br>ও উভয় পরিবারের আনন্দময় সম্মতিতে">
       With the divine blessings of the Almighty<br>
       & the joyous consent of both families
     </div>
@@ -1798,9 +1985,9 @@ section{
       <div class="hr-line"></div>
     </div>
 
-    <div class="reveal invite-line">We joyfully invite you to celebrate the</div>
-    <div class="reveal event-title">Ring Ceremony</div>
-    <div class="reveal event-sub">Engagement Celebration</div>
+    <div class="reveal invite-line i18n" data-bn="আমরা সানন্দে আপনাকে আমন্ত্রণ জানাচ্ছি উদযাপন করতে">We joyfully invite you to celebrate the</div>
+    <div class="reveal event-title i18n" data-bn="আংটি বদল অনুষ্ঠান">Ring Ceremony</div>
+    <div class="reveal event-sub i18n" data-bn="বাগদান উৎসব">Engagement Celebration</div>
 
     <div class="reveal" style="margin:30px 0 16px">
       <div class="rings-wrap">
@@ -1830,31 +2017,31 @@ section{
       </div>
     </div>
 
-    <div class="reveal label-xs" style="color:var(--sage)">Of</div>
+    <div class="reveal label-xs i18n" data-bn="✦" style="color:var(--sage)">Of</div>
 
-    <div class="reveal name-label">The Groom</div>
-    <div class="reveal name">
+    <div class="reveal name-label i18n" data-bn="পাত্র">The Groom</div>
+    <div class="reveal name i18n" data-bn="রোহিত">
       <span>R</span><span>o</span><span>h</span><span>i</span><span>t</span>
     </div>
-    <div class="reveal name-full">Rohit Mukherjee</div>
+    <div class="reveal name-full i18n" data-bn="রোহিত মুখার্জি">Rohit Mukherjee</div>
 
     <div class="reveal amp-wrap">
       <div class="amp-ring amp-ring-1"></div>
       <div class="amp-ring amp-ring-2"></div>
       <div class="amp-ring amp-ring-3"></div>
-      <div class="amp">&</div>
+      <div class="amp i18n" data-bn="ও">&</div>
     </div>
 
-    <div class="reveal name-label">The Bride</div>
-    <div class="reveal name">
+    <div class="reveal name-label i18n" data-bn="পাত্রী">The Bride</div>
+    <div class="reveal name i18n" data-bn="সুস্মিতা">
       <span>S</span><span>u</span><span>s</span><span>m</span><span>i</span><span>t</span><span>a</span>
     </div>
-    <div class="reveal name-full">Susmita Basak</div>
+    <div class="reveal name-full i18n" data-bn="সুস্মিতা বসাক">Susmita Basak</div>
 
   </div>
 
   <div class="scroll-hint">
-    <span class="label-xs" style="font-size:7px;letter-spacing:0.4em;display:block;margin-bottom:6px;color:var(--rose-l)">Scroll down</span>
+    <span class="label-xs i18n" data-bn="নিচে স্ক্রল করুন" style="font-size:7px;letter-spacing:0.4em;display:block;margin-bottom:6px;color:var(--rose-l)">Scroll down</span>
     <svg width="18" height="22" viewBox="0 0 18 22" class="scroll-arrow">
       <path d="M9 2L9 18M4 14L9 19L14 14" stroke-width="1" fill="none"/>
     </svg>
@@ -1877,9 +2064,9 @@ section{
       <circle cx="80" cy="18" r="1.5" fill="var(--sage-l)"/>
     </svg>
 
-    <div class="reveal section-title">With Love & Blessings</div>
+    <div class="reveal section-title i18n" data-bn="ভালোবাসা ও আশীর্বাদ সহ">With Love & Blessings</div>
 
-    <div class="reveal together-text">
+    <div class="reveal together-text i18n" data-bn="আমরা অত্যন্ত আনন্দের সাথে আমাদের প্রিয় সন্তানদের বাগদান ঘোষণা করছি।<br>কৃতজ্ঞতাপূর্ণ হৃদয়ে, আমরা আপনাকে এই সুন্দর মুহূর্তে আমাদের সাথে যোগ দিতে আমন্ত্রণ জানাচ্ছি,<br>যখন দুটি আত্মা একসাথে তাদের জীবনের পথচলা শুরু করছে।">
       We are overjoyed to announce the engagement of our beloved children.<br>
       With hearts full of gratitude, we invite you to share in this beautiful moment<br>
       as two souls begin their journey together.
@@ -1894,17 +2081,17 @@ section{
     </div>
 
     <div class="reveal family-block">
-      <div class="family-title">The Mukherjee Family</div>
-      <div class="family-parents">Cordially invites you on the occasion of<br>the engagement of our beloved son</div>
-      <div class="family-desc">Rohit Mukherjee</div>
+      <div class="family-title i18n" data-bn="মুখার্জি পরিবার">The Mukherjee Family</div>
+      <div class="family-parents i18n" data-bn="আপনাকে সাদরে আমন্ত্রণ জানাচ্ছে<br>আমাদের প্রিয় পুত্রের বাগদান উপলক্ষে">Cordially invites you on the occasion of<br>the engagement of our beloved son</div>
+      <div class="family-desc i18n" data-bn="রোহিত মুখার্জি">Rohit Mukherjee</div>
     </div>
 
-    <div class="reveal" style="font-family:'Pinyon Script',cursive;font-size:32px;color:var(--mauve);margin:8px 0">with</div>
+    <div class="reveal i18n" data-bn="এবং" style="font-family:'Pinyon Script',cursive;font-size:32px;color:var(--mauve);margin:8px 0">with</div>
 
     <div class="reveal family-block">
-      <div class="family-title">The Basak Family</div>
-      <div class="family-parents">Joyfully celebrates the engagement<br>of our cherished daughter</div>
-      <div class="family-desc">Susmita Basak</div>
+      <div class="family-title i18n" data-bn="বসাক পরিবার">The Basak Family</div>
+      <div class="family-parents i18n" data-bn="সানন্দে উদযাপন করছে<br>আমাদের প্রিয় কন্যার বাগদান">Joyfully celebrates the engagement<br>of our cherished daughter</div>
+      <div class="family-desc i18n" data-bn="সুস্মিতা বসাক">Susmita Basak</div>
     </div>
 
     <div class="reveal hr" style="margin-top:28px">
@@ -1913,7 +2100,7 @@ section{
       <div class="hr-line-sage"></div>
     </div>
 
-    <div class="reveal together-text" style="font-size:15px;margin-top:20px">
+    <div class="reveal together-text i18n" data-bn="&ldquo;দুটি হৃদয়, এক ভালোবাসা, এক সুন্দর সূচনা&rdquo;" style="font-size:15px;margin-top:20px">
       "Two hearts, one love, one beautiful beginning"
     </div>
 
@@ -1969,25 +2156,25 @@ section{
       <circle cx="90" cy="18" r="1.5" fill="var(--lav-l)"/>
     </svg>
 
-    <div class="reveal section-title">Save the Date</div>
-    <div class="reveal label-sm" style="margin-bottom:6px">Mark your calendars for this special day</div>
+    <div class="reveal section-title i18n" data-bn="তারিখটি মনে রাখুন">Save the Date</div>
+    <div class="reveal label-sm i18n" data-bn="এই বিশেষ দিনটি আপনার ক্যালেন্ডারে চিহ্নিত করুন" style="margin-bottom:6px">Mark your calendars for this special day</div>
 
     <div class="reveal date-frame">
       <div class="df-tr"></div>
       <div class="df-bl"></div>
-      <div class="day-name">Saturday</div>
+      <div class="day-name i18n" data-bn="শনিবার">Saturday</div>
       <div class="date-row">
         <div>
-          <div class="date-month">June</div>
-          <div class="date-year">2 0 2 6</div>
+          <div class="date-month i18n" data-bn="জুন">June</div>
+          <div class="date-year i18n" data-bn="২ ০ ২ ৬">2 0 2 6</div>
         </div>
         <div class="date-sep"></div>
-        <div class="date-big">27</div>
+        <div class="date-big i18n" data-bn="২৭">27</div>
       </div>
     </div>
 
-    <div class="reveal time">1 1 : 3 0 &ensp; A M &ensp; O N W A R D S</div>
-    <div class="reveal time-note">
+    <div class="reveal time i18n" data-bn="সকাল ১১ : ৩০ থেকে">1 1 : 3 0 &ensp; A M &ensp; O N W A R D S</div>
+    <div class="reveal time-note i18n" data-bn="আপনার উপস্থিতি দিয়ে আমাদের ধন্য করুন<br>যখন আমরা আংটি বিনিময় করব ও এই আনন্দময় মিলন উদযাপন করব">
       Please grace us with your presence as we exchange rings<br>
       and celebrate this joyous union
     </div>
@@ -2030,19 +2217,19 @@ section{
       <circle cx="80" cy="18" r="1.5" fill="var(--rose-l)"/>
     </svg>
 
-    <div class="reveal label-accent">You are cordially invited to</div>
-    <div class="reveal section-title">The Venue</div>
+    <div class="reveal label-accent i18n" data-bn="আপনাকে আন্তরিকভাবে আমন্ত্রণ জানাচ্ছি">You are cordially invited to</div>
+    <div class="reveal section-title i18n" data-bn="অনুষ্ঠানস্থল">The Venue</div>
 
     <div class="reveal hr" style="margin:12px auto 20px">
       <div class="hr-line"></div><div class="hr-dot hr-dot-rose"></div><div class="hr-diamond"></div><div class="hr-dot hr-dot-rose"></div><div class="hr-line"></div>
     </div>
 
-    <div class="reveal venue-name">Community Hall<br>Janapriya Sai Dharshan</div>
-    <div class="reveal venue-addr">
+    <div class="reveal venue-name i18n" data-bn="কমিউনিটি হল<br>জনপ্রিয় সাই দর্শন">Community Hall<br>Janapriya Sai Dharshan</div>
+    <div class="reveal venue-addr i18n" data-bn="বাস্তু ভূমি, কৃষ্ণরাজপুরম<br>বেঙ্গালুরু, কর্ণাটক ৫৬০১১৫">
       Vastu Bhoomi, Krishnarajapuram<br>
       Bengaluru, Karnataka 560115
     </div>
-    <div class="reveal venue-note">
+    <div class="reveal venue-note i18n" data-bn="এই সুন্দর স্থানে আপনাকে স্বাগত জানানোর জন্য আমরা অপেক্ষা করছি,<br>যেখানে ভালোবাসা, হাসি ও প্রিয় স্মৃতি অপেক্ষা করছে।">
       We look forward to welcoming you at this beautiful venue,<br>
       where love, laughter, and cherished memories await.
     </div>
@@ -2051,7 +2238,7 @@ section{
       <a href="https://maps.app.goo.gl/E2fdCXy8nGeDbMP17" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fmaps.app.goo.gl%2FE2fdCXy8nGeDbMP17&color=7a4a42&bgcolor=fdf9f3" alt="Scan for directions" style="width:140px;height:140px;border:1px solid var(--rose-ll);border-radius:8px;padding:6px;background:var(--bg)">
       </a>
-      <div class="scan-label">Scan for directions</div>
+      <div class="scan-label i18n" data-bn="দিকনির্দেশের জন্য স্ক্যান করুন">Scan for directions</div>
     </div>
 
     <div class="reveal hr" style="margin:28px auto">
@@ -2081,16 +2268,16 @@ section{
       <circle cx="80" cy="18" r="1.5" fill="var(--sage-l)"/>
     </svg>
 
-    <div class="reveal section-title">Celebrations</div>
-    <div class="reveal label-sm" style="margin-bottom:24px">A moment we've been waiting for</div>
+    <div class="reveal section-title i18n" data-bn="উদযাপন">Celebrations</div>
+    <div class="reveal label-sm i18n" data-bn="যে মুহূর্তের জন্য আমরা অপেক্ষা করছিলাম" style="margin-bottom:24px">A moment we've been waiting for</div>
 
     <div class="reveal ceremony-item">
       <div class="ceremony-icon">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="15" r="7" stroke="var(--rose-l)" stroke-width="0.8"/><circle cx="18" cy="15" r="7" stroke="var(--rose-l)" stroke-width="0.8"/><polygon points="10,6 12,10 10,9 8,10" fill="var(--rose-l)"/></svg>
       </div>
-      <div class="ceremony-name">Ring Exchange Ceremony</div>
-      <div class="ceremony-time">11:30 AM</div>
-      <div class="ceremony-desc">The sacred exchange of rings, sealing the promise of togetherness</div>
+      <div class="ceremony-name i18n" data-bn="আংটি বদল অনুষ্ঠান">Ring Exchange Ceremony</div>
+      <div class="ceremony-time i18n" data-bn="সকাল ১১:৩০">11:30 AM</div>
+      <div class="ceremony-desc i18n" data-bn="আংটির পবিত্র বিনিময়, একসাথে থাকার প্রতিশ্রুতিকে সীলমোহর করবে">The sacred exchange of rings, sealing the promise of togetherness</div>
     </div>
 
     <div class="reveal" style="margin:12px 0">
@@ -2101,9 +2288,9 @@ section{
       <div class="ceremony-icon">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M8 18Q8 10 14 6Q20 10 20 18" stroke="var(--sage-l)" stroke-width="0.8" fill="none"/><line x1="14" y1="6" x2="14" y2="22" stroke="var(--sage-l)" stroke-width="0.5"/><circle cx="14" cy="12" r="2" fill="var(--sage-ll)"/></svg>
       </div>
-      <div class="ceremony-name">Cake Cutting Ceremony</div>
-      <div class="ceremony-time">12:00 PM</div>
-      <div class="ceremony-desc">A sweet moment of celebration together</div>
+      <div class="ceremony-name i18n" data-bn="কেক কাটার অনুষ্ঠান">Cake Cutting Ceremony</div>
+      <div class="ceremony-time i18n" data-bn="দুপুর ১২:০০">12:00 PM</div>
+      <div class="ceremony-desc i18n" data-bn="একসাথে উদযাপনের এক মিষ্টি মুহূর্ত">A sweet moment of celebration together</div>
     </div>
 
     <div class="reveal" style="margin:12px 0">
@@ -2114,9 +2301,9 @@ section{
       <div class="ceremony-icon">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 6Q8 14 14 22Q20 14 14 6Z" stroke="var(--lav-l)" stroke-width="0.8" fill="none"/><circle cx="14" cy="14" r="3" stroke="var(--lav)" stroke-width="0.6" fill="none"/></svg>
       </div>
-      <div class="ceremony-name">Blessings & Aashirwad</div>
-      <div class="ceremony-time">12:30 PM</div>
-      <div class="ceremony-desc">Seek blessings from elders and loved ones</div>
+      <div class="ceremony-name i18n" data-bn="আশীর্বাদ">Blessings & Aashirwad</div>
+      <div class="ceremony-time i18n" data-bn="দুপুর ১২:৩০">12:30 PM</div>
+      <div class="ceremony-desc i18n" data-bn="গুরুজনদের ও প্রিয়জনদের কাছ থেকে আশীর্বাদ নিন">Seek blessings from elders and loved ones</div>
     </div>
 
     <div class="reveal" style="margin:12px 0">
@@ -2127,9 +2314,9 @@ section{
       <div class="ceremony-icon">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="6" y="10" width="16" height="12" rx="2" stroke="var(--gold-l)" stroke-width="0.8" fill="none"/><path d="M6 14L14 10L22 14" stroke="var(--gold-l)" stroke-width="0.8" fill="none"/><circle cx="14" cy="17" r="2" fill="var(--gold-ll)"/></svg>
       </div>
-      <div class="ceremony-name">Grand Feast & Celebration</div>
-      <div class="ceremony-time">1:00 PM onwards</div>
-      <div class="ceremony-desc">Lavish lunch, music, dance & merriment for all</div>
+      <div class="ceremony-name i18n" data-bn="মহাভোজ ও উদযাপন">Grand Feast & Celebration</div>
+      <div class="ceremony-time i18n" data-bn="দুপুর ১:০০ থেকে">1:00 PM onwards</div>
+      <div class="ceremony-desc i18n" data-bn="সকলের জন্য জমকালো মধ্যাহ্নভোজ, সঙ্গীত, নৃত্য ও আনন্দ-উল্লাস">Lavish lunch, music, dance & merriment for all</div>
     </div>
 
     <div class="reveal hr" style="margin-top:28px">
@@ -2152,7 +2339,7 @@ section{
       <circle cx="90" cy="20" r="1.5" fill="var(--rose-l)"/>
     </svg>
 
-    <div class="reveal closing-msg">
+    <div class="reveal closing-msg i18n" data-bn="আপনার সদয় উপস্থিতি ও হৃদয়ের আশীর্বাদ<br>আমাদের এই উদযাপনে অপরিসীম আনন্দ যোগ করবে।<br>আমরা আপনার সঙ্গে দেখা করার জন্য আগ্রহ নিয়ে অপেক্ষা করছি<br>যখন আমরা জীবনের এই সুন্দর নতুন অধ্যায় শুরু করছি।">
       Your gracious presence and heartfelt blessings<br>
       would add immeasurable joy to our celebration.<br>
       We eagerly await the pleasure of your company<br>
@@ -2163,10 +2350,10 @@ section{
       <div class="hr-line"></div><div class="hr-diamond-filled"></div><div class="hr-line"></div>
     </div>
 
-    <div class="reveal closing-names">Rohit & Susmita</div>
+    <div class="reveal closing-names i18n" data-bn="রোহিত ও সুস্মিতা">Rohit & Susmita</div>
     <div class="reveal closing-hashtag">#SuRo</div>
 
-    <div class="reveal closing-footer">
+    <div class="reveal closing-footer i18n" data-bn="ভালোবাসা ও শুভেচ্ছা সহ,<br>মুখার্জি ও বসাক পরিবার">
       With love and warm regards,<br>
       The Mukherjee & Basak Families
     </div>
@@ -2398,6 +2585,66 @@ window.addEventListener('scroll',()=>{
       localStorage.setItem('suro-font','large');
     }
     setTimeout(()=>html.classList.remove('font-transitioning'),900);
+  });
+})();
+
+// Language toggle — English / Bengali with slow, gradual fade (~3.8s total)
+(function(){
+  const btn=document.getElementById('langToggle');
+  if(!btn)return;
+  // Cache all translatable elements and store their English version on first run
+  const elements=document.querySelectorAll('.i18n');
+  elements.forEach(el=>{
+    if(!el.hasAttribute('data-en')){
+      el.setAttribute('data-en',el.innerHTML);
+    }
+  });
+  let switching=false;
+  // Apply language with optional slow animation
+  function applyLang(lang,animate){
+    const html=document.documentElement;
+    if(!animate){
+      // Instant apply on first load
+      elements.forEach(el=>{
+        const enText=el.getAttribute('data-en');
+        const bnText=el.getAttribute('data-bn');
+        if(lang==='bn' && bnText){el.innerHTML=bnText}
+        else if(enText){el.innerHTML=enText}
+      });
+      if(lang==='bn'){html.classList.add('lang-bn')}else{html.classList.remove('lang-bn')}
+      return;
+    }
+    switching=true;
+    // Step 1: Slowly fade OUT current text (1.8s)
+    html.classList.add('lang-transitioning');
+    // Step 2: After fade-out completes, swap text + class (at opacity 0, so invisible)
+    setTimeout(()=>{
+      elements.forEach(el=>{
+        const enText=el.getAttribute('data-en');
+        const bnText=el.getAttribute('data-bn');
+        if(lang==='bn' && bnText){el.innerHTML=bnText}
+        else if(enText){el.innerHTML=enText}
+      });
+      if(lang==='bn'){html.classList.add('lang-bn')}else{html.classList.remove('lang-bn')}
+      // Step 3: Brief pause at 0 opacity so users feel the swap moment
+      setTimeout(()=>{
+        html.classList.remove('lang-transitioning');
+        // Step 4: CSS transitions fade new text back in over another 1.8s
+        setTimeout(()=>{switching=false},1900);
+      },200);
+    },1850);
+  }
+  // On first load, if Bengali is saved, apply it without animation
+  if(localStorage.getItem('suro-lang')==='bn'){
+    applyLang('bn',false);
+  }
+  btn.addEventListener('click',function(){
+    if(switching)return;
+    const html=document.documentElement;
+    const isBn=html.classList.contains('lang-bn');
+    const newLang=isBn?'en':'bn';
+    localStorage.setItem('suro-lang',newLang);
+    applyLang(newLang,true);
   });
 })();
 
